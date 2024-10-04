@@ -19,9 +19,9 @@ erDiagram
         string nombre
     }
 
-    CITA {
+    TURNO {
         int id PK
-        datetime fechaHoraCita
+        datetime fechaHoraTURNO
         string estado
         string motivoConsulta
         datetime creadoEn
@@ -45,10 +45,10 @@ erDiagram
         int maximoSobreturnos
     }
 
-    CITA ||--|| PACIENTE : "pertenece a"
-    CITA ||--|| MEDICO : "asignada a"
-    CITA ||--|| ESPECIALIDAD : "relacionada con"
-    CITA ||--o{ AGENDA : "en agenda"
+    TURNO ||--|| PACIENTE : "pertenece a"
+    TURNO ||--|| MEDICO : "asignada a"
+    TURNO ||--|| ESPECIALIDAD : "relacionada con"
+    TURNO ||--o{ AGENDA : "en agenda"
 
     MEDICO ||--o{ ESPECIALIDAD : "tiene muchas"
     MEDICO ||--|{ AGENDA : "gestiona"
