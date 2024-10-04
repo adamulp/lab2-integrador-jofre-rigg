@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600">
+  <!-- Define lines for communication between actors -->
+  <line x1="100" y1="100" x2="350" y2="100" stroke="black" marker-end="url(#arrow)"/>
+  <line x1="100" y1="100" x2="350" y2="300" stroke="black" marker-end="url(#arrow)"/>
+  <line x1="350" y1="100" x2="600" y2="100" stroke="black" marker-end="url(#arrow)"/>
+  <line x1="350" y1="300" x2="600" y2="300" stroke="black" marker-end="url(#arrow)"/>
+  <line x1="600" y1="100" x2="600" y2="300" stroke="black" marker-end="url(#arrow)"/>
+  
+  <!-- Arrowhead marker definition -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="black" />
+    </marker>
+  </defs>
+
+  <!-- Paciente node -->
+  <circle cx="100" cy="100" r="40" stroke="black" fill="white"/>
+  <text x="65" y="105" font-size="14">Paciente</text>
+
+  <!-- Secretaria node -->
+  <circle cx="350" cy="100" r="40" stroke="black" fill="white"/>
+  <text x="315" y="105" font-size="14">Secretaria</text>
+
+  <!-- Sistema de Agenda node -->
+  <circle cx="600" cy="100" r="40" stroke="black" fill="white"/>
+  <text x="550" y="105" font-size="14">Sistema Agenda</text>
+
+  <!-- Medico node -->
+  <circle cx="600" cy="300" r="40" stroke="black" fill="white"/>
+  <text x="575" y="305" font-size="14">Medico</text>
+
+  <!-- Administrator node -->
+  <circle cx="350" cy="300" r="40" stroke="black" fill="white"/>
+  <text x="315" y="305" font-size="14">Admin</text>
+
+  <!-- Messages -->
+  <text x="200" y="85" font-size="12" fill="black">1. Solicita consulta</text>
+  <text x="200" y="150" font-size="12" fill="black">2. Confirma consulta</text>
+  <text x="450" y="85" font-size="12" fill="black">3. Consulta disponibilidad</text>
+  <text x="450" y="150" font-size="12" fill="black">4. Actualiza agenda</text>
+  <text x="635" y="200" font-size="12" fill="black">5. Consulta agenda</text>
+</svg>
