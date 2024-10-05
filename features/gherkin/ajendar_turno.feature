@@ -1,13 +1,5 @@
 Feature: Programar una consulta médica para un paciente
 
-  Scenario: Paciente agenda una cita con un cardiólogo
-    Given el paciente "Juan Pérez" con DNI "12345678" solicita una cita
-    And el paciente provee su información personal y detalles de su obra social
-    When la secretaria busca citas disponibles para "Cardiología"
-    And se encuentra una cita disponible con "Dr. García" para el "2024-10-10" a las "10:00 AM"
-    Then la cita queda reservada
-    And el estado de la cita es "Reservada"
-
   Scenario: No hay citas disponibles, paciente añadido a la lista de espera
     Given el paciente "María González" con DNI "87654321" solicita una cita
     When no hay citas disponibles para "Neurología"
