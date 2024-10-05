@@ -2,7 +2,6 @@
 
 El directorio `app` contiene el código principal de la aplicación y archivos relacionados. A continuación, se describe en detalle su contenido:
 
-- `.env`: Archivo de configuración local del entorno (no se sube al repo)
 - `app.js`: El punto de entrada principal de la aplicación.
 - `knexfile.js`: Archivo de configuración para Knex.js, utilizado para migraciones y semillas de la base de datos.
 - `migrations/`: Directorio que contiene archivos de migración para crear o recrear la base de datos.
@@ -13,3 +12,12 @@ El directorio `app` contiene el código principal de la aplicación y archivos r
   - `seed_data.js`: Archivo de datos de semillas para poblar la base de datos con datos iniciales.
 - `views/`: Directorio que contiene plantillas Pug para renderizar HTML.
 - `agenda_consultas.db`: Base de datos de prueba (SQLite)
+
+- `.env`: Archivo de configuración local del entorno (no se sube al repo)
+
+Ejemplo el contenido del archivo.env:
+
+```plaintext
+NODE_ENV=development
+PORT=3000
+```
