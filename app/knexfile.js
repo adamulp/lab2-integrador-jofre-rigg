@@ -1,9 +1,8 @@
-// knexfile.js
 module.exports = {
     client: 'sqlite3',
     connection: {
-      filename: './agenda_consultas.db' // SQLite database file
+      filename: './agenda_consultas.db'  // Path to your SQLite database file
     },
-    useNullAsDefault: true
+    useNullAsDefault: true // Required for SQLite
   };
   
