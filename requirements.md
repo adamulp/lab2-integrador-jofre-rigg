@@ -31,7 +31,7 @@ At any time, the application must allow the secretary to check available and/or 
 
 The application must allow transferring/copying patients between agendas, updating all the necessary information so that the appointments reflect this action.
 
-### Overbooking (Sobreturnos)
+### Overbooking
 
 The application must allow generating special time slots (known as "overbooking"). These special time slots can share the same schedule as a regular appointment in the agenda, provided that the regular appointment is already reserved. Each agenda may have a maximum number of overbooked slots per day (which can differ for each agenda).
 
