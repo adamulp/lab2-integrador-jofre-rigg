@@ -1,0 +1,39 @@
+doctype html
+html
+  head
+    title Gestión de Estados de las Citas
+    link(rel='stylesheet', href='/styles/styles.css')
+  body
+    header
+      h1 Gestión de Estados de las Citas
+      nav
+        ul
+          li: a(href='/') Home
+          li: a(href='/pacientes') Lista de Pacientes
+          li: a(href='/horarios') Gestionar Horarios de Médicos
+          li: a(href='/turnos') Programar Consulta Médica
+          li: a(href='/sobreturnos') Programar Sobreturno
+
+    main
+      h2 Confirmar, Cancelar o Marcar Ausencia de una Cita
+      form(action='/actualizarTurnos/gestionar', method='POST')
+        label(for='nombre_paciente') Nombre del Paciente:
+        input(type='text' id='nombre_paciente' name='nombre_paciente' required placeholder='e.g., Juan Pérez')
+
+        label(for='fecha_cita') Fecha de la Cita:
+        input(type='date' id='fecha_cita' name='fecha_cita' required)
+
+        label(for='hora_cita') Hora de la Cita:
+        input(type='time' id='hora_cita' name='hora_cita' required)
+
+        label(for='nuevo_estado') Actualizar Estado:
+        select(name='nuevo_estado' id='nuevo_estado')
+          option(value='Confirmado') Confirmar
+          option(value='Cancelado') Cancelar
+          option(value='Ausente') Marcar como Ausente
+
+        button(type='submit') Actualizar Estado
+
+      h2 Notas sobre Estados de las Citas
+      p El estado de las citas se puede actualizar dependiendo de los eventos que ocurran, como la llegada del paciente, cancelación anticipada, o ausencia.
+
