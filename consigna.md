@@ -15,10 +15,11 @@ Sus principales características deberán ser:
 - Facilidades en los recursos de copias y transferencias de programaciones.
 - Practicidad al momento de programar un agendamiento como también al momento de la cita.
 
-Las agendas estarán organizadas por sucursal y dispondrán de 2 tipos de clasificación: \* Un tipo de clasificación customizable por la organización (Por ej. podría utilizarse para diferencias
-los tipos de consultas: Normal, especial, VIP, etc)
+Las agendas estarán organizadas por sucursal y dispondrán de 2 tipos de clasificación:
 
-    * Por especialidad, esta clasificación quedará determinada por la especialidad del médico de la agenda.
+- Un tipo de clasificación customizable por la organización (Por ej. podría utilizarse para diferencias
+los tipos de consultas: Normal, especial, VIP, etc)
+-  Por especialidad, esta clasificación quedará determinada por la especialidad del médico de la agenda.
 
 ### Programación de Horarios
 
