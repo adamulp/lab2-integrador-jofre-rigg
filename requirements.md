@@ -4,7 +4,7 @@ The "medical consultation scheduling" application consists of a system for sched
 
 The scheduling system supports booking patients who need to make a medical consultation appointment for a specific specialty (e.g., Cardiology, Neurology, Pulmonology, etc.).
 
-The application centralizes all scheduling throughout the network of healthcare providers within the organization into one system.
+The application centralizes all scheduling throughout the network of healthcare providers in the organization into one system.
 
 ## Main Features
 
@@ -35,45 +35,45 @@ The application must allow transferring/copying patients between agendas, updati
 
 The application must allow generating special time slots (known as "overbooking"). These special time slots can share the same schedule as a regular appointment in the agenda, provided that the regular appointment is already reserved. Each agenda may have a maximum number of overbooked slots per day (which can differ for each agenda).
 
-### Professionals
+### Providers
 
-Professionals must be registered by users with the role of administrator. Professionals can have more than one specialty, with each specialty requiring a corresponding registration or certification. The professional can have an agenda for each specialty.
+Providers must be registered by administrative users. A healthcare professional can have more than one specialty, with each specialty requiring a registered license or certification. A provider can have an agenda for each specialty.
 
 ### Agenda Statuses
 
-Agendas must have time slots (which correspond to the appointments). Each agenda may have a different schedule plan. To achieve this, there must be a function for configuring agendas that allows for schedule planning.
+Agendas must have planned time slots (which correspond to the appointments). Because each agenda can have a different schedule plan, there must be a function for configuring agendas that allows for planning tentative open slots.
 
 For example, an agenda could have 30-minute slots with available hours on Mondays, Wednesdays, and Fridays from 8:00 AM to 12:00 PM.
 
 Another agenda might have 40-minute slots with available hours on Thursdays from 4:00 PM to 9:00 PM, and Fridays from 9:00 AM to 3:00 PM.
 
-It’s important to consider that there could be available appointments in the morning and afternoon, with unavailable time slots in between.
+It’s important to consider that there could be available appointments in the morning and in the afternoon, with unavailable time slots in between.
 
-The schedules will repeat weekly until the professional decides to change them.
+The schedules will repeat weekly until the provider decides to change them.
 
 It’s important for the agenda to be able to block time slots due to unforeseen events or planned absences (e.g., the professional’s vacation).
 
-The time slots on the agendas may have the following statuses:
+Time slots on the agendas may have the following statuses:
 
 - Not available (cannot be reserved)
 - Free (available for reservation)
-- Reserved (reserved by the patient, awaiting confirmation from the admissions desk)
-- Confirmed (appointment confirmed by admissions)
+- Reserved (reserved by the patient, awaiting confirmation from the reception or admissions area)
+- Confirmed (appointment confirmed by receptionist)
 - Canceled (patient cancels the appointment up to 24 hours in advance)
 - No-show (patient did not attend the appointment)
 - Present (patient attended the appointment)
-- In consultation (patient is currently being seen by the professional)
+- In consultation (patient is currently being seen by the healthcare professional)
 - Attended (patient has been seen by the professional)
 
 ### Patient Registration
 
-When a patient is new, the system must request all personal information and generate a person record.
+When a patient is new, the system must request all personal information and generate a patient record.
 
 If the patient is not new, the system must present the person’s information so it can be verified and updated if necessary.
 
 ### Patient Self-Scheduling
 
-Patients can register online in the system and make their appointment reservation. The reservation must be confirmed by admissions for the appointment to be finalized. Upon registering, they must provide all the necessary information, just as if it were done in person. Additionally, they must upload a photocopy of their ID so admissions can validate it.
+Patients can register for an account with the system and make their appointments online. The reservation must be confirmed by reception for the appointment to be finalized. During the registeration, a patient must provide all the necessary information, just as if it were done in person. Additionally, they must upload a photocopy of their ID so that it can be validated in the reception area.
 
 ### Calendar
 

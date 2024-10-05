@@ -17,8 +17,7 @@ Sus principales características deberán ser:
 
 Las agendas estarán organizadas por sucursal y dispondrán de 2 tipos de clasificación:
 
-- Un tipo de clasificación customizable por la organización (Por ej. podría utilizarse para diferencias
-  los tipos de consultas: Normal, especial, VIP, etc)
+- Un tipo de clasificación customizable por la organización (Por ej. podría utilizarse para diferencias los tipos de consultas: Normal, especial, VIP, etc)
 - Por especialidad, esta clasificación quedará determinada por la especialidad del médico de la agenda.
 
 ### Programación de Horarios
@@ -40,24 +39,17 @@ La aplicación debe permitir transferir/copiar pacientes entre agendas actualiza
 
 ### Sobreturnos
 
-La aplicación debe permitir generar horarios especiales (conocidos como sobreturnos). Estos horarios
-especiales pueden compartir el mismo horario de programación que un turno de la agenda siempre y cuando
-el horario este reservado. Cada agenda puede tener una cantidad máxima de sobreturnos en el día (diferentes
-para cada agenda).
+La aplicación debe permitir generar horarios especiales (conocidos como sobreturnos). Estos horarios especiales pueden compartir el mismo horario de programación que un turno de la agenda siempre y cuando el horario este reservado. Cada agenda puede tener una cantidad máxima de sobreturnos en el día (diferentes para cada agenda).
 
 ### Profesionales
 
-Los profesionales deberán ser registrados por usuarios que tengan rol de administrador, los profesionales
-pueden tener mas de una especialidad, donde por cada especialidad tienen una matrícula habilitante. El
-profesional podrá disponer de una agenda por especialidad.
+Los profesionales deberán ser registrados por usuarios que tengan rol de administrador, los profesionales pueden tener mas de una especialidad, donde por cada especialidad tienen una matrícula habilitante. El profesional podrá disponer de una agenda por especialidad.
 
 ### Estados de las agendas
 
-Las agendas deben disponer de horarios (que se corresponden con los turnos para las citas). Cada agenda
-puede tener una planificación diferente de horarios. Para ello se debe disponer de una función de
-configuración de agendas que pueda planificar los horarios.
-Por ejemplo, una agenda puede tener horarios de 30 minutos, con horarios disponibles los Lunes, Miércoles y
-Viernes de 8hs a 12hs.
+Las agendas deben disponer de horarios (que se corresponden con los turnos para las citas). Cada agenda puede tener una planificación diferente de horarios. Para ello se debe disponer de una función de configuración de agendas que pueda planificar los horarios.
+
+Por ejemplo, una agenda puede tener horarios de 30 minutos, con horarios disponibles los lunes, miércoles y viernes de 8hs a 12hs.
 
 Otra agenda puede tener horarios de 40 minutos, con horarios los Jueves de 16 a 21hs y los Viernes de 9 a
 15hs.
@@ -83,22 +75,17 @@ Los horarios de las agendas podrán tener los siguientes estados:
 
 ### Registro de Pacientes
 
-Cuando el paciente es nuevo el sistema debe solicitar la información personal completa y generar un registro
-de persona.
-Si el paciente no es nuevo el sistema debe presentar la información de la persona para que esta pueda ser
-corroborada y actualizada si es necesario.
+Cuando el paciente es nuevo el sistema debe solicitar la información personal completa y generar un registro de persona.
+
+Si el paciente no es nuevo el sistema debe presentar la información de la persona para que esta pueda ser corroborada y actualizada si es necesario.
 
 ### Agendamiento por el paciente
 
-El paciente puede registrarse online en el sistema y realizar la reserva del turno. La reserva del turno debe
-confirmarse por admisión para que el turno quede confirmado. Al registrarse deberá proveer todos los datos
-necesarios del mismo modo que si fuera presencial. Además, deberá subir una fotocopia del documento para
-que admisión la pueda validar.
+El paciente puede registrarse online en el sistema y realizar la reserva del turno. La reserva del turno debe confirmarse por admisión para que el turno quede confirmado. Al registrarse deberá proveer todos los datos necesarios del mismo modo que si fuera presencial. Además, deberá subir una fotocopia del documento para que admisión la pueda validar.
 
 ### Calendario
 
-El sistema debe proveer una función tal que los administradores puedan cargar los días no laborables del año
-para que estos no puedan ser planificados ni reservados en las agendas.
+El sistema debe proveer una función tal que los administradores puedan cargar los días no laborables del año para que estos no puedan ser planificados ni reservados en las agendas.
 
 ### Ejemplos de horarios que deberían ser soportados por la aplicación
 
