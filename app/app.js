@@ -35,15 +35,26 @@ app.set('views', path.join(__dirname, 'views'));
 // Serve static files (compiled CSS)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Define a route for the form (read from DB)
-app.get('/', async (req, res) => {
+// Route for the homepage
+app.get('/', (req, res) => {
+  res.render('index');
+});
+
+// Define a route for the pacientes form (read from DB)
+app.get('/pacientes', async (req, res) => {
   try {
     const pacientes = await Paciente.query(); // Fetch all Pacientes
-    res.render('index', { pacientes });
+    res.render('pacientes', { pacientes });
   } catch (err) {
     res.status(500).send(err.message);
   }
 });
+
+// Route for pacientes page
+app.get('/pacientes', (req, res) => {
+  res.render('pacientes');
+});
+
 
 // Handle POST request for creating a new paciente
 app.post('/paciente/create', async (req, res) => {
