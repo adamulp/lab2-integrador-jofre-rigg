@@ -13,7 +13,7 @@
    xmlns:svg="http://www.w3.org/2000/svg">
   <defs
      id="defs114" />
-  <sodipodi:namedview
+<sodipodi:namedview
      id="namedview112"
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -33,6 +33,13 @@
      inkscape:current-layer="svg110"
      units="mm"
      inkscape:document-units="mm" />
+<rect
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     fill="#ffffff"
+     id="background" />
   <!-- Escenario-->
   <g
      id="dashed-rectangle"
