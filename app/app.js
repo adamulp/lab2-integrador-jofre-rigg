@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
 app.get('/pacientes', async (req, res) => {
   try {
     const pacientes = await Paciente.query(); // Fetch all Pacientes
-    res.render('index', { pacientes });
+    res.render('pacientes', { pacientes });
   } catch (err) {
     res.status(500).send(err.message);
   }
