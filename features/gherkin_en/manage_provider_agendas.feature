@@ -25,7 +25,7 @@ Scenario: Configure Dr. Pepe's time slots from January 1st to February 20th
     When the administrative user sets up Dr. Pepe's agenda accordingly
     Then the agenda displays the correct time slots for those dates
 
-Scenario: Mark Dr. Pepe's vacation from February 21st for two weeks
+Scenario: Schedule Dr. Pepe's vacation from February 21st for two weeks
     Given Dr. Pepe will be on vacation starting February 21st for two weeks
     When the administrative user blocks off those dates in the agenda
     Then the time slots during that period are marked as "vacation" and "not available"
@@ -37,7 +37,7 @@ Scenario: Update Dr. Pepe's schedule from May 30th to June 20th
     When the administrative user updates the agenda
     Then the new time slots are reflected in the system
 
-Scenario: No planned schedules after June 21st
+Scenario: No planned schedules for Dr. Pepe after June 21st
     Given there are no planned schedules for Dr. Pepe after June 21st
     When patients or secretaries check the agenda beyond this date
     Then the system shows no available time slots

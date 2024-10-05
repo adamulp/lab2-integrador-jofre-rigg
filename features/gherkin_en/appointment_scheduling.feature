@@ -1,27 +1,27 @@
 Feature: Appointment Scheduling
 
-    Scenario: Schedule an appointment when slots are available
-        Given a patient arrives at the clinic or contacts via phone, WhatsApp, or email
-        And the patient provides full name, National ID (DNI), health insurance, and contact information
-        And there is an available time slot for the requested specialty
-        When the secretary searches for open slots on the selected schedule
-        And reserves the selected time slot
-        Then the appointment status changes to "reserved"
+Scenario: Schedule an appointment when slots are available
+    Given the clinic has available time slots
+    When a patient requests an appointment
+    And selects an available time slot
+    Then the appointment is successfully scheduled
+    And the patient receives a confirmation email
 
-    Scenario: Add patient to waiting list when no slots are available
-        Given a patient requests an appointment for a specific doctor or specialist
-        And there are no available appointments in the short term
-        When the secretary adds the patient to the waiting list for that professional
-        Then the patient is placed on the waiting list
-        And will be considered if an appointment becomes available
+Scenario: Add patient to waiting list when no slots are available
+    Given a patient named "John Doe" with ID "12345678" requests an appointment
+    When no slots are available for "Neurology"
+    Then the patient is added to the waiting list for "Neurology"
+    And the patient receives a notification about their status on the waiting list
 
-    Scenario: Secretary checks available and scheduled agendas
-        Given the secretary needs to check agendas and time slots
-        When the secretary filters agendas by classification, specialty, doctor, appointment status, or day
-        Then the system displays the filtered agendas and available or scheduled time slots
+Scenario: Secretary checks available and scheduled agendas
+    Given the clinic has multiple doctors with different specialties
+    When the secretary checks the agendas
+    Then the secretary can see the available and scheduled appointments for each doctor
+    And the secretary can filter the appointments by specialty and doctor
 
-    Scenario: Transfer patient between agendas
-        Given a patient has a reserved appointment in one agenda
-        When the secretary transfers or copies the patient to another agenda
-        Then the appointment information is updated to reflect the transfer
-        And the original time slot becomes available if transferred
+Scenario: Transfer patient between agendas
+    Given a patient has an appointment scheduled with Dr. Smith
+    When the patient requests to transfer the appointment to Dr. Johnson
+    And there is an available slot with Dr. Johnson
+    Then the appointment is transferred to Dr. Johnson's agenda
+    And the patient is notified of the change

@@ -4,7 +4,7 @@ Feature: Calendar Management of Non-Working Days
             Given the administrator has a list of non-working days for the year
             When the administrator inputs these dates into the system's calendar function
             Then the system marks these days as non-working
-            And agendas cannot have appointments scheduled on these days
+            And agendas cannot have appointments scheduled on these non-working days
 
         Scenario: Attempt to schedule on a non-working day
             Given a day is marked as non-working in the system
