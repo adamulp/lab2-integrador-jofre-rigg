@@ -11,11 +11,9 @@ consultorios/clínicas de la organización.
 
 Sus principales características deberán ser:
 
-    * Disponer de la mayor agilidad en la programación de citas, a causa de la disponibilidad de visualizar en una única pantalla todos los profesionales
-
-    * Facilidades en los recursos de copias y transferencias de programaciones.
-
-    * Practicidad al momento de programar un agendamiento como también al momento de la cita.
+- Disponer de la mayor agilidad en la programación de citas, a causa de la disponibilidad de visualizar en una única pantalla todos los profesionales
+- Facilidades en los recursos de copias y transferencias de programaciones.
+- Practicidad al momento de programar un agendamiento como también al momento de la cita.
 
 Las agendas estarán organizadas por sucursal y dispondrán de 2 tipos de clasificación: \* Un tipo de clasificación customizable por la organización (Por ej. podría utilizarse para diferencias
 los tipos de consultas: Normal, especial, VIP, etc)
