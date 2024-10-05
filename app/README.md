@@ -15,7 +15,7 @@ El directorio `app` contiene el código principal de la aplicación y archivos r
 - `agenda_consultas.db`: Base de datos de prueba (SQLite)
 
 
-### Ejemplo el contenido del archivo `.env`:
+### Ejemplo del contenido del archivo `.env`:
 
 ```plaintext
 NODE_ENV=development
