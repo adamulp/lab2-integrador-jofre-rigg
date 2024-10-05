@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
 app.get('/pacientes', async (req, res) => {
   try {
     const pacientes = await Paciente.query(); // Fetch all Pacientes
-    res.render('pacientes', { pacientes });
+    res.render('index', { pacientes });
   } catch (err) {
     res.status(500).send(err.message);
   }
@@ -55,6 +55,10 @@ app.get('/pacientes', (req, res) => {
   res.render('pacientes');
 });
 
+// Route for horarios page
+app.get('/horarios', (req, res) => {
+  res.render('horarios');
+});
 
 // Handle POST request for creating a new paciente
 app.post('/paciente/create', async (req, res) => {
@@ -81,6 +85,22 @@ app.post('/paciente/delete/:id', async (req, res) => {
   } catch (err) {
     res.status(500).send(err.message);
   }
+});
+
+// Handle form submissions for updating schedule
+app.post('/horarios/update', (req, res) => {
+  const { doctor, dia_cambio, nuevo_horario, fecha_cambio } = req.body;
+  // Logic to update doctor's schedule in the database here
+  console.log(`Updating schedule for ${doctor} on ${dia_cambio} to ${nuevo_horario} starting from ${fecha_cambio}`);
+  res.redirect('/horarios');
+});
+
+// Handle form submissions for marking vacation
+app.post('/horarios/vacaciones', (req, res) => {
+  const { doctor_vacaciones, fecha_inicio_vacaciones, fecha_fin_vacaciones } = req.body;
+  // Logic to mark vacation period in the database here
+  console.log(`Marking vacation for ${doctor_vacaciones} from ${fecha_inicio_vacaciones} to ${fecha_fin_vacaciones}`);
+  res.redirect('/horarios');
 });
 
 
