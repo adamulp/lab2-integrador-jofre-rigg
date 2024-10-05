@@ -1,11 +1,6 @@
+require('dotenv').config();
 const express = require('express');
 const port = process.env.PORT || 3000;
-
-if (process.env.NODE_ENV === 'development' || process.env.HOSTNAME === 'localhost') {
-    console.log('Running in development mode');}
-else {
-    console.log('Running in production mode');
-}
 
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -34,6 +29,13 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Serve static files (compiled CSS)
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Log the environment mode
+if (process.env.NODE_ENV === 'development' || process.env.HOSTNAME === 'localhost') {
+    console.log('Running in development mode');
+} else {
+    console.log('Running in production mode');
+}
 
 // Route for the homepage
 app.get('/', (req, res) => {
@@ -243,7 +245,6 @@ function transferirCita(nombre_paciente, doctor_anterior, fecha_cita_anterior, d
   // In a real application, update the appointment details in the database
   return true; // Hardcoded to simulate successful transfer
 }
-
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

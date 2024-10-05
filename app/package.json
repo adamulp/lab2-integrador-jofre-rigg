@@ -4,10 +4,12 @@
     "description": "Medical appointment scheduling system",
     "main": "app.js",
     "scripts": {
-        "start": "cross-env NODE_ENV=production node app.js",
-        "start:dev": "cross-env NODE_ENV=development nodemon app.js",
-        "dev": "npm run start:dev",
-        "sass": "sass --watch sass:public/styles"
+        "dev": "cross-env DB_CLIENT=sqlite3 nodemon app.js",
+        "start": "cross-env DB_CLIENT=mariadb node app.js",
+        "dev:sqlite": "cross-env DB_CLIENT=sqlite3 nodemon app.js",
+        "dev:mariadb": "cross-env DB_CLIENT=mariadb nodemon app.js",
+        "start:sqlite": "cross-env DB_CLIENT=sqlite3 node app.js",
+        "start:mariadb": "cross-env DB_CLIENT=mariadb node app.js"
     },
     "dependencies": {
         "body-parser": "^1.20.3",
