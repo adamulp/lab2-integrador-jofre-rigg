@@ -6,6 +6,16 @@ TUDS-B-24 Laboratorio de Programación II: Proyecto Integrador
 
 Run from the app folder.
 
+Install dependencies:
+```bash
+npm install
+```
+
+List dependencies:
+```bash
+jq -r '.dependencies | to_entries[] | "npm install \(.key)@\(.value)"' package.json
+```
+
 #### Dev mode on localhost (nodemon)
 
 ```bash
