@@ -11,38 +11,33 @@ consultorios/clínicas de la organización.
 
 Sus principales características deberán ser:
 
-- Disponer de la mayor agilidad en la programación de citas, a causa de la disponibilidad de visualizar en una única pantalla todos los profesionales
-- Facilidades en los recursos de copias y transferencias de programaciones.
-- Practicidad al momento de programar un agendamiento como también al momento de la cita.
+    * Disponer de la mayor agilidad en la programación de citas, a causa de la disponibilidad de visualizar en una única pantalla todos los profesionales
 
-Las agendas estarán organizadas por sucursal y dispondrán de 2 tipos de clasificación:
+    * Facilidades en los recursos de copias y transferencias de programaciones.
 
-- Un tipo de clasificación customizable por la organización (Por ej. podría utilizarse para diferencias
+    * Practicidad al momento de programar un agendamiento como también al momento de la cita.
+
+Las agendas estarán organizadas por sucursal y dispondrán de 2 tipos de clasificación: \* Un tipo de clasificación customizable por la organización (Por ej. podría utilizarse para diferencias
 los tipos de consultas: Normal, especial, VIP, etc)
--  Por especialidad, esta clasificación quedará determinada por la especialidad del médico de la agenda.
+
+    * Por especialidad, esta clasificación quedará determinada por la especialidad del médico de la agenda.
 
 ### Programación de Horarios
 
 La programación de un horario para una agenda se realiza a partir de que el paciente concurre al
-consultorio/sucursal y solicita una reserva para determinado médico (considere que este paso podría realizarse
-por algún otro mecanismo remoto. Ej. teléfono, whatsapp, mail, etc). En este momento la secretaria solicita al
-paciente la siguiente información: Nombre completo, DNI, motivo de consulta (opcional), obra social y datos
-de contacto para luego acordar un horario (fecha y hora disponible) para la cita.
-El sistema debe facilitar la búsqueda de horarios disponibles para la agenda solicitada como así también el
-registro de la información del turno.
+consultorio/sucursal y solicita una reserva para determinado médico (considere que este paso podría realizarse por algún otro mecanismo remoto. Ej. teléfono, whatsapp, mail, etc). En este momento la secretaria solicita al paciente la siguiente información: Nombre completo, DNI, motivo de consulta (opcional), obra social y datos de contacto para luego acordar un horario (fecha y hora disponible) para la cita.
+
+El sistema debe facilitar la búsqueda de horarios disponibles para la agenda solicitada como así también el registro de la información del turno.
 
 Al momento de confirmar la programación el estado del turno pasará a reservado.
 
-Llegado el caso de que no existieran turnos disponibles a corto plazo la secretaría podría registrar el paciente
-en una lista de espera del profesional o de la especialidad para que si se liberaran turnos este pudiera ser
+Llegado el caso de que no existieran turnos disponibles a corto plazo la secretaría podría registrar el paciente en una lista de espera del profesional o de la especialidad para que si se liberaran turnos este pudiera ser
 considerado.
-En todo momento la aplicación debe permitir a la secretaria consultar las agendas/horarios disponibles y/o
-programados. Para cumplir satisfactoriamente esta necesidad las agendas deben poder consultarse/filtrarse por
-diferentes criterios.
+
+En todo momento la aplicación debe permitir a la secretaria consultar las agendas/horarios disponibles y/o programados. Para cumplir satisfactoriamente esta necesidad las agendas deben poder consultarse/filtrarse por diferentes criterios.
 Filtros por clasificación, especialidad médica, médico, estados de los turnos, día y combinaciones de estos.
 
-La aplicación debe permitir transferir/copiar pacientes entre agendas actualizando toda la información
-necesaria para que los turnos reflejen esta acción.
+La aplicación debe permitir transferir/copiar pacientes entre agendas actualizando toda la información necesaria para que los turnos reflejen esta acción.
 
 ### Sobreturnos
 
