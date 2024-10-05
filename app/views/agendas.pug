@@ -5,57 +5,58 @@ html
     link(rel='stylesheet', href='/styles/styles.css')
   body
     header
-      h1 Gestión de Agendas
-      include nav.pug
+        h1 Gestión de Agendas
+        include nav.pug
+    
+    .container
+        main
+        h2 Filtrar Citas por Especialidad y Médico
+        form(action='/agendas/filtrar', method='POST')
+            label(for='especialidad') Especialidad:
+            select(name='especialidad' id='especialidad')
+                option(value='Cardiología') Cardiología
+                option(value='Neurología') Neurología
+                option(value='Pediatría') Pediatría
+                option(value='Dermatología') Dermatología
 
-    main
-      h2 Filtrar Citas por Especialidad y Médico
-      form(action='/agendas/filtrar', method='POST')
-        label(for='especialidad') Especialidad:
-        select(name='especialidad' id='especialidad')
-          option(value='Cardiología') Cardiología
-          option(value='Neurología') Neurología
-          option(value='Pediatría') Pediatría
-          option(value='Dermatología') Dermatología
+            label(for='medico') Médico:
+            select(name='medico' id='medico')
+                option(value='Dr. García') Dr. García
+                option(value='Dr. Rodríguez') Dr. Rodríguez
+                option(value='Dr. López') Dr. López
+                option(value='Dr. Pepe') Dr. Pepe
 
-        label(for='medico') Médico:
-        select(name='medico' id='medico')
-          option(value='Dr. García') Dr. García
-          option(value='Dr. Rodríguez') Dr. Rodríguez
-          option(value='Dr. López') Dr. López
-          option(value='Dr. Pepe') Dr. Pepe
+            button(type='submit') Filtrar Citas
 
-        button(type='submit') Filtrar Citas
+        h2 Transferir un Paciente de una Agenda a Otra
+        form(action='/agendas/transferir', method='POST')
+            label(for='nombre_paciente') Nombre del Paciente:
+            input(type='text' id='nombre_paciente' name='nombre_paciente' required placeholder='e.g., Juan Pérez')
 
-      h2 Transferir un Paciente de una Agenda a Otra
-      form(action='/agendas/transferir', method='POST')
-        label(for='nombre_paciente') Nombre del Paciente:
-        input(type='text' id='nombre_paciente' name='nombre_paciente' required placeholder='e.g., Juan Pérez')
+            label(for='doctor_anterior') Médico Actual:
+            select(name='doctor_anterior' id='doctor_anterior')
+              option(value='Dr. García') Dr. García
+              option(value='Dr. Rodríguez') Dr. Rodríguez
+              option(value='Dr. López') Dr. López
+              option(value='Dr. Pepe') Dr. Pepe
 
-        label(for='doctor_anterior') Médico Actual:
-        select(name='doctor_anterior' id='doctor_anterior')
-          option(value='Dr. García') Dr. García
-          option(value='Dr. Rodríguez') Dr. Rodríguez
-          option(value='Dr. López') Dr. López
-          option(value='Dr. Pepe') Dr. Pepe
+            label(for='fecha_cita_anterior') Fecha de la Cita Actual:
+            input(type='date' id='fecha_cita_anterior' name='fecha_cita_anterior' required)
 
-        label(for='fecha_cita_anterior') Fecha de la Cita Actual:
-        input(type='date' id='fecha_cita_anterior' name='fecha_cita_anterior' required)
+            label(for='doctor_nuevo') Nuevo Médico:
+            select(name='doctor_nuevo' id='doctor_nuevo')
+                option(value='Dr. García') Dr. García
+                option(value='Dr. Rodríguez') Dr. Rodríguez
+                option(value='Dr. López') Dr. López
+                option(value='Dr. Pepe') Dr. Pepe
 
-        label(for='doctor_nuevo') Nuevo Médico:
-        select(name='doctor_nuevo' id='doctor_nuevo')
-          option(value='Dr. García') Dr. García
-          option(value='Dr. Rodríguez') Dr. Rodríguez
-          option(value='Dr. López') Dr. López
-          option(value='Dr. Pepe') Dr. Pepe
+            label(for='fecha_cita_nueva') Fecha Nueva:
+            input(type='date' id='fecha_cita_nueva' name='fecha_cita_nueva' required)
 
-        label(for='fecha_cita_nueva') Fecha Nueva:
-        input(type='date' id='fecha_cita_nueva' name='fecha_cita_nueva' required)
+            label(for='hora_cita_nueva') Nueva Hora:
+            input(type='time' id='hora_cita_nueva' name='hora_cita_nueva' required)
 
-        label(for='hora_cita_nueva') Nueva Hora:
-        input(type='time' id='hora_cita_nueva' name='hora_cita_nueva' required)
+            button(type='submit') Transferir Paciente
 
-        button(type='submit') Transferir Paciente
-
-      h2 Notas sobre la Gestión de Agendas
-      p Use el formulario de arriba para filtrar citas o para transferir a un paciente de un médico a otro.
+        h2 Notas sobre la Gestión de Agendas
+        p Use el formulario de arriba para filtrar citas o para transferir a un paciente de un médico a otro.

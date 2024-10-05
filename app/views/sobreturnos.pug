@@ -7,24 +7,24 @@ html
     header
       h1 Programar Sobreturnos
       include nav.pug
+    .container
+        main
+        h2 Agendar un Sobreturno
+        form(action='/sobreturnos/solicitar', method='POST')
+            label(for='doctor') Seleccione el Médico:
+            select(name='doctor', id='doctor')
+                option(value='Dr. García') Dr. García
+                option(value='Dr. López') Dr. López
+                option(value='Dr. Pepe') Dr. Pepe
 
-    main
-      h2 Agendar un Sobreturno
-      form(action='/sobreturnos/solicitar', method='POST')
-        label(for='doctor') Seleccione el Médico:
-        select(name='doctor', id='doctor')
-          option(value='Dr. García') Dr. García
-          option(value='Dr. López') Dr. López
-          option(value='Dr. Pepe') Dr. Pepe
+            label(for='fecha') Fecha para Sobreturno:
+            input(type='date' id='fecha' name='fecha' required)
 
-        label(for='fecha') Fecha para Sobreturno:
-        input(type='date' id='fecha' name='fecha' required)
+            label(for='hora') Hora para Sobreturno:
+            input(type='time' id='hora' name='hora' required)
 
-        label(for='hora') Hora para Sobreturno:
-        input(type='time' id='hora' name='hora' required)
+            button(type='submit') Agendar Sobreturno
 
-        button(type='submit') Agendar Sobreturno
-
-      h2 Notas sobre Sobreturnos
-      p Los sobreturnos son citas adicionales que se agendan en horarios ya reservados.
-      p Los doctores pueden tener un máximo específico de sobreturnos por día.
+        h2 Notas sobre Sobreturnos
+        p Los sobreturnos son citas adicionales que se agendan en horarios ya reservados.
+        p Los doctores pueden tener un máximo específico de sobreturnos por día.

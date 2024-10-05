@@ -4,11 +4,12 @@ html
     title Agenda de Consultas Médicas
     link(rel="stylesheet" href="/styles/styles.css")
   body
-    .container
-      h1 Pacientes
-      include nav.pug
 
-      //- Form to create a new Paciente
+    h1 Pacientes
+    include nav.pug
+      
+
+    .container
       form(action="/paciente/create" method="POST")
         input(type="text" name="nombreCompleto" placeholder="Nombre Completo" required)
         input(type="text" name="dni" placeholder="DNI" required)

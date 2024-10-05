@@ -7,27 +7,28 @@ html
     header
       h1 Gestión de Estados de las Citas
       include nav.pug
+    
+    .container
+        main
+        h2 Confirmar, Cancelar o Marcar Ausencia de una Cita
+        form(action='/actualizarTurnos/gestionar', method='POST')
+            label(for='nombre_paciente') Nombre del Paciente:
+            input(type='text' id='nombre_paciente' name='nombre_paciente' required placeholder='e.g., Juan Pérez')
 
-    main
-      h2 Confirmar, Cancelar o Marcar Ausencia de una Cita
-      form(action='/actualizarTurnos/gestionar', method='POST')
-        label(for='nombre_paciente') Nombre del Paciente:
-        input(type='text' id='nombre_paciente' name='nombre_paciente' required placeholder='e.g., Juan Pérez')
+            label(for='fecha_cita') Fecha de la Cita:
+            input(type='date' id='fecha_cita' name='fecha_cita' required)
 
-        label(for='fecha_cita') Fecha de la Cita:
-        input(type='date' id='fecha_cita' name='fecha_cita' required)
+            label(for='hora_cita') Hora de la Cita:
+            input(type='time' id='hora_cita' name='hora_cita' required)
 
-        label(for='hora_cita') Hora de la Cita:
-        input(type='time' id='hora_cita' name='hora_cita' required)
+            label(for='nuevo_estado') Actualizar Estado:
+            select(name='nuevo_estado' id='nuevo_estado')
+                option(value='Confirmado') Confirmar
+                option(value='Cancelado') Cancelar
+                option(value='Ausente') Marcar como Ausente
 
-        label(for='nuevo_estado') Actualizar Estado:
-        select(name='nuevo_estado' id='nuevo_estado')
-          option(value='Confirmado') Confirmar
-          option(value='Cancelado') Cancelar
-          option(value='Ausente') Marcar como Ausente
+            button(type='submit') Actualizar Estado
 
-        button(type='submit') Actualizar Estado
-
-      h2 Notas sobre Estados de las Citas
-      p El estado de las citas se puede actualizar dependiendo de los eventos que ocurran, como la llegada del paciente, cancelación anticipada, o ausencia.
+        h2 Notas sobre Estados de las Citas
+        p El estado de las citas se puede actualizar dependiendo de los eventos que ocurran, como la llegada del paciente, cancelación anticipada, o ausencia.
 

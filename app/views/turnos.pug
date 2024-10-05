@@ -8,27 +8,28 @@ html
       h1 Programar una Consulta Médica
       include nav.pug
 
-    main
-      h2 Solicitar una Cita
-      form(action='/turnos/solicitar', method='POST')
-        label(for='nombre_paciente') Nombre del Paciente:
-        input(type='text' id='nombre_paciente' name='nombre_paciente' required placeholder='e.g., María González')
+    .container
+        main
+        h2 Solicitar una Cita
+        form(action='/turnos/solicitar', method='POST')
+            label(for='nombre_paciente') Nombre del Paciente:
+            input(type='text' id='nombre_paciente' name='nombre_paciente' required placeholder='e.g., María González')
 
-        label(for='dni') DNI del Paciente:
-        input(type='text' id='dni' name='dni' required placeholder='e.g., 87654321')
+            label(for='dni') DNI del Paciente:
+            input(type='text' id='dni' name='dni' required placeholder='e.g., 87654321')
 
-        label(for='especialidad') Especialidad:
-        select(name='especialidad' id='especialidad')
-          option(value='Cardiología') Cardiología
-          option(value='Neurología') Neurología
-          option(value='Pediatría') Pediatría
-          option(value='Dermatología') Dermatología
+            label(for='especialidad') Especialidad:
+            select(name='especialidad' id='especialidad')
+                option(value='Cardiología') Cardiología
+                option(value='Neurología') Neurología
+                option(value='Pediatría') Pediatría
+                option(value='Dermatología') Dermatología
 
-        label(for='obra_social') Obra Social (si aplica):
-        input(type='text' id='obra_social' name='obra_social' placeholder='Detalles de la obra social')
+            label(for='obra_social') Obra Social (si aplica):
+            input(type='text' id='obra_social' name='obra_social' placeholder='Detalles de la obra social')
 
-        button(type='submit') Solicitar Cita
+            button(type='submit') Solicitar Cita
 
-      h2 Lista de Espera
-      p Si no hay citas disponibles, el paciente será añadido automáticamente a la lista de espera y será notificado.
+        h2 Lista de Espera
+        p Si no hay citas disponibles, el paciente será añadido automáticamente a la lista de espera y será notificado.
 
