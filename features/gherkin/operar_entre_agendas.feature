@@ -5,12 +5,6 @@ Feature: Filtrar y transferir citas entre agendas
     When la secretaria filtra por "Cardiología" y "Dr. García"
     Then se muestran todas las citas disponibles para "Dr. García"
 
-  Scenario: Transferir un paciente de la agenda de un médico a otro
-    Given el paciente "Juan Pérez" tiene una cita con "Dr. García" el "2024-10-10"
-    When la secretaria transfiere al paciente a "Dr. Rodríguez" debido a una emergencia
-    Then la cita se actualiza para reflejar el cambio
-    And la nueva cita del paciente con "Dr. Rodríguez" se confirma
-
   Scenario Outline: Transferir un paciente de una agenda a otra
     Given el paciente "<nombre_paciente>" tiene una cita con "<nombre_doctor_anterior>" el "<fecha_cita_anterior>"
     When la secretaria transfiere al paciente a "<nombre_doctor_nuevo>"
