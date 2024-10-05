@@ -24,4 +24,9 @@ El directorio `app` contiene el código principal de la aplicación y archivos r
 ```plaintext
 NODE_ENV=development
 PORT=3000
+DB_CLIENT=mariadb
+DB_HOST=localhost
+DB_USER=your_username
+DB_PASSWORD=your_password
+DB_NAME=agenda_consultas
 ```
