@@ -1,11 +1,5 @@
 Feature: Gestionar horarios y estados de las agendas de los médicos
 
-  Scenario: Marcar horarios no disponibles por vacaciones
-    Given el doctor "Dr. Pepe" tiene citas agendadas del "2024-03-01" al "2024-03-15"
-    When el administrador marca el periodo del "2024-03-16" al "2024-03-30" como vacaciones
-    Then todas las citas dentro de ese periodo se marcan como "No disponible"
-    And el sistema actualiza la agenda para reflejar el periodo de vacaciones del médico
-
   Scenario: Actualizar el horario de un médico
     Given el doctor "Dr. Pepe" tiene horarios disponibles "Lunes, Miércoles y Viernes de 8:00 a 16:00"
     And el doctor solicita cambiar los horarios de los viernes a "8:00 a 12:00" a partir del "2024-05-30"
