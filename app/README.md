@@ -5,7 +5,7 @@ El directorio `app` contiene el código principal de la aplicación y archivos r
 - `.env`: Archivo de configuración local del entorno (no se sube al repo)
 - `app.js`: El punto de entrada principal de la aplicación.
 - `knexfile.js`: Archivo de configuración para Knex.js, utilizado para migraciones y semillas de la base de datos.
-- `migrations/`: Directorio que contiene archivos de migración de la base de datos.
+- `migrations/`: Directorio que contiene archivos de migración para crear o recrear la base de datos.
   - `20241005022427_create_agenda_de_consultas_tables.js`: Archivo de migración para crear las tablas de agenda de consultas.
 - `modelos/`: Directorio que contiene las definiciones de los modelos.
 - `public/`: Directorio que contiene activos públicos como hojas de estilo.
