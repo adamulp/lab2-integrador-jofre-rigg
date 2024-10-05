@@ -7,12 +7,6 @@ Feature: Programar sobreturnos
     Then el sobreturno se agenda exitosamente
     And la cita se marca como "Sobreturno"
 
-  Scenario: Intentar agendar un sobreturno más allá del límite diario
-    Given el doctor "Dr. García" ya tiene "2" sobreturnos agendados para "2024-10-10"
-    When la secretaria intenta agendar otro sobreturno
-    Then el sistema rechaza la solicitud
-    And se muestra un mensaje indicando que se ha alcanzado el número máximo de sobreturnos
-
   Scenario Outline: Intentar agendar un sobreturno con límite diario
     Given el doctor "<nombre_doctor>" tiene un máximo de "<sobreturnos_max>" sobreturnos permitidos por día
     And ya ha programado "<sobreturnos_actuales>" sobreturnos para el día "<fecha>"
