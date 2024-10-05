@@ -104,6 +104,40 @@ app.post('/horarios/vacaciones', (req, res) => {
 });
 
 
+// Route for horarios page
+app.get('/horarios', (req, res) => {
+  res.render('horarios');
+});
+
+// Route for turnos page
+app.get('/turnos', (req, res) => {
+  res.render('turnos');
+});
+
+// Handle form submission for requesting an appointment
+app.post('/turnos/solicitar', (req, res) => {
+  const { nombre_paciente, dni, especialidad, obra_social } = req.body;
+
+  // Simulated logic for checking availability
+  const citasDisponibles = checkCitasDisponibles(especialidad);
+
+  if (citasDisponibles) {
+    // Logic to schedule an appointment in the database
+    console.log(`Appointment scheduled for ${nombre_paciente} with ${especialidad}`);
+    res.send(`Cita programada para ${nombre_paciente} en ${especialidad}`);
+  } else {
+    // Logic to add patient to waiting list
+    console.log(`No available appointments. ${nombre_paciente} added to waiting list for ${especialidad}`);
+    res.send(`${nombre_paciente} fue añadido a la lista de espera para ${especialidad}`);
+  }
+});
+
+// Simulated function to check appointment availability
+function checkCitasDisponibles(especialidad) {
+  // In a real application, check the database for available slots
+  return false; // Currently hardcoded to simulate no availability
+}
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
