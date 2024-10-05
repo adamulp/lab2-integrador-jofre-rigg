@@ -6,14 +6,7 @@ html
   body
     header
       h1 Gestión de Agendas
-      nav
-        ul
-          li: a(href='/') Home
-          li: a(href='/pacientes') Lista de Pacientes
-          li: a(href='/horarios') Gestionar Horarios de Médicos
-          li: a(href='/turnos') Programar Consulta Médica
-          li: a(href='/sobreturnos') Programar Sobreturno
-          li: a(href='/actualizarTurnos') Gestión de Estados de Citas
+      include nav.pug
 
     main
       h2 Filtrar Citas por Especialidad y Médico
