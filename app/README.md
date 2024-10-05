@@ -15,7 +15,7 @@ El directorio `app` contiene el código principal de la aplicación y archivos r
 
 - `.env`: Archivo de configuración local del entorno (no se sube al repo)
 
-Ejemplo el contenido del archivo `.env`:
+### Ejemplo el contenido del archivo `.env`:
 
 ```plaintext
 NODE_ENV=development
