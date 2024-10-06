@@ -29,7 +29,7 @@ router.post('/create', async (req, res) => {
         contacto,
         obraSocial
       });
-      res.redirect('/');
+      res.redirect('/pacientes');
     } catch (err) {
       res.status(500).send(err.message);
     }
@@ -40,7 +40,7 @@ router.post('/create', async (req, res) => {
     try {
       const { id } = req.params;
       await Paciente.query().deleteById(id);
-      res.redirect('/');
+      res.redirect('/pacientes');
     } catch (err) {
       res.status(500).send(err.message);
     }

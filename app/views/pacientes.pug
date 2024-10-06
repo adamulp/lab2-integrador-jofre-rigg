@@ -3,6 +3,13 @@ html
   head
     title Agenda de Consultas Médicas
     link(rel="stylesheet" href="/styles/styles.css")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/css/theme.default.min.css")
+    script.
+      $(document).ready(function() {
+        $("#pacientesTable").tablesorter();
+      });
   body
     h1 Pacientes
     include nav.pug
@@ -25,11 +32,23 @@ html
         
       //- List existing Pacientes
       if pacientes.length
-        ul
-          each paciente in pacientes
-            li
-              | #{paciente.nombreCompleto} - #{paciente.dni}
-              form(action=`/pacientes/delete/${paciente.id}` method="POST" style="display:inline;")
-                button(type="submit") Eliminar
+        table#pacientesTable.tablesorter
+          thead
+            tr
+              th Nombre Completo
+              th DNI
+              th Contacto
+              th Obra Social
+              th Acciones
+          tbody
+            each paciente in pacientes
+              tr
+                td #{paciente.nombreCompleto}
+                td #{paciente.dni}
+                td #{paciente.contacto}
+                td #{paciente.obraSocial}
+                td
+                  form(action=`/pacientes/delete/${paciente.id}` method="POST" style="display:inline;")
+                    button(type="submit") Eliminar
       else
         p No hay pacientes registrados.
