@@ -59,7 +59,7 @@
      - Elegir la nueva agenda y horario.
      - Actualizar la información y estados de la cita según corresponda.
 
-9. ### Generar Horarios Sobrecargados (Overbooking)
+9. ### Generar Horarios Sobrecargados
    - **Descripción**: Crear horarios adicionales más allá del horario regular.
    - **Pasos**:
      - Verificar que no se haya alcanzado el máximo de horarios sobrecargados por día.

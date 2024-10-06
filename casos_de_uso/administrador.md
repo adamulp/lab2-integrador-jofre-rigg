@@ -45,7 +45,7 @@
      - Asegurarse de que estas fechas se apliquen a todas las agendas.
      - Confirmar que la programación está deshabilitada para estos días.
 
-7. ### Establecer Límites de Sobrecarga (Overbooking)
+7. ### Establecer Límites de Sobrecarga
    - **Descripción**: Definir el número máximo de citas sobrecargadas permitidas por día.
    - **Pasos**:
      - Acceder a la configuración de cada agenda.
