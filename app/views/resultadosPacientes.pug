@@ -1,0 +1,18 @@
+// views/resultados.pug
+doctype html
+html
+  head
+    title Resultados de Búsqueda
+    link(rel="stylesheet", href="/styles/styles.css")
+  body
+    h1 Resultados de Búsqueda
+    include nav.pug
+
+    .container
+      if pacientes.length
+        ul
+          each paciente in pacientes
+            li
+              | #{paciente.nombreCompleto} - #{paciente.dni}
+      else
+        p No se encontraron pacientes.

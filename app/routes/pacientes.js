@@ -46,4 +46,39 @@ router.post('/create', async (req, res) => {
     }
   });
 
+  router.post('/buscar', async (req, res) => {
+    try {
+      const { nombreCompleto, dni } = req.query;
+      const pacientes = await Paciente.query()
+        .where('nombreCompleto', 'like', `%${nombreCompleto}%`)
+        .orWhere('dni', 'like', `%${dni}%`);
+      res.render('pacientes', { pacientes });
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  });
+
+  // Handle POST request for searching pacientes
+  router.post('/resultados', async (req, res) => {
+    try {
+      const { nombreCompleto, dni } = req.body;
+    const pacientes = await Paciente.query()
+      .where('nombreCompleto', 'like', `%${nombreCompleto}%`)
+      .orWhere('dni', dni);
+      res.render('resultadosPacientes', { pacientes });
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  });
+
+
+  router.get('/:id', async (req, res) => {
+    try {
+      const paciente = await Paciente.getPacienteById(req.params.id); // Fetch all Pacientes
+    res.json(paciente);
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  });
+
 module.exports = router;

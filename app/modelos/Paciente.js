@@ -34,6 +34,10 @@ class Paciente extends Model {
       }
     };
   }
+
+    static getPacienteById(id) {
+        return this.query().findById(id);
+    }
 }
 
 module.exports = Paciente;

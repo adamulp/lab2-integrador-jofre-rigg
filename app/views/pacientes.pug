@@ -4,25 +4,31 @@ html
     title Agenda de Consultas Médicas
     link(rel="stylesheet" href="/styles/styles.css")
   body
-
     h1 Pacientes
     include nav.pug
       
-
     .container
       form(action="/pacientes/create" method="POST")
         input(type="text" name="nombreCompleto" placeholder="Nombre Completo" required)
         input(type="text" name="dni" placeholder="DNI" required)
         input(type="text" name="contacto" placeholder="Contacto" required)
         input(type="text" name="obraSocial" placeholder="Obra Social")
-        button(type="submit") Crear Paciente
-
+        .side-by-side 
+            .inline-field
+                button(type="submit") Crear Paciente
+      form(action="/pacientes/resultados" method="POST")
+        input(type="text" name="nombreCompleto" placeholder="Nombre Completo")
+        input(type="text" name="dni" placeholder="DNI")
+        .side-by-side 
+            .inline-field
+                button(type="submit") Buscar Paciente
+        
       //- List existing Pacientes
       if pacientes.length
         ul
           each paciente in pacientes
             li
-              | #{paciente.nombreCompleto} - #{paciente.dni} 
+              | #{paciente.nombreCompleto} - #{paciente.dni}
               form(action=`/pacientes/delete/${paciente.id}` method="POST" style="display:inline;")
                 button(type="submit") Eliminar
       else
