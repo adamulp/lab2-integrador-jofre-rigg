@@ -15,6 +15,15 @@ body {
 
 h1 {
   color: #007BFF;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+p {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 form {
@@ -49,29 +58,31 @@ button:hover {
 }
 
 .time-input {
-  max-width: 200px;
+  max-width: 172px;
 }
 
-nav {
+nav#main-nav {
   background-color: #007BFF;
   padding: 10px;
   border-radius: 5px;
+  max-width: 1080px;
+  margin: 0 auto;
 }
-nav ul {
+nav#main-nav ul {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   justify-content: space-around;
 }
-nav ul li a {
+nav#main-nav ul li a {
   color: white;
   text-decoration: none;
   display: inline-block;
   padding: 10px 20px;
   border-radius: 5px;
 }
-nav ul li a:hover {
+nav#main-nav ul li a:hover {
   background-color: #0056b3;
 }
 
