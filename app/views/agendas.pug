@@ -14,17 +14,13 @@ html
         form(action='/agendas/filtrar', method='POST')
             label(for='especialidad') Especialidad:
             select(name='especialidad' id='especialidad')
-                option(value='Cardiología') Cardiología
-                option(value='Neurología') Neurología
-                option(value='Pediatría') Pediatría
-                option(value='Dermatología') Dermatología
+                each especialidad in especialidades
+                    option(value=especialidad.nombre) #{especialidad.nombre}
 
             label(for='medico') Médico:
             select(name='medico' id='medico')
-                option(value='Dr. García') Dr. García
-                option(value='Dr. Rodríguez') Dr. Rodríguez
-                option(value='Dr. López') Dr. López
-                option(value='Dr. Pepe') Dr. Pepe
+                each medico in medicos
+                    option(value=medico.nombreCompleto) #{medico.nombreCompleto}
 
             button(type='submit') Filtrar Citas
 
@@ -35,20 +31,16 @@ html
 
             label(for='doctor_anterior') Médico Actual:
             select(name='doctor_anterior' id='doctor_anterior')
-                option(value='Dr. García') Dr. García
-                option(value='Dr. Rodríguez') Dr. Rodríguez
-                option(value='Dr. López') Dr. López
-                option(value='Dr. Pepe') Dr. Pepe
+                each medico in medicos 
+                    option(value=medico.nombreCompleto) #{medico.nombreCompleto}
 
             label(for='fecha_cita_anterior') Fecha de la Cita Actual:
             input(type='date' id='fecha_cita_anterior' name='fecha_cita_anterior' required class='date-input')
 
             label(for='doctor_nuevo') Nuevo Médico:
             select(name='doctor_nuevo' id='doctor_nuevo')
-                option(value='Dr. García') Dr. García
-                option(value='Dr. Rodríguez') Dr. Rodríguez
-                option(value='Dr. López') Dr. López
-                option(value='Dr. Pepe') Dr. Pepe
+                each medico in medicos 
+                    option(value=medico.nombreCompleto) #{medico.nombreCompleto}
 
             label(for='fecha_cita_nueva') Fecha Nueva:
             input(type='date' id='fecha_cita_nueva' name='fecha_cita_nueva' required class='date-input')

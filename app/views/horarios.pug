@@ -16,9 +16,8 @@ body
             form(action='/horarios/update', method='POST')
                     label(for='doctor') Seleccione el Médico:
                     select(name='doctor', id='doctor')
-                            option(value='Dr. Pepe') Dr. Pepe
-                            option(value='Dr. López') Dr. López
-                            option(value='Dr. García') Dr. García
+                            each medico in medicos
+                                option(value=medico.nombreCompleto) #{medico.nombreCompleto}
 
                     label(for='dia_cambio') Día a Cambiar:
                     select(name='dia_cambio', id='dia_cambio')
@@ -40,9 +39,8 @@ body
             form(action='/horarios/vacaciones', method='POST')
                     label(for='doctor_vacaciones') Seleccione el Médico:
                     select(name='doctor_vacaciones', id='doctor_vacaciones')
-                            option(value='Dr. Pepe') Dr. Pepe
-                            option(value='Dr. López') Dr. López
-                            option(value='Dr. García') Dr. García
+                            each medico in medicos
+                                option(value=medico.nombreCompleto) #{medico.nombreCompleto}
 
                     label(for='fecha_inicio_vacaciones') Fecha Inicio de Vacaciones:
                     input(type='date' id='fecha_inicio_vacaciones' name='fecha_inicio_vacaciones' class='date-input')

@@ -13,9 +13,8 @@ html
         form(action='/sobreturnos/solicitar', method='POST')
             label(for='doctor') Seleccione el Médico:
             select(name='doctor', id='doctor')
-                option(value='Dr. García') Dr. García
-                option(value='Dr. López') Dr. López
-                option(value='Dr. Pepe') Dr. Pepe
+                each medico in medicos
+                    option(value=medico.nombreCompleto) #{medico.nombreCompleto}
 
             label(for='fecha') Fecha para Sobreturno:
             input(type='date' id='fecha' name='fecha' required class='date-input')

@@ -21,6 +21,7 @@ const router = express.Router();
 
 const Paciente = require('./modelos/Paciente'); // Import the Paciente model
 const Especialidad = require('./modelos/Especialidad'); 
+const Medico = require('./modelos/Medico');
 
 // Middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -60,9 +61,14 @@ app.get('/pacientes', (req, res) => {
 });
 
 // Route for horarios page
-app.get('/horarios', (req, res) => {
-  res.render('horarios');
-});
+app.get('/horarios', async (req, res) => {
+    try {
+      const medicos = await Medico.query().select('nombreCompleto'); // Fetch all medicos
+      res.render('horarios', { medicos });
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  });
 
 // Handle POST request for creating a new paciente
 app.post('/paciente/create', async (req, res) => {
@@ -148,8 +154,13 @@ function checkCitasDisponibles(especialidad) {
 }
 
 // Route for sobreturnos page
-app.get('/sobreturnos', (req, res) => {
-  res.render('sobreturnos');
+app.get('/sobreturnos', async (req, res) => {
+    try {
+        const medicos = await Medico.query().select('nombreCompleto'); // Fetch all medicos
+        res.render('sobreturnos', { medicos });
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
 });
 
 // Handle form submission for scheduling an overbooked appointment
@@ -209,8 +220,14 @@ function findCita(nombre_paciente, fecha_cita, hora_cita) {
 }
 
 // Route for agendas page
-app.get('/agendas', (req, res) => {
-  res.render('agendas');
+app.get('/agendas', async (req, res) => {
+    try {
+        const especialidades = await Especialidad.query().select('nombre'); // Fetch all especialidades
+        const medicos = await Medico.query().select('nombreCompleto'); // Fetch all medicos
+        res.render('agendas', { especialidades, medicos });
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
 });
 
 // Handle form submission for filtering appointments
