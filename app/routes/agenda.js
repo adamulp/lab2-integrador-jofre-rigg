@@ -4,6 +4,11 @@ const router = express.Router();
 const Especialidad = require('../modelos/Especialidad');
 const Medico = require('../modelos/Medico');
 
+function transferirCita(nombre_paciente, doctor_anterior, fecha_cita_anterior, doctor_nuevo, fecha_cita_nueva, hora_cita_nueva) {
+    // In a real application, update the appointment details in the database
+    return true; // Hardcoded to simulate successful transfer
+}
+
 router.get('/', async (req, res) => {
     try {
         const especialidades = await Especialidad.query().select('nombre'); // Fetch all especialidades

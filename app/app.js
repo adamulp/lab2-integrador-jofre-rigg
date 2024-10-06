@@ -46,19 +46,8 @@ app.get('/', (req, res) => {
 });
 
 // Define a route for the pacientes form (read from DB)
-app.get('/pacientes', async (req, res) => {
-  try {
-    const pacientes = await Paciente.query(); // Fetch all Pacientes
-    res.render('pacientes', { pacientes });
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
-});
-
-// Route for pacientes page
-app.get('/pacientes', (req, res) => {
-  res.render('pacientes');
-});
+const pacientesRouter = require("./routes/pacientes");
+app.use("/pacientes", pacientesRouter);
 
 // Route for horarios page
 app.get('/horarios', async (req, res) => {
@@ -70,32 +59,7 @@ app.get('/horarios', async (req, res) => {
     }
   });
 
-// Handle POST request for creating a new paciente
-app.post('/paciente/create', async (req, res) => {
-  try {
-    const { nombreCompleto, dni, contacto, obraSocial } = req.body;
-    await Paciente.query().insert({
-      nombreCompleto,
-      dni,
-      contacto,
-      obraSocial
-    });
-    res.redirect('/');
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
-});
 
-// Handle POST request to delete a paciente
-app.post('/paciente/delete/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    await Paciente.query().deleteById(id);
-    res.redirect('/');
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
-});
 
 // Handle form submissions for updating schedule
 app.post('/horarios/update', (req, res) => {
