@@ -3,19 +3,32 @@ html
   head
     title Agenda de Consultas Médicas
     link(rel="stylesheet" href="/styles/styles.css")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js")
+    script(src="https://code.jquery.com/jquery-3.6.0.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js")
-    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/css/theme.default.min.css")
     script.
       $(document).ready(function() {
         $("#pacientesTable").tablesorter();
+        $("#formCrearPaciente").hide();
+        $("#formBuscarPaciente").hide();
+        $("#botonCrear").click(function() {
+          $("#formCrearPaciente").toggle();
+          $("#formBuscarPaciente").hide();
+        });
+        $("#botonBuscar").click(function() {
+          $("#formBuscarPaciente").toggle();
+          $("#formCrearPaciente").hide();
+        });
       });
   body
     h1 Pacientes
     include nav.pug
       
     .container
-      form(action="/pacientes/create" method="POST")
+      .side-by-side 
+        img(src="img/crear.svg" id="botonCrear" class="botonPaciente")
+        img(src="img/buscar.svg" id="botonBuscar" class="botonPaciente")
+
+      form#formCrearPaciente.formPaciente(action="/pacientes/create" method="POST")
         input(type="text" name="nombreCompleto" placeholder="Nombre Completo" required)
         input(type="text" name="dni" placeholder="DNI" required)
         input(type="text" name="contacto" placeholder="Contacto" required)
@@ -23,7 +36,8 @@ html
         .side-by-side 
             .inline-field
                 button(type="submit") Crear Paciente
-      form(action="/pacientes/resultados" method="POST")
+
+      form#formBuscarPaciente.formPaciente(action="/pacientes/resultados" method="POST")
         input(type="text" name="nombreCompleto" placeholder="Nombre Completo")
         input(type="text" name="dni" placeholder="DNI")
         .side-by-side 
@@ -39,7 +53,6 @@ html
               th DNI
               th Contacto
               th Obra Social
-              th Acciones
           tbody
             each paciente in pacientes
               tr
@@ -47,8 +60,5 @@ html
                 td #{paciente.dni}
                 td #{paciente.contacto}
                 td #{paciente.obraSocial}
-                td
-                  form(action=`/pacientes/delete/${paciente.id}` method="POST" style="display:inline;")
-                    button(type="submit") Eliminar
       else
         p No hay pacientes registrados.

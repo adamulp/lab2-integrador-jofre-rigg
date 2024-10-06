@@ -161,4 +161,43 @@ nav#main-nav ul li a:hover {
   background-color: #0056b3;
 }
 
+table.tablesorter {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 18px;
+  text-align: left;
+}
+
+table.tablesorter th, table.tablesorter td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+}
+
+table.tablesorter th {
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+table.tablesorter tbody tr:nth-of-type(even) {
+  background-color: #f9f9f9;
+}
+
+table.tablesorter tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.botonPaciente {
+  width: 200px;
+  padding: 15px;
+}
+.botonPaciente:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+form.formPaciente {
+  display: none;
+}
+
 /*# sourceMappingURL=styles.css.map */
