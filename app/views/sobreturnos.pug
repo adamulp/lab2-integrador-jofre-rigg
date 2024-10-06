@@ -15,12 +15,14 @@ html
             select(name='doctor', id='doctor')
                 each medico in medicos
                     option(value=medico.nombreCompleto) #{medico.nombreCompleto}
+            .side-by-side
+                .date-picker
+                    label(for='fecha') Fecha para Sobreturno:
+                    input(type='date' id='fecha' name='fecha' required class='date-input')
 
-            label(for='fecha') Fecha para Sobreturno:
-            input(type='date' id='fecha' name='fecha' required class='date-input')
-
-            label(for='hora') Hora para Sobreturno:
-            input(type='time' id='hora' name='hora' required class='time-input')
+                .inline-field
+                    label(for='hora') Hora para Sobreturno:
+                    input(type='time' id='hora' name='hora' required class='time-input')
 
             button(type='submit') Agendar Sobreturno
 
