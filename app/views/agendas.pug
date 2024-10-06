@@ -35,13 +35,13 @@ html
 
             label(for='doctor_anterior') Médico Actual:
             select(name='doctor_anterior' id='doctor_anterior')
-              option(value='Dr. García') Dr. García
-              option(value='Dr. Rodríguez') Dr. Rodríguez
-              option(value='Dr. López') Dr. López
-              option(value='Dr. Pepe') Dr. Pepe
+                option(value='Dr. García') Dr. García
+                option(value='Dr. Rodríguez') Dr. Rodríguez
+                option(value='Dr. López') Dr. López
+                option(value='Dr. Pepe') Dr. Pepe
 
             label(for='fecha_cita_anterior') Fecha de la Cita Actual:
-            input(type='date' id='fecha_cita_anterior' name='fecha_cita_anterior' required)
+            input(type='date' id='fecha_cita_anterior' name='fecha_cita_anterior' required class='date-input')
 
             label(for='doctor_nuevo') Nuevo Médico:
             select(name='doctor_nuevo' id='doctor_nuevo')
@@ -51,10 +51,10 @@ html
                 option(value='Dr. Pepe') Dr. Pepe
 
             label(for='fecha_cita_nueva') Fecha Nueva:
-            input(type='date' id='fecha_cita_nueva' name='fecha_cita_nueva' required)
+            input(type='date' id='fecha_cita_nueva' name='fecha_cita_nueva' required class='date-input')
 
             label(for='hora_cita_nueva') Nueva Hora:
-            input(type='time' id='hora_cita_nueva' name='hora_cita_nueva' required)
+            input(type='time' id='hora_cita_nueva' name='hora_cita_nueva' required class='time-input')
 
             button(type='submit') Transferir Paciente
 

@@ -44,6 +44,14 @@ button:hover {
   background-color: #0056b3;
 }
 
+.date-input {
+  max-width: 200px;
+}
+
+.time-input {
+  max-width: 200px;
+}
+
 nav {
   background-color: #007BFF;
   padding: 10px;

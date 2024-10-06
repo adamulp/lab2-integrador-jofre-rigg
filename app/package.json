@@ -9,7 +9,8 @@
         "dev:sqlite": "cross-env DB_CLIENT=sqlite3 nodemon app.js",
         "dev:mariadb": "cross-env DB_CLIENT=mariadb nodemon app.js",
         "start:sqlite": "cross-env DB_CLIENT=sqlite3 node app.js",
-        "start:mariadb": "cross-env DB_CLIENT=mariadb node app.js"
+        "start:mariadb": "cross-env DB_CLIENT=mariadb node app.js",
+        "sass": "sass --watch sass:public/styles"
     },
     "dependencies": {
         "body-parser": "^1.20.3",
