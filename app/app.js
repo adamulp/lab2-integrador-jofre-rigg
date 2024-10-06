@@ -16,9 +16,11 @@ const knex = Knex(knexConfig);
 // Bind Objection.js models to Knex
 Model.knex(knex);
 
-const Paciente = require('./modelos/Paciente'); // Import the Paciente model
-
 const app = express();
+const router = express.Router();
+
+const Paciente = require('./modelos/Paciente'); // Import the Paciente model
+const Especialidad = require('./modelos/Especialidad'); 
 
 // Middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -112,9 +114,14 @@ app.get('/horarios', (req, res) => {
 });
 
 // Route for turnos page
-app.get('/turnos', (req, res) => {
-  res.render('turnos');
-});
+app.get('/turnos', async (req, res) => {
+    try {
+      const especialidades = await Especialidad.query().select('nombre'); // Fetch all especialidades
+      res.render('turnos', { especialidades });
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  });
 
 // Handle form submission for requesting an appointment
 app.post('/turnos/solicitar', (req, res) => {

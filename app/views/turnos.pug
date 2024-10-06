@@ -20,10 +20,8 @@ html
 
             label(for='especialidad') Especialidad:
             select(name='especialidad' id='especialidad')
-                option(value='Cardiología') Cardiología
-                option(value='Neurología') Neurología
-                option(value='Pediatría') Pediatría
-                option(value='Dermatología') Dermatología
+                each especialidad in especialidades
+                    option(value=especialidad.nombre) #{especialidad.nombre}
 
             label(for='obra_social') Obra Social (si aplica):
             input(type='text' id='obra_social' name='obra_social' placeholder='Detalles de la obra social')
