@@ -12,15 +12,17 @@ html
         main
         h2 Filtrar Citas por Especialidad y Médico
         form(action='/agendas/filtrar', method='POST')
-            label(for='especialidad') Especialidad:
-            select(name='especialidad' id='especialidad')
-                each especialidad in especialidades
-                    option(value=especialidad.nombre) #{especialidad.nombre}
-
-            label(for='medico') Médico:
-            select(name='medico' id='medico')
-                each medico in medicos
-                    option(value=medico.nombreCompleto) #{medico.nombreCompleto}
+            .side-by-side
+                .inline-field
+                    label(for='especialidad') Especialidad:
+                    select(name='especialidad' id='especialidad')
+                        each especialidad in especialidades
+                            option(value=especialidad.nombre) #{especialidad.nombre}
+                .inline-field
+                    label(for='medico') Médico:
+                    select(name='medico' id='medico')
+                        each medico in medicos
+                            option(value=medico.nombreCompleto) #{medico.nombreCompleto}
 
             button(type='submit') Filtrar Citas
 
