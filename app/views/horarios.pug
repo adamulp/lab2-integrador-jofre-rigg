@@ -14,24 +14,29 @@ body
             p Utilice este formulario para actualizar el horario de los médicos y marcar horarios como no disponibles por vacaciones.
 
             form(action='/horarios/update', method='POST')
-                    label(for='doctor') Seleccione el Médico:
-                    select(name='doctor', id='doctor')
-                            each medico in medicos
-                                option(value=medico.nombreCompleto) #{medico.nombreCompleto}
+                    .side-by-side 
+                        .field
+                            label(for='doctor') Seleccione el Médico:
+                            select(name='doctor', id='doctor')
+                                    each medico in medicos
+                                        option(value=medico.nombreCompleto) #{medico.nombreCompleto}
+                        .field
+                            label(for='dia_cambio') Día a Cambiar:
+                            select(name='dia_cambio', id='dia_cambio')
+                                    option(value='lunes') Lunes
+                                    option(value='martes') Martes
+                                    option(value='miércoles') Miércoles
+                                    option(value='jueves') Jueves
+                                    option(value='viernes') Viernes
+                    
+                    .side-by-side
+                        .inline-field
+                            label(for='nuevo_horario') Nuevo Horario:
+                            input(type='text' class='narrow-input' id='nuevo_horario' name='nuevo_horario' placeholder='e.g., 8:00 a 12:00')
 
-                    label(for='dia_cambio') Día a Cambiar:
-                    select(name='dia_cambio', id='dia_cambio')
-                            option(value='lunes') Lunes
-                            option(value='martes') Martes
-                            option(value='miércoles') Miércoles
-                            option(value='jueves') Jueves
-                            option(value='viernes') Viernes
-
-                    label(for='nuevo_horario') Nuevo Horario:
-                    input(type='text' id='nuevo_horario' name='nuevo_horario' placeholder='e.g., 8:00 a 12:00')
-
-                    label(for='fecha_cambio') Fecha de Cambio:
-                    input(type='date' id='fecha_cambio' name='fecha_cambio' class='date-input')
+                        .inline-field
+                            label(for='fecha_cambio') Fecha de Cambio:
+                            input(type='date' id='fecha_cambio' name='fecha_cambio' class='date-input')
 
                     button(type='submit') Actualizar Horario
 
@@ -41,11 +46,14 @@ body
                     select(name='doctor_vacaciones', id='doctor_vacaciones')
                             each medico in medicos
                                 option(value=medico.nombreCompleto) #{medico.nombreCompleto}
+                    
+                    .date-picker-container
+                        .date-picker
+                            label(for='fecha_inicio_vacaciones') Fecha Inicio de Vacaciones:
+                            input(type='date' id='fecha_inicio_vacaciones' name='fecha_inicio_vacaciones' class='date-input')
 
-                    label(for='fecha_inicio_vacaciones') Fecha Inicio de Vacaciones:
-                    input(type='date' id='fecha_inicio_vacaciones' name='fecha_inicio_vacaciones' class='date-input')
-
-                    label(for='fecha_fin_vacaciones') Fecha Fin de Vacaciones:
-                    input(type='date' id='fecha_fin_vacaciones' name='fecha_fin_vacaciones' class='date-input')
+                        .date-picker
+                            label(for='fecha_fin_vacaciones') Fecha Fin de Vacaciones:
+                            input(type='date' id='fecha_fin_vacaciones' name='fecha_fin_vacaciones' class='date-input')
 
                     button(type='submit') Marcar Vacaciones

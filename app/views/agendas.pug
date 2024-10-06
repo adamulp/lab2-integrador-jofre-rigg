@@ -29,24 +29,36 @@ html
             label(for='nombre_paciente') Nombre del Paciente:
             input(type='text' id='nombre_paciente' name='nombre_paciente' required placeholder='e.g., Juan Pérez')
 
-            label(for='doctor_anterior') Médico Actual:
-            select(name='doctor_anterior' id='doctor_anterior')
-                each medico in medicos 
-                    option(value=medico.nombreCompleto) #{medico.nombreCompleto}
+            .side-by-side 
+                .inline-field
+                    label(for='doctor_anterior') Médico Actual:
+                    select(name='doctor_anterior' id='doctor_anterior')
+                        each medico in medicos 
+                            option(value=medico.nombreCompleto) #{medico.nombreCompleto}
+                
+                .inline-field
+                    label(for='doctor_nuevo') Nuevo Médico:
+                    select(name='doctor_nuevo' id='doctor_nuevo')
+                        each medico in medicos 
+                            option(value=medico.nombreCompleto) #{medico.nombreCompleto}
 
-            label(for='fecha_cita_anterior') Fecha de la Cita Actual:
-            input(type='date' id='fecha_cita_anterior' name='fecha_cita_anterior' required class='date-input')
+            .date-picker-container 
+                .date-picker
+                    label(for='fecha_cita_anterior') Fecha de la Cita Actual:
+                    input(type='date' id='fecha_cita_anterior' name='fecha_cita_anterior' required class='date-input')
+                
+                .date-picker
+                    label(for='fecha_cita_nueva') Fecha Nueva:
+                    input(type='date' id='fecha_cita_nueva' name='fecha_cita_nueva' required class='date-input')
+            
+            .side-by-side 
+                .inline-field
+                    label(for='hora_cita_nueva') Hora Actual:
+                    input(type='time' id='hora_cita_actual' name='hora_cita_actual' required class='time-input')
 
-            label(for='doctor_nuevo') Nuevo Médico:
-            select(name='doctor_nuevo' id='doctor_nuevo')
-                each medico in medicos 
-                    option(value=medico.nombreCompleto) #{medico.nombreCompleto}
-
-            label(for='fecha_cita_nueva') Fecha Nueva:
-            input(type='date' id='fecha_cita_nueva' name='fecha_cita_nueva' required class='date-input')
-
-            label(for='hora_cita_nueva') Nueva Hora:
-            input(type='time' id='hora_cita_nueva' name='hora_cita_nueva' required class='time-input')
+                .inline-field
+                    label(for='hora_cita_nueva') Nueva Hora:
+                    input(type='time' id='hora_cita_nueva' name='hora_cita_nueva' required class='time-input')
 
             button(type='submit') Transferir Paciente
 

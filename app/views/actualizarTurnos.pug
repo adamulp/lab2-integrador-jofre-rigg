@@ -18,11 +18,12 @@ html
             input(type='date' id='fecha_cita' name='fecha_cita' required class='date-input')
             label(for='hora_cita') Hora de la Cita:
             input(type='time' id='hora_cita' name='hora_cita' required class='time-input')
-            label(for='nuevo_estado') Actualizar Estado:
-            select(name='nuevo_estado' id='nuevo_estado')
-                option(value='Confirmado') Confirmar
-                option(value='Cancelado') Cancelar
-                option(value='Ausente') Marcar como Ausente
+            .inline-container
+                label(for='nuevo_estado') Actualizar Estado:
+                select(name='nuevo_estado' id='nuevo_estado')
+                    option(value='Confirmado') Confirmar
+                    option(value='Cancelado') Cancelar
+                    option(value='Ausente') Marcar como Ausente
             button(type='submit') Actualizar Estado
 
         h2 Notas sobre Estados de las Citas
