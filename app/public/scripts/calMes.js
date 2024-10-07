@@ -3,6 +3,9 @@ $(document).ready(function() {
     const currentYear = today.getFullYear();
     const currentMonth = today.getMonth();
     const currentDay = today.getDate();
+    let isMouseDown = false;
+    let startDate = null;
+    let endDate = null;
 
     // Set default values for selects
     $('#month-select').val(currentMonth);
@@ -105,6 +108,32 @@ $(document).ready(function() {
         openWeekView(today);
     });
 
-    // Example usage: Highlighting the 5th, 10th, and 15th of the month
-    // highlightDates([5, 10, 15]);
+    // Mouse events for highlighting contiguous days
+    $('#calendar-dates').on('mousedown', '.calendar-date', function(e) {
+        isMouseDown = true;
+        startDate = $(this).data('date');
+        endDate = startDate;
+        highlightRange(startDate, endDate);
+        return false; // prevent text selection
+    });
+
+    $('#calendar-dates').on('mouseover', '.calendar-date', function(e) {
+        if (isMouseDown) {
+            endDate = $(this).data('date');
+            highlightRange(startDate, endDate);
+        }
+    });
+
+    $(document).mouseup(function() {
+        isMouseDown = false;
+    });
+
+    function highlightRange(start, end) {
+        $('.calendar-date').removeClass('highlighted');
+        const min = Math.min(start, end);
+        const max = Math.max(start, end);
+        for (let i = min; i <= max; i++) {
+            $(`.calendar-date[data-date="${i}"]`).addClass('highlighted');
+        }
+    }
 });
