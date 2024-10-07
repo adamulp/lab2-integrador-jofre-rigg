@@ -36,4 +36,16 @@
   margin-bottom: 15px;
 }
 
+.select-group-calMes {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+#hoy-btn.btn.btn-primary {
+  max-width: 100px;
+  max-height: 40px;
+  margin-top: 23px;
+}
+
 /*# sourceMappingURL=calMes.css.map */

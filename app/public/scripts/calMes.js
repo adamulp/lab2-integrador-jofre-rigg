@@ -52,6 +52,13 @@ $(document).ready(function() {
         generateCalendar(selectedYear, selectedMonth);
     });
 
+    // Handle "Hoy" button click
+    $('#hoy-btn').click(function() {
+        $('#month-select').val(currentMonth);
+        $('#year-select').val(currentYear);
+        generateCalendar(currentYear, currentMonth);
+    });
+
     // Function to highlight specific dates
     function highlightDates(dateNumbers) {
         dateNumbers.forEach(function(date) {
