@@ -2,13 +2,13 @@
   button#prevWeek.btn.btn-secondary.calendar-control ◀
   .calendar-grid
     .row
+      .col.border(style='background-color: #f8f9fa; cursor: default;')
+      each diaNumber in [0, 0, 0, 0, 0, 0, 0]
+        .col.border.date-number(style='background-color: #f8f9fa; cursor: default;') #{diaNumber}
+    .row
       .col.border.hora-header(style='background-color: #f8f9fa; cursor: default;') Hora
       each dia in ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
         .col.border.day-header(style='background-color: #f8f9fa; cursor: pointer;') #{dia}
-    .row
-      .col.border(style='background-color: #f8f9fa; cursor: default;') Fecha
-      each dia in ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
-        .col.border.date-header(style='background-color: #f8f9fa; cursor: default;')
     each hora in ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00']
       .row
         .col.border.hora-header(style='cursor: default;') #{hora}

@@ -92,4 +92,12 @@
   border-radius: 5px;
 }
 
+.date-number {
+  text-align: center;
+  font-weight: bold;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+}
+
 /*# sourceMappingURL=calSemana.css.map */

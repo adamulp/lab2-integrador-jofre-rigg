@@ -1,5 +1,45 @@
+
 $(document).ready(function() {
 let isMouseDown = false;
+let currentStartDate = new Date();
+
+    // Function to generate date numbers for the current week
+    function getCurrentWeekDates(startDate) {
+        const startOfWeek = new Date(startDate);
+        const dayOfWeek = startOfWeek.getDay(); // 0 (Sunday) to 6 (Saturday)
+        startOfWeek.setDate(startOfWeek.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1)); // Adjust to start on Monday
+
+        const weekDates = [];
+        for (let i = 0; i < 7; i++) {
+            const date = new Date(startOfWeek);
+            date.setDate(startOfWeek.getDate() + i);
+            weekDates.push(date.getDate());
+        }
+        return weekDates;
+    }
+
+    // Function to update the date numbers in the calendar grid
+    function updateWeekDates(startDate) {
+        const weekDates = getCurrentWeekDates(startDate);
+        $('.calendar-grid .date-number').each(function(index) {
+            $(this).text(weekDates[index]);
+        });
+    }
+
+    // Set initial date numbers for the current week
+    updateWeekDates(currentStartDate);
+
+    // Event listener for next week button
+    $('#nextWeek').click(function() {
+        currentStartDate.setDate(currentStartDate.getDate() + 7);
+        updateWeekDates(currentStartDate);
+    });
+
+    // Event listener for previous week button
+    $('#prevWeek').click(function() {
+        currentStartDate.setDate(currentStartDate.getDate() - 7);
+        updateWeekDates(currentStartDate);
+    });
 
 // Highlight entire day column
 $('.day-header').click(function() {
