@@ -1,19 +1,31 @@
-// views/calendario.pug
 doctype html
 html
   head
     title Calendario
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css')
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.js')
+    script(src='https://code.jquery.com/jquery-3.6.0.min.js')
     script.
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth',
-          events: !{JSON.stringify(citas)}
+      $(document).ready(function() {
+        let isMouseDown = false;
+
+        $('.hora-col').mousedown(function() {
+          isMouseDown = true;
+          $(this).toggleClass('highlighted');
+          return false; // prevent text selection
+        }).mouseover(function() {
+          if (isMouseDown) {
+            $(this).toggleClass('highlighted');
+          }
         });
-        calendar.render();
+
+        $(document).mouseup(function() {
+          isMouseDown = false;
+        });
       });
+    style.
+      .highlighted {
+        background-color: lightblue !important;
+      }
   body
     .container
       h1 Calendario de Citas
@@ -48,6 +60,6 @@ html
             .col.border(style='background-color: #f8f9fa;') #{dia}
         each hora in ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00']
           .row
-            .col.border #{hora}
+            .col.border.hora-col(style='cursor: pointer;') #{hora}
             each dia in ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
-              .col.border(style='height: 50px;')
+              .col.border.hora-col(style='height: 50px; cursor: pointer;')

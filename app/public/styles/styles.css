@@ -213,4 +213,8 @@ form.formPaciente {
   cursor: pointer;
 }
 
+.highlighted {
+  background-color: lightblue;
+}
+
 /*# sourceMappingURL=styles.css.map */
