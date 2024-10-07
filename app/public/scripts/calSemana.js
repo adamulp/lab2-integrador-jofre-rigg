@@ -3,6 +3,31 @@ $(document).ready(function() {
 let isMouseDown = false;
 let currentStartDate = new Date();
 
+function getMonthName(mes = null) {
+    const monthNames = [
+        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    ];
+    if(mes == null){
+        mes = new Date();
+        mes = mes.getMonth();
+    }
+    return monthNames[mes];
+}
+
+// Function to update the h1 text content
+function updateMonth(fecha = null) {
+    const h1Element = document.getElementById('mes-de-la-semana-visible');
+    if(fecha != null){
+        h1Element.textContent = getMonthName(fecha.getMonth());
+    } else {
+        h1Element.textContent = getMonthName();
+    }
+}
+
+// Initial update
+updateMonth();
+
     // Function to generate date numbers for the current week
     function getCurrentWeekDates(startDate) {
         const startOfWeek = new Date(startDate);
@@ -33,12 +58,14 @@ let currentStartDate = new Date();
     $('#nextWeek').click(function() {
         currentStartDate.setDate(currentStartDate.getDate() + 7);
         updateWeekDates(currentStartDate);
+        updateMonth(currentStartDate);
     });
 
     // Event listener for previous week button
     $('#prevWeek').click(function() {
         currentStartDate.setDate(currentStartDate.getDate() - 7);
         updateWeekDates(currentStartDate);
+        updateMonth(currentStartDate);
     });
 
 // Highlight entire day column

@@ -9,6 +9,20 @@ $(document).ready(function() {
     let startColumn = null;
     let endColumn = null;
 
+    function getMonthName(mes) {
+        const monthNames = [
+            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+        ];
+        return monthNames[mes];
+    }
+    
+    // Function to update the h1 text content
+    function updateSemanaMonth(mes) {
+        const h1Element = document.getElementById('mes-de-la-semana-visible');
+        h1Element.textContent = getMonthName(mes);
+    }
+
     // Set default values for selects
     $('#month-select').val(currentMonth);
     $('#year-select').val(currentYear);
@@ -44,6 +58,7 @@ $(document).ready(function() {
     // Function to open the week view for a specific date
     function openWeekView(date) {
         updateWeekDates(date);
+        updateSemanaMonth(date.getMonth());
         // Scroll to the weekly calendar section
         // $('html, body').animate({
         //     scrollTop: $('.cal-contenedor-semanal').offset().top
