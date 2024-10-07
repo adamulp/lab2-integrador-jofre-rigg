@@ -6,6 +6,8 @@ $(document).ready(function() {
     let isMouseDown = false;
     let startDate = null;
     let endDate = null;
+    let startColumn = null;
+    let endColumn = null;
 
     // Set default values for selects
     $('#month-select').val(currentMonth);
@@ -138,10 +140,21 @@ $(document).ready(function() {
     }
 
         // Event listener for cal-mes-day-header
-        $('.cal-mes-day-header').on('mousedown', function(e) {
-            const headerIndex = $(this).index();
-            highlightColumn(headerIndex);
-        });
+    $('.cal-mes-day-header').on('mousedown', function(e) {
+        isMouseDown = true;
+        startColumn = $(this).index();
+        endColumn = startColumn;
+        highlightColumn(startColumn);
+        return false; // prevent text selection
+    });
+
+    $('.cal-mes-day-header').on('mouseover', function(e) {
+        if (isMouseDown) {
+            estaColumna = $(this).index();
+            highlightColumn(estaColumna);
+        }
+    });
+
     
         function highlightColumn(column) {
             let allHighlighted = true;
@@ -163,4 +176,5 @@ $(document).ready(function() {
             }
             });
         }
+
 });
