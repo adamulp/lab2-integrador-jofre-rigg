@@ -1,0 +1,63 @@
+doctype html
+html
+  head
+    title Monthly Calendar
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/styles/styles.css')
+    script(src='https://code.jquery.com/jquery-3.6.0.min.js')
+    style.
+      .calendar-container {
+        max-width: 600px;
+        margin: 20px auto;
+      }
+      .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+        text-align: center;
+      }
+      .day-header {
+        font-weight: bold;
+        background-color: #f8f9fa;
+        padding: 10px;
+      }
+      .calendar-date {
+        padding: 15px;
+        border: 1px solid #ddd;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .calendar-date:hover {
+        background-color: #e9e9e9;
+      }
+      .highlighted {
+        background-color: lightblue !important;
+      }
+  body
+    .calendar-container
+      h1 Monthly Calendar
+      // Weekday headers
+      .calendar-grid
+        each day in ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+          div.day-header #{day}
+      // Dates for the current month
+      .calendar-grid
+        each dayNumber in Array(31).fill().map((_, i) => i + 1)
+          div.calendar-date(data-date=dayNumber) #{dayNumber}
+    script.
+      $(document).ready(function() {
+        // Allow users to select dates by clicking
+        $('.calendar-date').click(function() {
+          $(this).toggleClass('highlighted');
+        });
+
+        // Function to highlight specific dates
+        function highlightDates(dateNumbers) {
+          dateNumbers.forEach(function(date) {
+            $(`.calendar-date[data-date="${date}"]`).addClass('highlighted');
+          });
+        }
+
+        // Example usage: Highlighting the 5th, 10th, and 15th of the month
+        highlightDates([5, 10, 15]);
+      });
