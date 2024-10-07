@@ -8,6 +8,30 @@ html
       $(document).ready(function() {
         let isMouseDown = false;
 
+        // Highlight entire day column
+        $('.day-header').click(function() {
+          var index = $(this).index();
+          var isHighlighted = $('.calendar-grid .row').first().children().eq(index).hasClass('highlighted');
+          $('.calendar-grid .row').each(function() {
+            if (isHighlighted) {
+              $(this).children().eq(index).removeClass('highlighted');
+            } else {
+              $(this).children().eq(index).addClass('highlighted');
+            }
+          });
+        });
+
+        // Highlight entire hour-long row
+        $('.hora-header').click(function() {
+          var row = $(this).parent();
+          if (row.children().not('.highlighted').length === 0) {
+            row.children().removeClass('highlighted');
+          } else {
+            row.children().addClass('highlighted');
+          }
+        });
+
+        // Contiguous grid highlighting
         $('.hora-col').mousedown(function() {
           isMouseDown = true;
           $(this).toggleClass('highlighted');
@@ -21,10 +45,20 @@ html
         $(document).mouseup(function() {
           isMouseDown = false;
         });
+
+        // Prevent selection of headers and first column
+        $('.hora-header, .day-header').mousedown(function(event) {
+          event.stopPropagation();
+        });
       });
     style.
       .highlighted {
         background-color: lightblue !important;
+      }
+      .hora-header, .day-header {
+        background-color: #f8f9fa !important;
+        cursor: default;
+        user-select: none;
       }
   body
     .container
@@ -55,11 +89,11 @@ html
         button.btn.btn-primary(type='submit') Filtrar
       .calendar-grid
         .row
-          .col.border(style='background-color: #f8f9fa;') Hora
+          .col.border.hora-header(style='background-color: #f8f9fa; cursor: default;') Hora
           each dia in ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
-            .col.border(style='background-color: #f8f9fa;') #{dia}
+            .col.border.day-header(style='background-color: #f8f9fa; cursor: pointer;') #{dia}
         each hora in ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00']
           .row
-            .col.border.hora-col(style='cursor: pointer;') #{hora}
+            .col.border.hora-header(style='cursor: default;') #{hora}
             each dia in ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
               .col.border.hora-col(style='height: 50px; cursor: pointer;')
