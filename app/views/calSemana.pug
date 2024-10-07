@@ -10,32 +10,6 @@ html
    
   body
     .container
-      h1 Calendario de Citas
-      form(action='/calendario', method='POST')
-        .row
-          .col-md-4
-            .mb-3
-              label(for='especialidad') Especialidad:
-              select.form-select(name='especialidad' id='especialidad')
-                option(value='') -- Seleccione Especialidad --
-                each especialidad in especialidades
-                  option(value=especialidad.nombre) #{especialidad.nombre}
-          .col-md-4
-            .mb-3
-              label(for='medico') Médico:
-              select.form-select(name='medico' id='medico')
-                option(value='') -- Seleccione Médico --
-                each medico in medicos
-                  option(value=medico.nombreCompleto) #{medico.nombreCompleto}
-          .col-md-4
-            .mb-3
-              label(for='paciente') Paciente:
-              select.form-select(name='paciente' id='paciente')
-                option(value='') -- Seleccione Paciente --
-                each paciente in pacientes
-                  option(value=paciente.nombreCompleto) #{paciente.nombreCompleto}
-        button.btn.btn-primary(type='submit') Filtrar
-      // Move buttons inside the container
       button#prevWeek.btn.btn-secondary.calendar-control ◀
       .calendar-grid
         .row

@@ -118,8 +118,12 @@ app.get('/calendario', async (req, res) => {
     }
   });
 
-app.get('/navMes', (req, res) => {
-res.render('navMes');
+app.get('/calMes', (req, res) => {
+res.render('calMes');
+});
+
+app.get('/calSemana', (req, res) => {
+    res.render('calSemana');
 });
 
 // Route for turnos page
