@@ -2,9 +2,9 @@
   button#prevWeek.btn.btn-secondary.calendar-control ◀
   .calendar-grid
     .row
-      .col.border(style='background-color: #f8f9fa; cursor: default;')
+      .col(class=first-row style='background-color: #f8f9fa; cursor: default;')
       each diaNumber in [0, 0, 0, 0, 0, 0, 0]
-        .col.border.date-number(style='background-color: #f8f9fa; cursor: default;') #{diaNumber}
+        .col.date-number(class=first-row style='background-color: #f8f9fa; cursor: default;') #{diaNumber}
     .row
       .col.border.hora-header(style='background-color: #f8f9fa; cursor: default;') Hora
       each dia in ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
