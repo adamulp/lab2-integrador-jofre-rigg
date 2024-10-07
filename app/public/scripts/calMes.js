@@ -8,6 +8,43 @@ $(document).ready(function() {
     $('#month-select').val(currentMonth);
     $('#year-select').val(currentYear);
 
+    // Function to get current week dates
+    function getCurrentWeekDates(startDate) {
+        const weekDates = [];
+        const currentDate = new Date(startDate);
+        
+        // Adjust to get the Monday of the current week
+        const day = currentDate.getDay();
+        const diff = (day === 0 ? -6 : 1) - day; // Adjust when day is Sunday
+        currentDate.setDate(currentDate.getDate() + diff);
+        
+        for (let i = 0; i < 7; i++) {
+            weekDates.push(new Date(currentDate).getDate());
+            currentDate.setDate(currentDate.getDate() + 1);
+        }
+        
+        return weekDates;
+    }
+
+    // Function to update week dates
+    function updateWeekDates(startDate) {
+        const weekDates = getCurrentWeekDates(startDate);
+        $('.calendar-grid .date-number').each(function(index) {
+            if (weekDates[index] !== undefined) {
+                $(this).text(weekDates[index]);
+            }
+        });
+    }
+
+    // Function to open the week view for a specific date
+    function openWeekView(date) {
+        updateWeekDates(date);
+        // Scroll to the weekly calendar section
+        // $('html, body').animate({
+        //     scrollTop: $('.cal-contenedor-semanal').offset().top
+        // }, 500);
+    }
+
     // Function to generate the calendar for a given month and year
     function generateCalendar(year, month) {
         $('#calendar-dates').empty(); // Clear previous calendar cells
@@ -36,9 +73,17 @@ $(document).ready(function() {
             $('#calendar-dates').append(dateDiv);
         }
 
-        // Attach click event to highlight dates
-        $('.calendar-date').off('click').click(function() {
-            $(this).toggleClass('highlighted');
+        // Attach double-click event to open week view
+        $('.calendar-date').off('dblclick').dblclick(function() {
+            const selectedDay = $(this).data('date');
+            openWeekView(new Date(year, month, selectedDay));
+        });
+    }
+
+    // Function to highlight specific dates
+    function highlightDates(dateNumbers) {
+        dateNumbers.forEach(function(date) {
+            $(`.calendar-date[data-date="${date}"]`).addClass('highlighted');
         });
     }
 
@@ -57,14 +102,8 @@ $(document).ready(function() {
         $('#month-select').val(currentMonth);
         $('#year-select').val(currentYear);
         generateCalendar(currentYear, currentMonth);
+        openWeekView(today);
     });
-
-    // Function to highlight specific dates
-    function highlightDates(dateNumbers) {
-        dateNumbers.forEach(function(date) {
-            $(`.calendar-date[data-date="${date}"]`).addClass('highlighted');
-        });
-    }
 
     // Example usage: Highlighting the 5th, 10th, and 15th of the month
     // highlightDates([5, 10, 15]);
