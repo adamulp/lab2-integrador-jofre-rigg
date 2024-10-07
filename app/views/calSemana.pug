@@ -1,29 +1,18 @@
-doctype html
-html
-  head
-    title Calendario
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/styles/styles.css')
-    link(rel='stylesheet', href='/styles/calSemana.css')
-    script(src='https://code.jquery.com/jquery-3.6.0.min.js')
-    script(src='/scripts/calSemana.js')
-   
-  body
-    .container
-      button#prevWeek.btn.btn-secondary.calendar-control ◀
-      .calendar-grid
+.cal-container
+    button#prevWeek.btn.btn-secondary.calendar-control ◀
+    .calendar-grid
+    .row
+        .col.border.hora-header(style='background-color: #f8f9fa; cursor: default;') Hora
+        each dia in ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
+        .col.border.day-header(style='background-color: #f8f9fa; cursor: pointer;') #{dia}
+    .row
+        .col.border(style='background-color: #f8f9fa; cursor: default;') Fecha
+        each dia in ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
+        .col.border.date-header(style='background-color: #f8f9fa; cursor: default;')
+    each hora in ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00']
         .row
-          .col.border.hora-header(style='background-color: #f8f9fa; cursor: default;') Hora
-          each dia in ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
-            .col.border.day-header(style='background-color: #f8f9fa; cursor: pointer;') #{dia}
-        .row
-          .col.border(style='background-color: #f8f9fa; cursor: default;') Fecha
-          each dia in ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
-            .col.border.date-header(style='background-color: #f8f9fa; cursor: default;')
-        each hora in ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00']
-          .row
-            .col.border.hora-header(style='cursor: default;') #{hora}
-            each dia in ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
-              .col.border.hora-col(style='height: 50px; cursor: pointer;')
-      button#nextWeek.btn.btn-secondary.calendar-control ▶
-      
+        .col.border.hora-header(style='cursor: default;') #{hora}
+        each dia in ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
+            .col.border.hora-col(style='height: 50px; cursor: pointer;')
+    button#nextWeek.btn.btn-secondary.calendar-control ▶
+    
