@@ -118,6 +118,10 @@ app.get('/calendario', async (req, res) => {
     }
   });
 
+app.get('/navMes', (req, res) => {
+res.render('navMes');
+});
+
 // Route for turnos page
 app.get('/turnos', async (req, res) => {
     try {
