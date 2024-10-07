@@ -83,6 +83,41 @@ app.get('/horarios', (req, res) => {
   res.render('horarios');
 });
 
+// Placeholder functions to simulate database interactions
+function filtrarCitas(especialidad, medico, paciente) {
+    // In a real application, query the database for filtered appointments
+    return [
+      { title: 'Cita 1', start: '2023-10-01' },
+      { title: 'Cita 2', start: '2023-10-07', end: '2023-10-10' },
+      { title: 'Cita 3', start: '2023-10-09T16:00:00' }
+    ];
+  }
+  
+// Route for calendario page
+app.get('/calendario', async (req, res) => {
+    try {
+      const especialidades = await Especialidad.query();
+      const medicos = await Medico.query();
+      const pacientes = await Paciente.query();
+      res.render('calendario', { citas: [], especialidades, medicos, pacientes });
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  });
+  
+  app.post('/calendario', async (req, res) => {
+    const { especialidad, medico, paciente } = req.body;
+    const citas = filtrarCitas(especialidad, medico, paciente);
+    try {
+      const especialidades = await Especialidad.query();
+      const medicos = await Medico.query();
+      const pacientes = await Paciente.query();
+      res.render('calendario', { citas, especialidades, medicos, pacientes });
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  });
+
 // Route for turnos page
 app.get('/turnos', async (req, res) => {
     try {
@@ -196,10 +231,7 @@ function filtrarCitas(especialidad, medico) {
   ];
 }
 
-function transferirCita(nombre_paciente, doctor_anterior, fecha_cita_anterior, doctor_nuevo, fecha_cita_nueva, hora_cita_nueva) {
-  // In a real application, update the appointment details in the database
-  return true; // Hardcoded to simulate successful transfer
-}
+
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
