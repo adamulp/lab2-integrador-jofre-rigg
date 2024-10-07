@@ -136,4 +136,31 @@ $(document).ready(function() {
             $(`.calendar-date[data-date="${i}"]`).addClass('highlighted');
         }
     }
+
+        // Event listener for cal-mes-day-header
+        $('.cal-mes-day-header').on('mousedown', function(e) {
+            const headerIndex = $(this).index();
+            highlightColumn(headerIndex);
+        });
+    
+        function highlightColumn(column) {
+            let allHighlighted = true;
+            $('.calendar-date').each(function() {
+            if ($(this).index() % 7 === column) {
+                if (!$(this).hasClass('highlighted')) {
+                allHighlighted = false;
+                }
+            }
+            });
+
+            $('.calendar-date').each(function() {
+            if ($(this).index() % 7 === column) {
+                if (allHighlighted) {
+                $(this).removeClass('highlighted');
+                } else {
+                $(this).addClass('highlighted');
+                }
+            }
+            });
+        }
 });
