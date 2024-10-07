@@ -1,16 +1,16 @@
-.calendar-container {
+.cal-mes-contedor {
   max-width: 600px;
   margin: 20px auto;
 }
 
-.calendar-grid {
+.cal-mes-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
   text-align: center;
 }
 
-.day-header {
+.cal-mes-day-header {
   font-weight: bold;
   background-color: #f8f9fa;
   padding: 10px;

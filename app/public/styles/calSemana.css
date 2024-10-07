@@ -8,7 +8,14 @@
   user-select: none;
 }
 
-.cal-container {
+.cal-filter-top-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.cal-contenedor-semanal {
   position: relative;
   position: relative;
   max-width: 800px;
@@ -46,6 +53,43 @@
 
 #nextWeek.calendar-control {
   right: -40px;
+}
+
+.cal-formulario-contenedor {
+  max-width: 300px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  flex: 0 0 auto;
+}
+
+#cal-filtro {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 300px;
+  margin-right: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+#cal-filtro .form-select,
+#cal-filtro input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.cal-mes {
+  flex: 1;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
 }
 
 /*# sourceMappingURL=calSemana.css.map */

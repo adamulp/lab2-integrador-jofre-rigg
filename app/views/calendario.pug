@@ -5,36 +5,42 @@ html
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css')
     link(rel='stylesheet', href='/styles/styles.css')
     link(rel='stylesheet', href='/styles/calSemana.css')
+    link(rel='stylesheet', href='/styles/calMes.css')
     script(src='https://code.jquery.com/jquery-3.6.0.min.js')
     script(src='/scripts/calSemana.js')
-   
+    script(src='/scripts/calMes.js')
+
   body
     .container
       h1 Calendario de Citas
-      form(action='/calendario', method='POST')
-        .row
-          .col-md-4
-            .mb-3
-              label(for='especialidad') Especialidad:
-              select.form-select(name='especialidad' id='especialidad')
-                option(value='') -- Seleccione Especialidad --
-                each especialidad in especialidades
-                  option(value=especialidad.nombre) #{especialidad.nombre}
-          .col-md-4
-            .mb-3
-              label(for='medico') Médico:
-              select.form-select(name='medico' id='medico')
-                option(value='') -- Seleccione Médico --
-                each medico in medicos
-                  option(value=medico.nombreCompleto) #{medico.nombreCompleto}
-          .col-md-4
-            .mb-3
-              label(for='paciente') Paciente:
-              select.form-select(name='paciente' id='paciente')
-                option(value='') -- Seleccione Paciente --
-                each paciente in pacientes
-                  option(value=paciente.nombreCompleto) #{paciente.nombreCompleto}
-        button.btn.btn-primary(type='submit') Filtrar
-      
+      // Container for the form and the calendar side by side
+      .cal-filter-top-container
+        // Form container on the left
+        .cal-formulario-contenedor
+          form#cal-filtro(action='/calendario', method='POST')
+            label(for='especialidad') Especialidad:
+            select.form-select(name='especialidad' id='especialidad')
+              option(value='') -- Seleccione Especialidad --
+              each especialidad in especialidades
+                option(value=especialidad.nombre) #{especialidad.nombre}
+
+            label(for='medico') Médico:
+            select.form-select(name='medico' id='medico')
+              option(value='') -- Seleccione Médico --
+              each medico in medicos
+                option(value=medico.nombreCompleto) #{medico.nombreCompleto}
+
+            label(for='paciente') Paciente:
+            select.form-select(name='paciente' id='paciente')
+              option(value='') -- Seleccione Paciente --
+              each paciente in pacientes
+                option(value=paciente.nombreCompleto) #{paciente.nombreCompleto}
+
+            button.btn.btn-primary(type='submit') Filtrar
+
+        // Include the monthly calendar to the right
+        .cal-mes
+          include calMes.pug
+
+      // Include the weekly calendar beneath the container
       include calSemana.pug
-      

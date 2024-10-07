@@ -1,25 +1,19 @@
-doctype html
-html
-  head
-    title Calendario Mensual
-    link(rel='stylesheet', href='/styles/calMes.css')
-    script(src='https://code.jquery.com/jquery-3.6.0.min.js')
-    script(src='/scripts/calMes.js')
-  body
-    .calendar-container
-      h1 Calendario Mensual
-      .select-container
-        label(for='month-select') Seleccione Mes:
-        select#month-select.form-select(name='month')
-          each mes, index in ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-            option(value=index) #{mes}
-        label(for='year-select') Seleccione Año:
-        select#year-select.form-select(name='year')
-          each year in Array(5).fill().map((_, i) => new Date().getFullYear() - 2 + i)
-            option(value=year) #{year}
-      // Weekday headers (starting from Monday)
-      .calendar-grid
-        each day in ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom']
-          div.day-header #{day}
-      // Dates for the current month
-      .calendar-grid#calendar-dates
+.cal-mes-contenedor
+  .select-container
+    label(for='month-select') Seleccione Mes:
+    select#month-select.form-select(name='month')
+      each mes, index in ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+        option(value=index) #{mes}
+
+    label(for='year-select') Seleccione Año:
+    select#year-select.form-select(name='year')
+      each year in Array(5).fill().map((_, i) => new Date().getFullYear() - 2 + i)
+        option(value=year) #{year}
+
+  // Weekday headers (starting from Monday)
+  .cal-mes-grid
+    each day in ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom']
+      div.cal-mes-day-header #{day}
+
+  // Dates for the current month
+  .cal-mes-grid#calendar-dates

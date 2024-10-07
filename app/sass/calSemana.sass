@@ -6,7 +6,13 @@
     cursor: default
     user-select: none
 
-.cal-container
+.cal-filter-top-container
+  display: flex
+  flex-direction: row
+  align-items: flex-start
+  gap: 20px // Adds space between the form and the calendar
+
+.cal-contenedor-semanal
   position: relative // Add this line
   position: relative
   max-width: 800px
@@ -41,3 +47,40 @@
   left: -40px // Adjust as needed
 #nextWeek.calendar-control
   right: -40px // Adjust as needed
+
+.cal-formulario-contenedor
+  max-width: 300px // Make the form narrow to leave more space for the calendar
+  padding: 20px
+  border: 1px solid #ddd
+  border-radius: 5px
+  background-color: #fff
+  flex: 0 0 auto // Ensure the form takes only its necessary space
+
+// General styling for the form with id 'cal-filtro'
+#cal-filtro
+  display: flex
+  flex-direction: column
+  gap: 15px // Space between each form field
+  max-width: 300px // Define the width to make it compact and leave more space on the right
+  margin-right: 20px // Space to the right of the form to create more space for other elements
+  padding: 20px
+  border: 1px solid #ddd
+  border-radius: 5px
+  background-color: #fff
+
+// Styling for individual input fields or select elements within the form
+#cal-filtro .form-select,
+#cal-filtro input
+  width: 100%
+  padding: 10px
+  margin-bottom: 10px
+  border: 1px solid #ccc
+  border-radius: 5px
+
+// Styling for right-side content
+.cal-mes
+  flex: 1 // Take up the remaining space available
+  padding: 20px
+  background-color: #f9f9f9
+  border-radius: 5px
+
