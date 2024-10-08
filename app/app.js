@@ -99,32 +99,25 @@ app.get('/calendario', async (req, res) => {
       const especialidades = await Especialidad.query();
       const medicos = await Medico.query();
       const pacientes = await Paciente.query();
-      res.render('calendario', { citas: [], especialidades, medicos, pacientes });
+      res.render('calendarios/calendario', { citas: [], especialidades, medicos, pacientes });
     } catch (err) {
       res.status(500).send(err.message);
     }
   });
   
-  app.post('/calendario', async (req, res) => {
-    const { especialidad, medico, paciente } = req.body;
-    const citas = filtrarCitas(especialidad, medico, paciente);
-    try {
-      const especialidades = await Especialidad.query();
-      const medicos = await Medico.query();
-      const pacientes = await Paciente.query();
-      res.render('calendario', { citas, especialidades, medicos, pacientes });
-    } catch (err) {
-      res.status(500).send(err.message);
-    }
-  });
+//   app.post('/calendario', async (req, res) => {
+//     const { especialidad, medico, paciente } = req.body;
+//     const citas = filtrarCitas(especialidad, medico, paciente);
+//     try {
+//       const especialidades = await Especialidad.query();
+//       const medicos = await Medico.query();
+//       const pacientes = await Paciente.query();
+//       res.render('calendario', { citas, especialidades, medicos, pacientes });
+//     } catch (err) {
+//       res.status(500).send(err.message);
+//     }
+//   });
 
-app.get('/calMes', (req, res) => {
-res.render('calMes');
-});
-
-app.get('/calSemana', (req, res) => {
-    res.render('calSemana');
-});
 
 // Route for turnos page
 app.get('/turnos', async (req, res) => {
