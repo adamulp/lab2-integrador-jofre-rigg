@@ -19,7 +19,7 @@ function getMonthName(mes = null) {
 function updateMonth(fecha = null) {
     const h1Element = document.getElementById('mes-de-la-semana-visible');
     if(fecha != null){
-        h1Element.textContent = getMonthName(fecha.getMonth());
+        h1Element.textContent = getMonthName(fecha.getMonth()) + ' ' + fecha.getFullYear();
     } else {
         h1Element.textContent = getMonthName();
     }
