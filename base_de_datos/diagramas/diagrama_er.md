@@ -51,8 +51,8 @@ erDiagram
     TURNO ||--o{ AGENDA : "en agenda"
 
     MEDICO ||--o{ ESPECIALIDAD : "tiene una o más"
+    AGENDA ||--|| ESPECIALIDAD : "tiene una"
     MEDICO ||--|{ AGENDA : "tiene"
-    AGENDA ||--|{ ESPECIALIDAD : "puede tener"
     MEDICO ||--|{ SOBRETURNO : "puede tener"
 
     PACIENTE ||--o{ LISTA_ESPERA : "puede estar en"
