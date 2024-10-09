@@ -36,8 +36,8 @@ erDiagram
         int id PK
         string clasificacion
         string estado
-        datetime disponibleDesde
-        datetime disponibleHasta
+        datetime desde
+        datetime hasta
     }
 
     SOBRETURNO {
@@ -50,8 +50,9 @@ erDiagram
     TURNO ||--|| ESPECIALIDAD : "relacionada con"
     TURNO ||--o{ AGENDA : "en agenda"
 
-    MEDICO ||--o{ ESPECIALIDAD : "tiene muchas"
-    MEDICO ||--|{ AGENDA : "gestiona"
+    MEDICO ||--o{ ESPECIALIDAD : "tiene una o más"
+    MEDICO ||--|{ AGENDA : "tiene"
+    AGENDA ||--|{ ESPECIALIDAD : "puede tener"
     MEDICO ||--|{ SOBRETURNO : "puede tener"
 
     PACIENTE ||--o{ LISTA_ESPERA : "puede estar en"
