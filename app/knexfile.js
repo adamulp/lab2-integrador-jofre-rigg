@@ -9,7 +9,7 @@ const dbConfig = {
     useNullAsDefault: true
   },
   mariadb: {
-    client: 'mariadb',
+    client: 'mysql2',
     connection: {
       host: process.env.DB_HOST || 'localhost',
       user: process.env.DB_USER || 'your_username',
