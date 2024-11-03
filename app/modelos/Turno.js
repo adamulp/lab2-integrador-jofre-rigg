@@ -1,68 +1,84 @@
 // models/Turno.js
-const { Model } = require('objection');
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/database'); // Asegúrate de que este archivo exporte la instancia de Sequelize
 
-class Turno extends Model {
-  static get tableName() {
-    return 'turnos';
-  }
+class Turno extends Model {}
 
-  static get jsonSchema() {
-    return {
-      type: 'object',
-      required: ['fechaHora', 'estado', 'pacienteId', 'medicoId'],
+// Definición del modelo
+Turno.init({
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
+  fechaHora: {
+    type: DataTypes.DATE, // Se recomienda usar el tipo DATE para fechas y horas
+    allowNull: false,
+  },
+  estado: {
+    type: DataTypes.ENUM('Reservado', 'Confirmado', 'Cancelado'),
+    allowNull: false,
+  },
+  motivoConsulta: {
+    type: DataTypes.STRING,
+  },
+  pacienteId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'pacientes', // Nombre de la tabla de referencia
+      key: 'id', // Llave primaria en la tabla de referencia
+    },
+  },
+  medicoId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'medicos',
+      key: 'id',
+    },
+  },
+  especialidadId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'especialidades',
+      key: 'id',
+    },
+  },
+  agendaId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'agendas',
+      key: 'id',
+    },
+  },
+}, {
+  sequelize, // La instancia de Sequelize
+  modelName: 'Turno',
+  tableName: 'turnos',
+  timestamps: false, // Si no quieres que Sequelize agregue campos de timestamps (createdAt, updatedAt)
+});
 
-      properties: {
-        id: { type: 'integer' },
-        fechaHora: { type: 'string', format: 'date-time' },
-        estado: { type: 'string', enum: ['Reservado', 'Confirmado', 'Cancelado'] },
-        motivoConsulta: { type: 'string' },
-        pacienteId: { type: 'integer' },
-        medicoId: { type: 'integer' }
-      }
-    };
-  }
-
-  static get relationMappings() {
-    const Paciente = require('./Paciente');
-    const Medico = require('./Medico');
-    const Especialidad = require('./Especialidad');
-    const Agenda = require('./Agenda');
-
-    return {
-      paciente: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Paciente,
-        join: {
-          from: 'turnos.pacienteId',
-          to: 'pacientes.id'
-        }
-      },
-      medico: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Medico,
-        join: {
-          from: 'turnos.medicoId',
-          to: 'medicos.id'
-        }
-      },
-      especialidad: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Especialidad,
-        join: {
-          from: 'turnos.especialidadId',
-          to: 'especialidades.id'
-        }
-      },
-      agenda: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Agenda,
-        join: {
-          from: 'turnos.agendaId',
-          to: 'agendas.id'
-        }
-      }
-    };
-  }
-}
+// Relación con los modelos
+Turno.associate = (models) => {
+  Turno.belongsTo(models.Paciente, {
+    foreignKey: 'pacienteId',
+    targetKey: 'id',
+  });
+  Turno.belongsTo(models.Medico, {
+    foreignKey: 'medicoId',
+    targetKey: 'id',
+  });
+  Turno.belongsTo(models.Especialidad, {
+    foreignKey: 'especialidadId',
+    targetKey: 'id',
+  });
+  Turno.belongsTo(models.Agenda, {
+    foreignKey: 'agendaId',
+    targetKey: 'id',
+  });
+};
 
 module.exports = Turno;

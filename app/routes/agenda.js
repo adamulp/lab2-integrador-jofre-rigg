@@ -1,54 +1,58 @@
 const express = require("express");
 const router = express.Router();
+const { Especialidad, Medico, Turno } = require('../modelos'); // Asegúrate de incluir los modelos necesarios
 
-const Especialidad = require('../modelos/Especialidad');
-const Medico = require('../modelos/Medico');
-
-function transferirCita(nombre_paciente, doctor_anterior, fecha_cita_anterior, doctor_nuevo, fecha_cita_nueva, hora_cita_nueva) {
-    // In a real application, update the appointment details in the database
-    return true; // Hardcoded to simulate successful transfer
-}
-
+// Obtener todas las especialidades y médicos
 router.get('/', async (req, res) => {
     try {
-        const especialidades = await Especialidad.query().select('nombre'); // Fetch all especialidades
-        const medicos = await Medico.query().select('nombreCompleto'); // Fetch all medicos
+        const especialidades = await Especialidad.findAll({ attributes: ['nombre'] }); // Fetch all especialidades
+        const medicos = await Medico.findAll({ attributes: ['nombreCompleto'] }); // Fetch all medicos
         res.render('agendas', { especialidades, medicos });
     } catch (err) {
         res.status(500).send(err.message);
     }
 });
 
-// Handle form submission for filtering appointments
-// Placeholder function for filtering appointments
-function filtrarCitas(especialidad, medico) {
-  // Simulated logic for filtering appointments
-  return []; // Return an empty array or mock data
-}
+// Filtrar citas
+router.post('/filtrar', async (req, res) => {
+    const { especialidad, medico } = req.body;
 
-router.post('/filtrar', (req, res) => {
-  const { especialidad, medico } = req.body;
+    try {
+        // Simulated logic for filtering appointments using Sequelize
+        const citas = await Turno.findAll({
+            where: {
+                especialidad: especialidad,
+                medico: medico
+            }
+        });
 
-  // Simulated logic for filtering appointments
-  const citas = filtrarCitas(especialidad, medico); // Placeholder function
-
-  console.log(`Filtered appointments for ${especialidad} with ${medico}`);
-  res.send(`Citas filtradas para ${especialidad} con ${medico}: ${JSON.stringify(citas)}`);
+        console.log(`Filtered appointments for ${especialidad} with ${medico}`);
+        res.json(citas); // Devolver citas filtradas como respuesta JSON
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
 });
 
-// Handle form submission for transferring an appointment
-router.post('/transferir', (req, res) => {
-  const { nombre_paciente, doctor_anterior, fecha_cita_anterior, doctor_nuevo, fecha_cita_nueva, hora_cita_nueva } = req.body;
+// Transferir una cita
+router.post('/transferir', async (req, res) => {
+    const { nombre_paciente, doctor_anterior, fecha_cita_anterior, doctor_nuevo, fecha_cita_nueva, hora_cita_nueva } = req.body;
 
-  // Simulated logic for transferring an appointment
-  const citaTransferida = transferirCita(nombre_paciente, doctor_anterior, fecha_cita_anterior, doctor_nuevo, fecha_cita_nueva, hora_cita_nueva); // Placeholder function
+    try {
+        // Lógica para transferir una cita (actualizar en la base de datos)
+        const citaTransferida = await Turno.update(
+            { medico: doctor_nuevo, fecha: fecha_cita_nueva, hora: hora_cita_nueva },
+            { where: { nombrePaciente: nombre_paciente, medico: doctor_anterior, fecha: fecha_cita_anterior } }
+        );
 
-  if (citaTransferida) {
-    console.log(`Appointment transferred for ${nombre_paciente} from ${doctor_anterior} to ${doctor_nuevo}`);
-    res.send(`La cita para ${nombre_paciente} se ha transferido de ${doctor_anterior} a ${doctor_nuevo} para el ${fecha_cita_nueva} a las ${hora_cita_nueva}.`);
-  } else {
-    res.send(`No se pudo transferir la cita para ${nombre_paciente}.`);
-  }
+        if (citaTransferida[0] > 0) { // Si se actualizó al menos una fila
+            console.log(`Appointment transferred for ${nombre_paciente} from ${doctor_anterior} to ${doctor_nuevo}`);
+            res.send(`La cita para ${nombre_paciente} se ha transferido de ${doctor_anterior} a ${doctor_nuevo} para el ${fecha_cita_nueva} a las ${hora_cita_nueva}.`);
+        } else {
+            res.send(`No se pudo transferir la cita para ${nombre_paciente}. Verifique los datos ingresados.`);
+        }
+    } catch (err) {
+        res.status(500).send('Error al transferir la cita: ' + err.message);
+    }
 });
 
 module.exports = router;

@@ -1,5 +1,4 @@
-// controllers/EspecialidadController.js
-const Especialidad = require('../models/Especialidad');
+const { Especialidad } = require('../models');
 
 class EspecialidadController {
   // Crear una nueva especialidad

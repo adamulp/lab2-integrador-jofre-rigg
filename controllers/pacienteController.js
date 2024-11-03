@@ -1,4 +1,5 @@
-const Paciente = require('../models/Paciente');
+// controllers/PacienteController.js
+const { Paciente } = require('../models');
 
 class PacienteController {
     // Crear un nuevo paciente
@@ -25,7 +26,7 @@ class PacienteController {
     static async obtenerPacientePorId(req, res) {
         const { id } = req.params;
         try {
-            const paciente = await Paciente.getPacienteById(id);
+            const paciente = await Paciente.query().findById(id); // Cambié de getPacienteById a query().findById()
             if (!paciente) {
                 return res.status(404).json({ error: 'Paciente no encontrado.' });
             }
@@ -53,11 +54,11 @@ class PacienteController {
     static async eliminarPaciente(req, res) {
         const { id } = req.params;
         try {
-            const pacienteEliminado = await Paciente.query().deleteById(id);
-            if (!pacienteEliminado) {
+            const eliminadoCount = await Paciente.query().deleteById(id); // Cambié de pacienteEliminado a eliminadoCount
+            if (!eliminadoCount) {
                 return res.status(404).json({ error: 'Paciente no encontrado.' });
             }
-            res.status(204).json(); // Sin contenido
+            res.status(204).send(); // Sin contenido
         } catch (error) {
             res.status(500).json({ error: 'Error al eliminar el paciente.' });
         }

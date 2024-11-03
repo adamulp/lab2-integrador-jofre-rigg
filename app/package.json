@@ -5,7 +5,7 @@
     "main": "app.js",
     "scripts": {
         "dev": "cross-env DB_CLIENT=sqlite3 nodemon app.js",
-        "start": "cross-env DB_CLIENT=mariadb node app.js",
+        "start": "cross-env DB_CLIENT=mysql node app.js",
         "dev:sqlite": "cross-env DB_CLIENT=sqlite3 nodemon app.js",
         "dev:mariadb": "cross-env DB_CLIENT=mariadb nodemon app.js",
         "start:sqlite": "cross-env DB_CLIENT=sqlite3 node app.js",
@@ -18,10 +18,12 @@
         "express": "^4.21.0",
         "knex": "^3.1.0",
         "mariadb": "^3.4.0",
+        "mysql": "^2.18.1",
         "mysql2": "^3.11.3",
         "objection": "^3.1.5",
         "pug": "^3.0.3",
         "sass": "^1.79.4",
+        "sequelize": "^6.37.5",
         "sqlite3": "^5.1.7"
     },
     "devDependencies": {

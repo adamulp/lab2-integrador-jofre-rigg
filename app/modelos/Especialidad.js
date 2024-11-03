@@ -1,36 +1,36 @@
 // models/Especialidad.js
-const { Model } = require('objection');
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/database'); // Asegúrate de que este archivo exporte la instancia de Sequelize
 
-class Especialidad extends Model {
-  static get tableName() {
-    return 'especialidades';
-  }
+class Especialidad extends Model {}
 
-  static get jsonSchema() {
-    return {
-      type: 'object',
-      required: ['nombre'],
+// Definición del modelo
+Especialidad.init({
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
+  nombre: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      len: [1, 255], // Longitud mínima y máxima
+    },
+  },
+}, {
+  sequelize, // La instancia de Sequelize
+  modelName: 'Especialidad',
+  tableName: 'especialidades',
+  timestamps: false, // Si no quieres que Sequelize agregue campos de timestamps (createdAt, updatedAt)
+});
 
-      properties: {
-        id: { type: 'integer' },
-        nombre: { type: 'string', minLength: 1, maxLength: 255 }
-      }
-    };
-  }
-
-  static get relationMappings() {
-    const Turno = require('./Turno');
-    return {
-      turnos: {
-        relation: Model.HasManyRelation,
-        modelClass: Turno,
-        join: {
-          from: 'especialidades.id',
-          to: 'turnos.especialidadId'
-        }
-      }
-    };
-  }
-}
+// Relación con el modelo Turno
+Especialidad.associate = (models) => {
+  Especialidad.hasMany(models.Turno, {
+    foreignKey: 'especialidadId',
+    sourceKey: 'id',
+  });
+};
 
 module.exports = Especialidad;

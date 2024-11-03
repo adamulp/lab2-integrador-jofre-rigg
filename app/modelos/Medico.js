@@ -1,46 +1,47 @@
 // models/Medico.js
-const { Model } = require('objection');
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/database'); // Asegúrate de que este archivo exporte la instancia de Sequelize
 
-class Medico extends Model {
-  static get tableName() {
-    return 'medicos';
-  }
+class Medico extends Model {}
 
-  static get jsonSchema() {
-    return {
-      type: 'object',
-      required: ['nombreCompleto', 'numeroMatricula'],
+// Definición del modelo
+Medico.init({
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
+  nombreCompleto: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      len: [1, 255], // Longitud mínima y máxima
+    },
+  },
+  numeroMatricula: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      len: [1, 50], // Longitud mínima y máxima
+    },
+  },
+}, {
+  sequelize, // La instancia de Sequelize
+  modelName: 'Medico',
+  tableName: 'medicos',
+  timestamps: false, // Si no quieres que Sequelize agregue campos de timestamps (createdAt, updatedAt)
+});
 
-      properties: {
-        id: { type: 'integer' },
-        nombreCompleto: { type: 'string', minLength: 1, maxLength: 255 },
-        numeroMatricula: { type: 'string', minLength: 1, maxLength: 50 }
-      }
-    };
-  }
-
-  static get relationMappings() {
-    const Turno = require('./Turno');
-    const Agenda = require('./Agenda');
-    return {
-      turnos: {
-        relation: Model.HasManyRelation,
-        modelClass: Turno,
-        join: {
-          from: 'medicos.id',
-          to: 'turnos.medicoId'
-        }
-      },
-      agendas: {
-        relation: Model.HasManyRelation,
-        modelClass: Agenda,
-        join: {
-          from: 'medicos.id',
-          to: 'agendas.medicoId'
-        }
-      }
-    };
-  }
-}
+// Relación con los modelos Turno y Agenda
+Medico.associate = (models) => {
+  Medico.hasMany(models.Turno, {
+    foreignKey: 'medicoId',
+    sourceKey: 'id',
+  });
+  Medico.hasMany(models.Agenda, {
+    foreignKey: 'medicoId',
+    sourceKey: 'id',
+  });
+};
 
 module.exports = Medico;

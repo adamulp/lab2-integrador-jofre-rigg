@@ -1,5 +1,5 @@
 // controllers/MedicoController.js
-const Medico = require('../models/Medico');
+const { Medico } = require('../models');
 
 class MedicoController {
     // Crear un nuevo médico
@@ -56,8 +56,8 @@ class MedicoController {
     static async eliminarMedico(req, res) {
         const { id } = req.params;
         try {
-            const medico = await Medico.query().deleteById(id);
-            if (medico) {
+            const deletedCount = await Medico.query().deleteById(id);
+            if (deletedCount) {
                 res.status(204).send();
             } else {
                 res.status(404).json({ error: 'Médico no encontrado' });

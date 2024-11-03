@@ -2,26 +2,29 @@ require('dotenv').config();
 const express = require('express');
 const port = process.env.PORT || 3000;
 
+const { Sequelize } = require('sequelize');
+
 const bodyParser = require('body-parser');
 const path = require('path');
 const Knex = require('knex');
 const { Model } = require('objection');
 
-// Load Knex configuration
-const knexConfig = require('./knexfile');
+// Configuración de Sequelize
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
+  host: process.env.DB_HOST,
+  dialect: 'mysql',
+  logging: false,
+});
 
-// Initialize Knex instance
-const knex = Knex(knexConfig);
-
-// Bind Objection.js models to Knex
-Model.knex(knex);
+// Prueba la conexión con la base de datos
+sequelize.authenticate()
+  .then(() => console.log('Conexión establecida con la base de datos.'))
+  .catch(err => console.error('No se pudo conectar a la base de datos:', err));
 
 const app = express();
 const router = express.Router();
 
-const Paciente = require('./modelos/Paciente'); // Import the Paciente model
-const Especialidad = require('./modelos/Especialidad'); 
-const Medico = require('./modelos/Medico');
+const { Paciente, Especialidad, Medico } = require('./modelos')(sequelize);
 
 // Middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -52,7 +55,7 @@ app.use("/pacientes", pacientesRouter);
 // Route for horarios page
 app.get('/horarios', async (req, res) => {
     try {
-      const medicos = await Medico.query().select('nombreCompleto'); // Fetch all medicos
+      const medicos = await Medico.findAll({ attributes: ['nombreCompleto'] }); // Fetch all medicos
       res.render('horarios', { medicos });
     } catch (err) {
       res.status(500).send(err.message);
@@ -96,9 +99,9 @@ function filtrarCitas(especialidad, medico, paciente) {
 // Route for calendario page
 app.get('/calendario', async (req, res) => {
     try {
-      const especialidades = await Especialidad.query();
-      const medicos = await Medico.query();
-      const pacientes = await Paciente.query();
+      const especialidades = await Especialidad.findAll();
+      const medicos = await Medico.findAll();
+      const pacientes = await Paciente.findAll();
       res.render('calendario', { citas: [], especialidades, medicos, pacientes });
     } catch (err) {
       res.status(500).send(err.message);
@@ -109,9 +112,9 @@ app.get('/calendario', async (req, res) => {
     const { especialidad, medico, paciente } = req.body;
     const citas = filtrarCitas(especialidad, medico, paciente);
     try {
-      const especialidades = await Especialidad.query();
-      const medicos = await Medico.query();
-      const pacientes = await Paciente.query();
+      const especialidades = await Especialidad.findAll();
+      const medicos = await Medico.findAll();
+      const pacientes = await Paciente.findAll();
       res.render('calendario', { citas, especialidades, medicos, pacientes });
     } catch (err) {
       res.status(500).send(err.message);
@@ -129,7 +132,7 @@ app.get('/calSemana', (req, res) => {
 // Route for turnos page
 app.get('/turnos', async (req, res) => {
     try {
-      const especialidades = await Especialidad.query().select('nombre'); // Fetch all especialidades
+      const especialidades = await Especialidad.findAll({ attributes: ['nombre'] }); // Fetch all especialidades
       res.render('turnos', { especialidades });
     } catch (err) {
       res.status(500).send(err.message);
@@ -163,7 +166,7 @@ function checkCitasDisponibles(especialidad) {
 // Route for sobreturnos page
 app.get('/sobreturnos', async (req, res) => {
     try {
-        const medicos = await Medico.query().select('nombreCompleto'); // Fetch all medicos
+        const medicos = await Medico.findAll({ attributes: ['nombreCompleto'] }); // Fetch all medicos
         res.render('sobreturnos', { medicos });
     } catch (err) {
         res.status(500).send(err.message);

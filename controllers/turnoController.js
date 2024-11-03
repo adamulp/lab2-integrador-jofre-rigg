@@ -1,5 +1,4 @@
-// controllers/TurnoController.js
-const Turno = require('../models/Turno');
+const { Turno } = require('../models');
 
 class TurnoController {
   // Crear un nuevo turno
