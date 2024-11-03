@@ -1,11 +1,12 @@
-const { Especialidad } = require('../models');
+// controllers/EspecialidadController.js
+const Especialidad = require('../models/Especialidad'); // Asegúrate de que la ruta sea correcta
 
 class EspecialidadController {
   // Crear una nueva especialidad
   async create(req, res) {
     const { nombre } = req.body;
     try {
-      const newEspecialidad = await Especialidad.query().insert({ nombre });
+      const newEspecialidad = await Especialidad.create({ nombre });
       res.status(201).json(newEspecialidad);
     } catch (error) {
       res.status(500).json({ error: 'Error al crear la especialidad' });
@@ -15,7 +16,7 @@ class EspecialidadController {
   // Obtener todas las especialidades
   async getAll(req, res) {
     try {
-      const especialidades = await Especialidad.query();
+      const especialidades = await Especialidad.findAll();
       res.status(200).json(especialidades);
     } catch (error) {
       res.status(500).json({ error: 'Error al obtener las especialidades' });
@@ -26,7 +27,7 @@ class EspecialidadController {
   async getById(req, res) {
     const { id } = req.params;
     try {
-      const especialidad = await Especialidad.query().findById(id);
+      const especialidad = await Especialidad.findByPk(id);
       if (!especialidad) {
         return res.status(404).json({ error: 'Especialidad no encontrada' });
       }
@@ -41,11 +42,15 @@ class EspecialidadController {
     const { id } = req.params;
     const { nombre } = req.body;
     try {
-      const updatedEspecialidad = await Especialidad.query().patchAndFetchById(id, { nombre });
-      if (!updatedEspecialidad) {
-        return res.status(404).json({ error: 'Especialidad no encontrada' });
+      const [updated] = await Especialidad.update({ nombre }, {
+        where: { id_especialidad: id },
+      });
+      if (updated) {
+        const updatedEspecialidad = await Especialidad.findByPk(id);
+        res.status(200).json(updatedEspecialidad);
+      } else {
+        res.status(404).json({ error: 'Especialidad no encontrada' });
       }
-      res.status(200).json(updatedEspecialidad);
     } catch (error) {
       res.status(500).json({ error: 'Error al actualizar la especialidad' });
     }
@@ -55,11 +60,14 @@ class EspecialidadController {
   async delete(req, res) {
     const { id } = req.params;
     try {
-      const deletedCount = await Especialidad.query().deleteById(id);
-      if (!deletedCount) {
-        return res.status(404).json({ error: 'Especialidad no encontrada' });
+      const deletedCount = await Especialidad.destroy({
+        where: { id_especialidad: id },
+      });
+      if (deletedCount) {
+        res.status(204).send();
+      } else {
+        res.status(404).json({ error: 'Especialidad no encontrada' });
       }
-      res.status(204).send();
     } catch (error) {
       res.status(500).json({ error: 'Error al eliminar la especialidad' });
     }

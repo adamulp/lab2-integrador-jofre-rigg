@@ -1,11 +1,10 @@
-// controllers/MedicoController.js
-const { Medico } = require('../models');
+const Medico = require('../models/Medico'); // Asegúrate de que la ruta sea correcta
 
 class MedicoController {
     // Crear un nuevo médico
     static async crearMedico(req, res) {
         try {
-            const medico = await Medico.query().insert(req.body);
+            const medico = await Medico.create(req.body);
             res.status(201).json(medico);
         } catch (error) {
             res.status(400).json({ error: error.message });
@@ -15,7 +14,7 @@ class MedicoController {
     // Obtener todos los médicos
     static async obtenerMedicos(req, res) {
         try {
-            const medicos = await Medico.query();
+            const medicos = await Medico.findAll();
             res.status(200).json(medicos);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -26,7 +25,7 @@ class MedicoController {
     static async obtenerMedicoPorId(req, res) {
         const { id } = req.params;
         try {
-            const medico = await Medico.query().findById(id);
+            const medico = await Medico.findByPk(id);
             if (medico) {
                 res.status(200).json(medico);
             } else {
@@ -41,9 +40,12 @@ class MedicoController {
     static async actualizarMedico(req, res) {
         const { id } = req.params;
         try {
-            const medico = await Medico.query().patchAndFetchById(id, req.body);
-            if (medico) {
-                res.status(200).json(medico);
+            const [updated] = await Medico.update(req.body, {
+                where: { id_medico: id }
+            });
+            if (updated) {
+                const updatedMedico = await Medico.findByPk(id);
+                res.status(200).json(updatedMedico);
             } else {
                 res.status(404).json({ error: 'Médico no encontrado' });
             }
@@ -56,7 +58,9 @@ class MedicoController {
     static async eliminarMedico(req, res) {
         const { id } = req.params;
         try {
-            const deletedCount = await Medico.query().deleteById(id);
+            const deletedCount = await Medico.destroy({
+                where: { id_medico: id }
+            });
             if (deletedCount) {
                 res.status(204).send();
             } else {

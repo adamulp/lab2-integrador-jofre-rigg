@@ -1,11 +1,10 @@
-// controllers/PacienteController.js
 const { Paciente } = require('../models');
 
 class PacienteController {
     // Crear un nuevo paciente
     static async crearPaciente(req, res) {
         try {
-            const nuevoPaciente = await Paciente.query().insert(req.body);
+            const nuevoPaciente = await Paciente.create(req.body); // Cambié query().insert a create
             res.status(201).json(nuevoPaciente);
         } catch (error) {
             res.status(400).json({ error: 'Error al crear el paciente.' });
@@ -15,7 +14,7 @@ class PacienteController {
     // Obtener todos los pacientes
     static async obtenerPacientes(req, res) {
         try {
-            const pacientes = await Paciente.query();
+            const pacientes = await Paciente.findAll(); // Cambié query() a findAll
             res.status(200).json(pacientes);
         } catch (error) {
             res.status(500).json({ error: 'Error al obtener los pacientes.' });
@@ -26,7 +25,7 @@ class PacienteController {
     static async obtenerPacientePorId(req, res) {
         const { id } = req.params;
         try {
-            const paciente = await Paciente.query().findById(id); // Cambié de getPacienteById a query().findById()
+            const paciente = await Paciente.findByPk(id); // Cambié query().findById a findByPk
             if (!paciente) {
                 return res.status(404).json({ error: 'Paciente no encontrado.' });
             }
@@ -40,11 +39,14 @@ class PacienteController {
     static async actualizarPaciente(req, res) {
         const { id } = req.params;
         try {
-            const pacienteActualizado = await Paciente.query().patchAndFetchById(id, req.body);
-            if (!pacienteActualizado) {
+            const pacienteActualizado = await Paciente.update(req.body, {
+                where: { id },
+                returning: true, // Solo necesario en algunas configuraciones de Sequelize
+            });
+            if (!pacienteActualizado[0]) {
                 return res.status(404).json({ error: 'Paciente no encontrado.' });
             }
-            res.status(200).json(pacienteActualizado);
+            res.status(200).json(pacienteActualizado[1][0]);
         } catch (error) {
             res.status(400).json({ error: 'Error al actualizar el paciente.' });
         }
@@ -54,7 +56,7 @@ class PacienteController {
     static async eliminarPaciente(req, res) {
         const { id } = req.params;
         try {
-            const eliminadoCount = await Paciente.query().deleteById(id); // Cambié de pacienteEliminado a eliminadoCount
+            const eliminadoCount = await Paciente.destroy({ where: { id } }); // Cambié query().deleteById a destroy
             if (!eliminadoCount) {
                 return res.status(404).json({ error: 'Paciente no encontrado.' });
             }

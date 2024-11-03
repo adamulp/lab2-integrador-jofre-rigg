@@ -1,18 +1,18 @@
-const { Turno } = require('../models');
+const Turno = require('../models/Turno'); // Ajusta según tu estructura
 
 class TurnoController {
   // Crear un nuevo turno
   async create(req, res) {
-    const { fechaHora, estado, motivoConsulta, pacienteId, medicoId, especialidadId, agendaId } = req.body;
+    const { fecha_hora, estado, motivo_consulta, paciente_id, medico_id, especialidad_id, agenda_id } = req.body;
     try {
-      const newTurno = await Turno.query().insert({
-        fechaHora,
+      const newTurno = await Turno.create({
+        fecha_hora,
         estado,
-        motivoConsulta,
-        pacienteId,
-        medicoId,
-        especialidadId,
-        agendaId
+        motivo_consulta,
+        paciente_id,
+        medico_id,
+        especialidad_id,
+        agenda_id
       });
       res.status(201).json(newTurno);
     } catch (error) {
@@ -23,7 +23,9 @@ class TurnoController {
   // Obtener todos los turnos
   async getAll(req, res) {
     try {
-      const turnos = await Turno.query().withGraphFetched('[paciente, medico, especialidad, agenda]');
+      const turnos = await Turno.findAll({
+        include: [{ model: Paciente }, { model: Medico }, { model: Especialidad }, { model: Agenda }] // Asegúrate de que estos modelos estén definidos y asociados correctamente
+      });
       res.status(200).json(turnos);
     } catch (error) {
       res.status(500).json({ error: 'Error al obtener los turnos' });
@@ -34,7 +36,9 @@ class TurnoController {
   async getById(req, res) {
     const { id } = req.params;
     try {
-      const turno = await Turno.query().findById(id).withGraphFetched('[paciente, medico, especialidad, agenda]');
+      const turno = await Turno.findByPk(id, {
+        include: [{ model: Paciente }, { model: Medico }, { model: Especialidad }, { model: Agenda }]
+      });
       if (!turno) {
         return res.status(404).json({ error: 'Turno no encontrado' });
       }
@@ -47,20 +51,23 @@ class TurnoController {
   // Actualizar un turno
   async update(req, res) {
     const { id } = req.params;
-    const { fechaHora, estado, motivoConsulta, pacienteId, medicoId, especialidadId, agendaId } = req.body;
+    const { fecha_hora, estado, motivo_consulta, paciente_id, medico_id, especialidad_id, agenda_id } = req.body;
     try {
-      const updatedTurno = await Turno.query().patchAndFetchById(id, {
-        fechaHora,
+      const [updated] = await Turno.update({
+        fecha_hora,
         estado,
-        motivoConsulta,
-        pacienteId,
-        medicoId,
-        especialidadId,
-        agendaId
+        motivo_consulta,
+        paciente_id,
+        medico_id,
+        especialidad_id,
+        agenda_id
+      }, {
+        where: { id_turno: id }
       });
-      if (!updatedTurno) {
+      if (!updated) {
         return res.status(404).json({ error: 'Turno no encontrado' });
       }
+      const updatedTurno = await Turno.findByPk(id);
       res.status(200).json(updatedTurno);
     } catch (error) {
       res.status(500).json({ error: 'Error al actualizar el turno' });
@@ -71,7 +78,9 @@ class TurnoController {
   async delete(req, res) {
     const { id } = req.params;
     try {
-      const deletedCount = await Turno.query().deleteById(id);
+      const deletedCount = await Turno.destroy({
+        where: { id_turno: id }
+      });
       if (!deletedCount) {
         return res.status(404).json({ error: 'Turno no encontrado' });
       }
