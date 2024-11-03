@@ -11,6 +11,7 @@ router.get('/', async (req, res) => {
   try {
     console.log('Obteniendo todos los Pacientes...');
       const pacientes = await Paciente.findAll(); // Fetch all Pacientes
+      console.log('Pacientes obtenidos:', pacientes);
       res.render('pacientes', { pacientes });
   } catch (err) {
       res.status(500).send(err.message);

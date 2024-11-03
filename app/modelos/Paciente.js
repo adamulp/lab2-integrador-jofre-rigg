@@ -46,6 +46,11 @@ Paciente.getPacienteById = async (id) => {
   return await Paciente.findByPk(id);
 };
 
+// Método para obtener todos los pacientes
+Paciente.getAllPacientes = async () => {
+  return await Paciente.findAll();
+};
+
 module.exports = (sequelize, DataTypes) => {
   const Paciente = sequelize.define('Paciente', {
     id_paciente: {
