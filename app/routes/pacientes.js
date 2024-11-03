@@ -9,6 +9,7 @@ const Paciente = require('../modelos/Paciente');
 // Obtener todos los pacientes
 router.get('/', async (req, res) => {
   try {
+    console.log('Obteniendo todos los Pacientes...');
       const pacientes = await Paciente.findAll(); // Fetch all Pacientes
       res.render('pacientes', { pacientes });
   } catch (err) {

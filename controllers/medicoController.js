@@ -14,6 +14,7 @@ class MedicoController {
     // Obtener todos los médicos
     static async obtenerMedicos(req, res) {
         try {
+            console.log('Obteniendo todos los médicos...');
             const medicos = await Medico.findAll();
             res.status(200).json(medicos);
         } catch (error) {
