@@ -4,7 +4,7 @@
     "description": "Medical appointment scheduling system",
     "main": "app.js",
     "scripts": {
-        "dev": "cross-env DB_CLIENT=sqlite3 nodemon app.js",
+        "dev": "cross-env DB_CLIENT=mysql nodemon app.js",
         "start": "cross-env DB_CLIENT=mysql node app.js",
         "dev:sqlite": "cross-env DB_CLIENT=sqlite3 nodemon app.js",
         "dev:mariadb": "cross-env DB_CLIENT=mariadb nodemon app.js",
