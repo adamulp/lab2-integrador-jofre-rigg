@@ -6,7 +6,7 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      nombreCompleto: {
+      nombre_completo: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -32,12 +32,12 @@ module.exports = {
     });
 
     await queryInterface.createTable('medicos', {
-      id: {
+      id_medico: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
-      nombreCompleto: {
+      nombre_completo: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -57,7 +57,7 @@ module.exports = {
     });
 
     await queryInterface.createTable('especialidades', {
-      id: {
+      id_especialidad: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
@@ -77,7 +77,7 @@ module.exports = {
     });
 
     await queryInterface.createTable('agendas', {
-      id: {
+      id_agenda: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
@@ -90,7 +90,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      medicoId: {
+      medico_id: {
         type: Sequelize.INTEGER,
         references: {
           model: 'medicos',
@@ -110,12 +110,12 @@ module.exports = {
     });
 
     await queryInterface.createTable('turnos', {
-      id: {
+      id_turno: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
-      fechaHora: {
+      fecha_hora: {
         type: Sequelize.DATE,
         allowNull: false,
       },
@@ -135,7 +135,7 @@ module.exports = {
         onDelete: 'CASCADE',
         allowNull: false,
       },
-      medicoId: {
+      medico_id: {
         type: Sequelize.INTEGER,
         references: {
           model: 'medicos',
@@ -144,7 +144,7 @@ module.exports = {
         onDelete: 'CASCADE',
         allowNull: false,
       },
-      especialidadId: {
+      especialidad_id: {
         type: Sequelize.INTEGER,
         references: {
           model: 'especialidades',
@@ -153,7 +153,7 @@ module.exports = {
         onDelete: 'CASCADE',
         allowNull: false,
       },
-      agendaId: {
+      agenda_id: {
         type: Sequelize.INTEGER,
         references: {
           model: 'agendas',

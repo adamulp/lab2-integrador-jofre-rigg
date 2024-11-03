@@ -2,19 +2,12 @@ require('dotenv').config();
 const express = require('express');
 const port = process.env.PORT || 3000;
 
-const { Sequelize } = require('sequelize');
+const { sequelize, Agenda, Medico, Paciente, Especialidad, Turno } = require('./modelos');
 
 const bodyParser = require('body-parser');
 const path = require('path');
-const Knex = require('knex');
-const { Model } = require('objection');
 
 // Configuración de Sequelize
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
-  host: process.env.DB_HOST,
-  dialect: 'mysql',
-  logging: false,
-});
 
 // Prueba la conexión con la base de datos
 sequelize.authenticate()
@@ -24,7 +17,7 @@ sequelize.authenticate()
 const app = express();
 const router = express.Router();
 
-const { Paciente, Especialidad, Medico } = require('./modelos')(sequelize);
+
 
 // Middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -55,7 +48,7 @@ app.use("/pacientes", pacientesRouter);
 // Route for horarios page
 app.get('/horarios', async (req, res) => {
     try {
-      const medicos = await Medico.findAll({ attributes: ['nombreCompleto'] }); // Fetch all medicos
+      const medicos = await Medico.findAll({ attributes: ['nombre_completo'] }); // Fetch all medicos
       res.render('horarios', { medicos });
     } catch (err) {
       res.status(500).send(err.message);
@@ -166,7 +159,7 @@ function checkCitasDisponibles(especialidad) {
 // Route for sobreturnos page
 app.get('/sobreturnos', async (req, res) => {
     try {
-        const medicos = await Medico.findAll({ attributes: ['nombreCompleto'] }); // Fetch all medicos
+        const medicos = await Medico.findAll({ attributes: ['nombre_completo'] }); // Fetch all medicos
         res.render('sobreturnos', { medicos });
     } catch (err) {
         res.status(500).send(err.message);

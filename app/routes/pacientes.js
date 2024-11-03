@@ -19,9 +19,9 @@ router.get('/', async (req, res) => {
 // Manejar la creación de un nuevo paciente
 router.post('/create', async (req, res) => {
   try {
-      const { nombreCompleto, dni, contacto, obraSocial } = req.body;
+      const { nombre_completo, dni, contacto, obraSocial } = req.body;
       await Paciente.create({
-          nombreCompleto,
+          nombre_completo,
           dni,
           contacto,
           obraSocial
@@ -46,11 +46,11 @@ router.post('/delete/:id', async (req, res) => {
 // Manejar la búsqueda de pacientes
 router.post('/buscar', async (req, res) => {
   try {
-      const { nombreCompleto, dni } = req.body; // Cambiado a req.body para consistentemente manejar formularios
+      const { nombre_completo, dni } = req.body; // Cambiado a req.body para consistentemente manejar formularios
       const pacientes = await Paciente.findAll({
           where: {
               [Op.or]: [
-                  { nombreCompleto: { [Op.like]: `%${nombreCompleto}%` } },
+                  { nombre_completo: { [Op.like]: `%${nombre_completo}%` } },
                   { dni: { [Op.like]: `%${dni}%` } }
               ]
           }
@@ -64,11 +64,11 @@ router.post('/buscar', async (req, res) => {
 // Manejar la búsqueda de resultados
 router.post('/resultados', async (req, res) => {
   try {
-      const { nombreCompleto, dni } = req.body;
+      const { nombre_completo, dni } = req.body;
       const pacientes = await Paciente.findAll({
           where: {
               [Op.or]: [
-                  { nombreCompleto: { [Op.like]: `%${nombreCompleto}%` } },
+                  { nombre_completo: { [Op.like]: `%${nombre_completo}%` } },
                   { dni: dni }
               ]
           }

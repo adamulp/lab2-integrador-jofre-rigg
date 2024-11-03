@@ -6,25 +6,33 @@ class Agenda extends Model {}
 
 // Definición del modelo
 Agenda.init({
-  id: {
+  id_agenda: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
   clasificacion: {
-    type: DataTypes.ENUM('Normal', 'Especial', 'VIP'),
-    allowNull: false,
+    type: DataTypes.STRING(50),
+    allowNull: true,
   },
   estado: {
-    type: DataTypes.ENUM('Disponible', 'No disponible'),
+    type: DataTypes.STRING(50),
+    allowNull: true,
+  },
+  disponible_desde: {
+    type: DataTypes.DATE,
     allowNull: false,
   },
-  medicoId: {
+  disponible_hasta: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+  medico_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
       model: 'medicos', // Nombre de la tabla de referencia
-      key: 'id', // Llave primaria en la tabla de referencia
+      key: 'id_medico', // Llave primaria en la tabla de referencia
     },
   },
 }, {
@@ -34,16 +42,53 @@ Agenda.init({
   timestamps: false, // Si no quieres que Sequelize agregue campos de timestamps (createdAt, updatedAt)
 });
 
-// Relación con el modelo Medico
-Agenda.associate = (models) => {
-  Agenda.belongsTo(models.Medico, {
-    foreignKey: 'medicoId',
-    targetKey: 'id',
+module.exports = (sequelize, DataTypes) => {
+  const Agenda = sequelize.define('Agenda', {
+      id_agenda: {
+          type: DataTypes.INTEGER,
+          autoIncrement: true,
+          primaryKey: true,
+      },
+      clasificacion: {
+        type: DataTypes.STRING(50), 
+        allowNull: true, 
+      },
+      estado: {
+        type: DataTypes.STRING(50),
+          allowNull: true,
+      },
+      disponible_desde: {
+        type: DataTypes.DATE, 
+        allowNull: false, 
+      },
+      disponible_hasta: {
+        type: DataTypes.DATE, 
+        allowNull: false, 
+      },
+      medico_id: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+          references: {
+              model: 'medicos', // Nombre de la tabla de referencia
+              key: 'id_medico', // Llave primaria en la tabla de referencia
+          },
+      },
+  }, {
+      tableName: 'agendas',
+      timestamps: false, // Si no quieres que Sequelize agregue campos de timestamps
   });
-  Agenda.hasMany(models.Turno, {
-    foreignKey: 'agendaId',
-    sourceKey: 'id',
-  });
-};
 
-module.exports = Agenda;
+  // Relación con el modelo Medico
+  Agenda.associate = (models) => {
+      Agenda.belongsTo(models.Medico, {
+          foreignKey: 'medicoId',
+          targetKey: 'id_medico',
+      });
+      Agenda.hasMany(models.Turno, {
+          foreignKey: 'agendaId',
+          sourceKey: 'id_agenda',
+      });
+  };
+
+  return Agenda;
+};

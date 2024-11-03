@@ -11,13 +11,13 @@ exports.seed = async (sequelize) => {
   // Insertar Pacientes
   const pacientes = await Paciente.bulkCreate([
     {
-      nombreCompleto: 'Juan Pérez',
+      nombre_completo: 'Juan Pérez',
       dni: '12345678',
       contacto: 'juan.perez@example.com',
       obraSocial: 'OSDE'
     },
     {
-      nombreCompleto: 'Maria Gomez',
+      nombre_completo: 'Maria Gomez',
       dni: '87654321',
       contacto: 'maria.gomez@example.com',
       obraSocial: 'Swiss Medical'
@@ -27,11 +27,11 @@ exports.seed = async (sequelize) => {
   // Insertar Medicos
   const medicos = await Medico.bulkCreate([
     {
-      nombreCompleto: 'Dr. Carlos López',
+      nombre_completo: 'Dr. Carlos López',
       numeroMatricula: 'M12345'
     },
     {
-      nombreCompleto: 'Dra. Ana Fernández',
+      nombre_completo: 'Dra. Ana Fernández',
       numeroMatricula: 'M67890'
     }
   ]);
@@ -47,34 +47,34 @@ exports.seed = async (sequelize) => {
     {
       clasificacion: 'Normal',
       estado: 'Disponible',
-      medicoId: medicos[0].id  // Dr. Carlos López
+      medico_id: medicos[0].id  // Dr. Carlos López
     },
     {
       clasificacion: 'VIP',
       estado: 'Disponible',
-      medicoId: medicos[1].id  // Dra. Ana Fernández
+      medico_id: medicos[1].id  // Dra. Ana Fernández
     }
   ]);
 
   // Insertar Turnos (Appointments)
   await Turno.bulkCreate([
     {
-      fechaHora: '2024-10-10 09:00:00',
+      fecha_hora: '2024-10-10 09:00:00',
       estado: 'Reservado',
-      motivoConsulta: 'Chequeo general',
-      pacienteId: pacientes[0].id,  // Juan Pérez
-      medicoId: medicos[0].id,  // Dr. Carlos López
-      especialidadId: especialidades[0].id,  // Cardiología
-      agendaId: agendas[0].id  // Dr. López's agenda
+      motivo_consulta: 'Chequeo general',
+      paciente_id: pacientes[0].id,  // Juan Pérez
+      medico_id: medicos[0].id,  // Dr. Carlos López
+      especialidad_id: especialidades[0].id,  // Cardiología
+      agenda_id: agendas[0].id  // Dr. López's agenda
     },
     {
-      fechaHora: '2024-10-11 11:00:00',
+      fecha_hora: '2024-10-11 11:00:00',
       estado: 'Reservado',
-      motivoConsulta: 'Consulta neurológica',
-      pacienteId: pacientes[1].id,  // Maria Gomez
-      medicoId: medicos[1].id,  // Dra. Ana Fernández
-      especialidadId: especialidades[1].id,  // Neurología
-      agendaId: agendas[1].id  // Dra. Fernández's agenda
+      motivo_consulta: 'Consulta neurológica',
+      paciente_id: pacientes[1].id,  // Maria Gomez
+      medico_id: medicos[1].id,  // Dra. Ana Fernández
+      especialidad_id: especialidades[1].id,  // Neurología
+      agenda_id: agendas[1].id  // Dra. Fernández's agenda
     }
   ]);
 };

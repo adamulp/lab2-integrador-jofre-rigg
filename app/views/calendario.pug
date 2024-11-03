@@ -28,13 +28,13 @@ html
             select.form-select(name='medico' id='medico')
               option(value='') -- Seleccione Médico --
               each medico in medicos
-                option(value=medico.nombreCompleto) #{medico.nombreCompleto}
+                option(value=medico.nombre_completo) #{medico.nombre_completo}
 
             label(for='paciente') Paciente:
             select.form-select(name='paciente' id='paciente')
               option(value='') -- Seleccione Paciente --
               each paciente in pacientes
-                option(value=paciente.nombreCompleto) #{paciente.nombreCompleto}
+                option(value=paciente.nombre_completo) #{paciente.nombre_completo}
 
             button.btn.btn-primary(type='submit') Filtrar
 
