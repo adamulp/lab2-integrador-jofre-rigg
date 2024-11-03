@@ -1,4 +1,4 @@
-const { Paciente } = require('../models');
+const { Paciente } = require('../models/Paciente');
 
 class PacienteController {
     // Crear un nuevo paciente
@@ -17,6 +17,7 @@ class PacienteController {
             const pacientes = await Paciente.findAll(); // Cambié query() a findAll
             res.status(200).json(pacientes);
         } catch (error) {
+            console.error(error);
             res.status(500).json({ error: 'Error al obtener los pacientes.' });
         }
     }
