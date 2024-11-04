@@ -18,7 +18,6 @@ class PacienteController {
                 attributes: ['id_paciente','nombre_completo', 'dni', 'informacion_contacto', 'obra_social'] // Cambia estos atributos a los de tu tabla `Paciente`
             }); 
             res.render('pacientes', { pacientes });
-            res.status(200).json(pacientes);
         } catch (error) {
             console.error( error);
             res.status(500).json({ error: 'Error al obtener los pacientes.' });
