@@ -10,6 +10,8 @@ const PacienteController = require('../controllers/pacienteController');
 // Obtener todos los pacientes
 router.get('/', PacienteController.obtenerPacientes);
 
+router.post('/create', PacienteController.crearPaciente);
+
 // Manejar la creación de un nuevo paciente
 router.post('/create', async (req, res) => {
   try {
