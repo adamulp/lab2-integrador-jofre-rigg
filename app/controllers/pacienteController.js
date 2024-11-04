@@ -4,8 +4,6 @@ class PacienteController {
     // Crear un nuevo paciente
     static async crearPaciente(req, res) {
         try {
-            console.log("Datos del paciente:", req.body);
-            // Ajusta los nombres de las propiedades antes de pasarlas a Sequelize
             const pacienteData = {
                 nombre_completo: req.body.nombre_completo,
                 dni: req.body.dni,
@@ -20,7 +18,24 @@ class PacienteController {
             res.status(400).json({ error: 'Error al crear el paciente.' });
         }
     }
-
+//buscar un paciente por nombre y dni
+    static async buscarPaciente(req, res) {
+        const { nombre_completo, dni } = req.body;
+        try {
+            const pacientes = await Paciente.findAll({
+                where: {
+                    [Op.or]: [
+                        { nombre_completo: { [Op.like]: `%${nombre_completo}%` } },
+                        { dni: dni }
+                    ]
+                }
+            });
+            res.render('resultadosPacientes', { pacientes });
+        } catch (error) {
+            console.error("Error al buscar el paciente:", error);
+            res.status(400).json({ error: 'Error al buscar el paciente.' });
+        }
+    }
 
     // Obtener todos los pacientes
     static async obtenerPacientes(req, res) {

@@ -12,6 +12,8 @@ router.get('/', PacienteController.obtenerPacientes);
 
 router.post('/create', PacienteController.crearPaciente);
 
+router.post('/search', PacienteController.buscarPaciente);
+
 // Manejar la eliminación de un paciente
 router.post('/delete/:id', async (req, res) => {
   try {
@@ -23,23 +25,6 @@ router.post('/delete/:id', async (req, res) => {
   }
 });
 
-// Manejar la búsqueda de pacientes
-router.post('/buscar', async (req, res) => {
-  try {
-      const { nombre_completo, dni } = req.body; // Cambiado a req.body para consistentemente manejar formularios
-      const pacientes = await Paciente.findAll({
-          where: {
-              [Op.or]: [
-                  { nombre_completo: { [Op.like]: `%${nombre_completo}%` } },
-                  { dni: { [Op.like]: `%${dni}%` } }
-              ]
-          }
-      });
-      res.render('pacientes', { pacientes });
-  } catch (err) {
-      res.status(500).send(err.message);
-  }
-});
 
 // Manejar la búsqueda de resultados
 router.post('/resultados', async (req, res) => {
