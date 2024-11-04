@@ -12,22 +12,6 @@ router.get('/', PacienteController.obtenerPacientes);
 
 router.post('/create', PacienteController.crearPaciente);
 
-// Manejar la creación de un nuevo paciente
-router.post('/create', async (req, res) => {
-  try {
-      const { nombre_completo, dni, contacto, obraSocial } = req.body;
-      await Paciente.create({
-          nombre_completo,
-          dni,
-          contacto,
-          obraSocial
-      });
-      res.redirect('/pacientes');
-  } catch (err) {
-      res.status(500).send(err.message);
-  }
-});
-
 // Manejar la eliminación de un paciente
 router.post('/delete/:id', async (req, res) => {
   try {

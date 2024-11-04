@@ -4,12 +4,23 @@ class PacienteController {
     // Crear un nuevo paciente
     static async crearPaciente(req, res) {
         try {
-            const nuevoPaciente = await Paciente.create(req.body); // Cambié query().insert a create
-            res.status(201).json(nuevoPaciente);
+            console.log("Datos del paciente:", req.body);
+            // Ajusta los nombres de las propiedades antes de pasarlas a Sequelize
+            const pacienteData = {
+                nombre_completo: req.body.nombre_completo,
+                dni: req.body.dni,
+                informacion_contacto: req.body.contacto,  // Cambia 'contacto' por 'informacion_contacto'
+                obra_social: req.body.obraSocial
+            };
+
+            await Paciente.create(pacienteData);
+            res.redirect('/pacientes');
         } catch (error) {
+            console.error("Error al crear el paciente:", error);
             res.status(400).json({ error: 'Error al crear el paciente.' });
         }
     }
+
 
     // Obtener todos los pacientes
     static async obtenerPacientes(req, res) {
