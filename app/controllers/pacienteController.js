@@ -14,11 +14,10 @@ class PacienteController {
     // Obtener todos los pacientes
     static async obtenerPacientes(req, res) {
         try {
-            console.log('Intentando obtener pacientes...');
             const pacientes = await Paciente.findAll({
                 attributes: ['id_paciente','nombre_completo', 'dni', 'informacion_contacto', 'obra_social'] // Cambia estos atributos a los de tu tabla `Paciente`
             }); 
-            console.log('Pacientes obtenidos:', pacientes);
+            res.render('pacientes', { pacientes });
             res.status(200).json(pacientes);
         } catch (error) {
             console.error( error);
