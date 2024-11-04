@@ -5,18 +5,10 @@ const { Op } = require('sequelize');
 const Especialidad = require('../modelos/Especialidad');
 const Medico = require('../modelos/Medico');
 const Paciente = require('../modelos/Paciente');
+const PacienteController = require('../controllers/pacienteController');
 
 // Obtener todos los pacientes
-router.get('/', async (req, res) => {
-  try {
-    console.log('Obteniendo todos los Pacientes...');
-      const pacientes = await Paciente.findAll(); // Fetch all Pacientes
-      console.log('Pacientes obtenidos:', pacientes);
-      res.render('pacientes', { pacientes });
-  } catch (err) {
-      res.status(500).send(err.message);
-  }
-});
+router.get('/', PacienteController.obtenerPacientes);
 
 // Manejar la creación de un nuevo paciente
 router.post('/create', async (req, res) => {

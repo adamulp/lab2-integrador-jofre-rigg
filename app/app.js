@@ -1,26 +1,39 @@
 require('dotenv').config();
 const express = require('express');
 const port = process.env.PORT || 3000;
-
+const app = express();
+const router = express.Router();
 const { sequelize, Agenda, Medico, Paciente, Especialidad, Turno } = require('./modelos');
 
 const bodyParser = require('body-parser');
 const path = require('path');
 
+
+async function test() {
+  try {
+      const pacientes = await Paciente.findAll(); // Intenta obtener todos los pacientes
+      console.log('Pacientes:', pacientes); // Muestra los pacientes en la consola
+  } catch (error) {
+      console.error('Error al obtener los pacientes:', error); // Muestra cualquier error
+  }
+}
+
+
 // Configuración de Sequelize
 
 // Prueba la conexión con la base de datos
 sequelize.authenticate()
-  .then(() => console.log('Conexión establecida con la base de datos.'))
-  .catch(err => console.error('No se pudo conectar a la base de datos:', err));
+  .then(() => {
+  console.log('Conexión establecida con la base de datos.')
+  //test();
+  })
+    .catch(err => console.error('No se pudo conectar a la base de datos:', err));
 
-const app = express();
-const router = express.Router();
+// Middleware para parsear el cuerpo de las solicitudes JSON
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
-
-// Middleware to parse form data
-app.use(bodyParser.urlencoded({ extended: false }));
 
 // Set Pug as the view engine
 app.set('view engine', 'pug');
