@@ -57,7 +57,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/buscar', async (req, res) => {
+/*router.post('/buscar', async (req, res) => {
   try {
     const { nombre_completo, dni } = req.body;
     let whereClause = {};
@@ -83,6 +83,6 @@ router.post('/buscar', async (req, res) => {
   } catch (err) {
     res.status(500).send(err.message);
   }
-});
+});*/
 
 module.exports = router;

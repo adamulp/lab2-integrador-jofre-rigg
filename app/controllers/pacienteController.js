@@ -20,23 +20,40 @@ class PacienteController {
         }
     }
 //buscar un paciente por nombre y dni
-    static async buscarPaciente(req, res) {
-        const { nombre_completo, dni } = req.body;
-        try {
-            const pacientes = await Paciente.findAll({
-                where: {
-                    [Op.or]: [
-                        { nombre_completo: { [Op.like]: `%${nombre_completo}%` } },
-                        { dni: dni }
-                    ]
-                }
-            });
-            res.render('resultadosPacientes', { pacientes });
-        } catch (error) {
-            console.error("Error al buscar el paciente:", error);
-            res.status(400).json({ error: 'Error al buscar el paciente.' });
-        }
+static async buscarPaciente(req, res) {
+    const { nombre_completo, dni } = req.body;
+
+    // Construimos la condición de búsqueda dinámica
+    const condiciones = [];
+    
+    if (nombre_completo) {
+        condiciones.push({ nombre_completo: { [Op.like]: `%${nombre_completo}%` } });
     }
+    
+    if (dni) {
+        condiciones.push({ dni: { [Op.like]: `%${dni}%` } });
+    }
+
+    try {
+        const pacientes = await Paciente.findAll({
+            where: {
+                [Op.or]: condiciones // Solo se incluirán las condiciones presentes
+            }
+        });
+
+        console.log("Pacientes encontrados:", pacientes); // Verifica los resultados antes de renderizar
+
+        // Renderizamos la vista con los resultados encontrados
+        if (pacientes.length === 0) {
+            return res.render('resultadosPacientes', { pacientes: [], mensaje: "No se encontraron pacientes." });
+        }
+
+        res.render('resultadosPacientes', { pacientes });
+    } catch (error) {
+        console.error("Error al buscar el paciente:", error);
+        res.status(400).json({ error: 'Error al buscar el paciente.' });
+    }
+}
 
     // Obtener todos los pacientes
     static async obtenerPacientes(req, res) {
