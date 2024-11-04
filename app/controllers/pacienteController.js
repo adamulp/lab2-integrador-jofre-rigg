@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const { Paciente } = require('../modelos');
 
 class PacienteController {

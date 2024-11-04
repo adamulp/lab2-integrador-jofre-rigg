@@ -12,7 +12,7 @@ router.get('/', PacienteController.obtenerPacientes);
 
 router.post('/create', PacienteController.crearPaciente);
 
-router.post('/search', PacienteController.buscarPaciente);
+router.post('/buscar', PacienteController.buscarPaciente);
 
 // Manejar la eliminación de un paciente
 router.post('/delete/:id', async (req, res) => {

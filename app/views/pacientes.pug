@@ -37,7 +37,7 @@ html
             .inline-field
                 button(type="submit") Crear Paciente
 
-      form#formBuscarPaciente.formPaciente(action="/pacientes/resultados" method="POST")
+      form#formBuscarPaciente.formPaciente(action="/pacientes/buscar" method="POST")
         input(type="text" name="nombre_completo" placeholder="Nombre Completo")
         input(type="text" name="dni" placeholder="DNI")
         .side-by-side 
