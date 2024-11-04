@@ -57,4 +57,32 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+router.post('/buscar', async (req, res) => {
+  try {
+    const { nombre_completo, dni } = req.body;
+    let whereClause = {};
+
+    if (nombre_completo && dni) {
+      // Use AND logic when both fields are filled
+      whereClause = {
+        nombre_completo: { [Op.like]: `%${nombre_completo}%` },
+        dni: { [Op.like]: `%${dni}%` }
+      };
+    } else if (nombre_completo || dni) {
+      // Use OR logic when only one field is filled
+      whereClause = {
+        [Op.or]: [
+          nombre_completo ? { nombre_completo: { [Op.like]: `%${nombre_completo}%` } } : null,
+          dni ? { dni: { [Op.like]: `%${dni}%` } } : null
+        ].filter(Boolean) // Remove null values
+      };
+    }
+
+    const pacientes = await Paciente.findAll({ where: whereClause });
+    res.render('pacientes', { pacientes });
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
 module.exports = router;
