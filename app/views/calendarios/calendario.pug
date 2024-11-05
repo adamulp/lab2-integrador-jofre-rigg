@@ -4,9 +4,11 @@ html
     title Calendario
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css')
     link(rel='stylesheet', href='/styles/styles.css')
-    link(rel='stylesheet', href='/styles/calendario.css')
+    link(rel='stylesheet', href='/styles/calSemana.css')
+    link(rel='stylesheet', href='/styles/calMes.css')
     script(src='https://code.jquery.com/jquery-3.6.0.min.js')
-    script(src='/scripts/calendario.js')
+    script(src='/scripts/calSemana.js')
+    script(src='/scripts/calMes.js')
 
   body
     .container
@@ -26,13 +28,13 @@ html
             select.form-select(name='medico' id='medico')
               option(value='') -- Seleccione Médico --
               each medico in medicos
-                option(value=medico.nombreCompleto) #{medico.nombreCompleto}
+                option(value=medico.nombre_completo) #{medico.nombre_completo}
 
             label(for='paciente') Paciente:
             select.form-select(name='paciente' id='paciente')
               option(value='') -- Seleccione Paciente --
               each paciente in pacientes
-                option(value=paciente.nombreCompleto) #{paciente.nombreCompleto}
+                option(value=paciente.nombre_completo) #{paciente.nombre_completo}
 
             button.btn.btn-primary(type='submit') Filtrar
 
