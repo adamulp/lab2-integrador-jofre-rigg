@@ -14,7 +14,7 @@ html
             label(for='doctor') Seleccione el Médico:
             select(name='doctor', id='doctor')
                 each medico in medicos
-                    option(value=medico.nombreCompleto) #{medico.nombreCompleto}
+                    option(value=medico.nombre_completo) #{medico.nombre_completo}
             .side-by-side
                 .date-picker
                     label(for='fecha') Fecha para Sobreturno:

@@ -1,47 +1,94 @@
 // models/Agenda.js
-const { Model } = require('objection');
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/database'); // Asegúrate de que este archivo exporte la instancia de Sequelize
 
-class Agenda extends Model {
-  static get tableName() {
-    return 'agendas';
-  }
+class Agenda extends Model {}
 
-  static get jsonSchema() {
-    return {
-      type: 'object',
-      required: ['clasificacion', 'estado', 'medicoId'],
+// Definición del modelo
+Agenda.init({
+  id_agenda: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
+  clasificacion: {
+    type: DataTypes.STRING(50),
+    allowNull: true,
+  },
+  estado: {
+    type: DataTypes.STRING(50),
+    allowNull: true,
+  },
+  disponible_desde: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+  disponible_hasta: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+  medico_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'medicos', // Nombre de la tabla de referencia
+      key: 'id_medico', // Llave primaria en la tabla de referencia
+    },
+  },
+}, {
+  sequelize, // La instancia de Sequelize
+  modelName: 'Agenda',
+  tableName: 'agendas',
+  timestamps: false, // Si no quieres que Sequelize agregue campos de timestamps (createdAt, updatedAt)
+});
 
-      properties: {
-        id: { type: 'integer' },
-        clasificacion: { type: 'string', enum: ['Normal', 'Especial', 'VIP'] },
-        estado: { type: 'string', enum: ['Disponible', 'No disponible'] },
-        medicoId: { type: 'integer' }
-      }
-    };
-  }
-
-  static get relationMappings() {
-    const Medico = require('./Medico');
-    const Turno = require('./Turno');
-    return {
-      medico: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Medico,
-        join: {
-          from: 'agendas.medicoId',
-          to: 'medicos.id'
-        }
+module.exports = (sequelize, DataTypes) => {
+  const Agenda = sequelize.define('Agenda', {
+      id_agenda: {
+          type: DataTypes.INTEGER,
+          autoIncrement: true,
+          primaryKey: true,
       },
-      turnos: {
-        relation: Model.HasManyRelation,
-        modelClass: Turno,
-        join: {
-          from: 'agendas.id',
-          to: 'turnos.agendaId'
-        }
-      }
-    };
-  }
-}
+      clasificacion: {
+        type: DataTypes.STRING(50), 
+        allowNull: true, 
+      },
+      estado: {
+        type: DataTypes.STRING(50),
+          allowNull: true,
+      },
+      disponible_desde: {
+        type: DataTypes.DATE, 
+        allowNull: false, 
+      },
+      disponible_hasta: {
+        type: DataTypes.DATE, 
+        allowNull: false, 
+      },
+      medico_id: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+          references: {
+              model: 'medicos', // Nombre de la tabla de referencia
+              key: 'id_medico', // Llave primaria en la tabla de referencia
+          },
+      },
+  }, {
+      tableName: 'agendas',
+      timestamps: false, // Si no quieres que Sequelize agregue campos de timestamps
+  });
 
-module.exports = Agenda;
+  // Relación con el modelo Medico
+  Agenda.associate = (models) => {
+      Agenda.belongsTo(models.Medico, {
+          foreignKey: 'medicoId',
+          targetKey: 'id_medico',
+      });
+      Agenda.hasMany(models.Turno, {
+          foreignKey: 'agendaId',
+          sourceKey: 'id_agenda',
+      });
+  };
+
+  return Agenda;
+};

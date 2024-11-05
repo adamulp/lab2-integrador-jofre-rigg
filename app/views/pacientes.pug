@@ -25,11 +25,11 @@ html
       
     .container
       .side-by-side 
-        img(src="img/crear.svg" id="botonCrear" class="botonPaciente")
-        img(src="img/buscar.svg" id="botonBuscar" class="botonPaciente")
+        img(src="/img/crear.svg" id="botonCrear" class="botonPaciente")
+        img(src="/img/buscar.svg" id="botonBuscar" class="botonPaciente")
 
       form#formCrearPaciente.formPaciente(action="/pacientes/create" method="POST")
-        input(type="text" name="nombreCompleto" placeholder="Nombre Completo" required)
+        input(type="text" name="nombre_completo" placeholder="Nombre Completo" required)
         input(type="text" name="dni" placeholder="DNI" required)
         input(type="text" name="contacto" placeholder="Contacto" required)
         input(type="text" name="obraSocial" placeholder="Obra Social")
@@ -37,8 +37,8 @@ html
             .inline-field
                 button(type="submit") Crear Paciente
 
-      form#formBuscarPaciente.formPaciente(action="/pacientes/resultados" method="POST")
-        input(type="text" name="nombreCompleto" placeholder="Nombre Completo")
+      form#formBuscarPaciente.formPaciente(action="/pacientes/buscar" method="POST")
+        input(type="text" name="nombre_completo" placeholder="Nombre Completo")
         input(type="text" name="dni" placeholder="DNI")
         .side-by-side 
             .inline-field
@@ -56,9 +56,9 @@ html
           tbody
             each paciente in pacientes
               tr
-                td #{paciente.nombreCompleto}
+                td #{paciente.nombre_completo}
                 td #{paciente.dni}
-                td #{paciente.contacto}
-                td #{paciente.obraSocial}
+                td #{paciente.informacion_contacto}
+                td #{paciente.obra_social}
       else
         p No hay pacientes registrados.

@@ -22,7 +22,7 @@ html
                     label(for='medico') Médico:
                     select(name='medico' id='medico')
                         each medico in medicos
-                            option(value=medico.nombreCompleto) #{medico.nombreCompleto}
+                            option(value=medico.nombre_completo) #{medico.nombre_completo}
 
             button(type='submit') Filtrar Citas
 
@@ -36,13 +36,13 @@ html
                     label(for='doctor_anterior') Médico Actual:
                     select(name='doctor_anterior' id='doctor_anterior')
                         each medico in medicos 
-                            option(value=medico.nombreCompleto) #{medico.nombreCompleto}
+                            option(value=medico.nombre_completo) #{medico.nombre_completo}
                 
                 .inline-field
                     label(for='doctor_nuevo') Nuevo Médico:
                     select(name='doctor_nuevo' id='doctor_nuevo')
                         each medico in medicos 
-                            option(value=medico.nombreCompleto) #{medico.nombreCompleto}
+                            option(value=medico.nombre_completo) #{medico.nombre_completo}
 
             .date-picker-container 
                 .date-picker

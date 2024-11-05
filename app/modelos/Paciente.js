@@ -1,43 +1,54 @@
 // models/Paciente.js
-const { Model } = require('objection');
+const { Model, DataTypes } = require('sequelize');
+module.exports = (sequelize) => {
 
-class Paciente extends Model {
-  static get tableName() {
-    return 'pacientes';
-  }
+class Paciente extends Model {}
 
-  static get jsonSchema() {
-    return {
-      type: 'object',
-      required: ['nombreCompleto', 'dni'],
+// Definición del modelo
+Paciente.init({
+  id_paciente: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
+  nombre_completo: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      len: [1, 255],
+    },
+  },
+  dni: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+    validate: {
+      len: [1, 20],
+    },
+  },
+  informacion_contacto: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  obra_social: {
+    type: DataTypes.STRING(255),
+    allowNull: true,
+  },
+}, {
+  sequelize, 
+  modelName: 'Paciente',
+  tableName: 'pacientes',
+  timestamps: false, 
+});
 
-      properties: {
-        id: { type: 'integer' },
-        nombreCompleto: { type: 'string', minLength: 1, maxLength: 255 },
-        dni: { type: 'string', minLength: 1, maxLength: 20 },
-        contacto: { type: 'string' },
-        obraSocial: { type: 'string' }
-      }
-    };
-  }
 
-  static get relationMappings() {
-    const Turno = require('./Turno');
-    return {
-      turnos: {
-        relation: Model.HasManyRelation,
-        modelClass: Turno,
-        join: {
-          from: 'pacientes.id',
-          to: 'turnos.pacienteId'
-        }
-      }
-    };
-  }
+// Relación con el modelo Turno
+Paciente.associate = (models) => {
+  Paciente.hasMany(models.Turno, {
+    foreignKey: 'paciente_id',
+    sourceKey: 'id_paciente',
+  });
+};
 
-    static getPacienteById(id) {
-        return this.query().findById(id);
-    }
-}
-
-module.exports = Paciente;
+return Paciente;
+};

@@ -1,36 +1,59 @@
 // models/Especialidad.js
-const { Model } = require('objection');
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/database'); // Asegúrate de que este archivo exporte la instancia de Sequelize
 
-class Especialidad extends Model {
-  static get tableName() {
-    return 'especialidades';
-  }
+class Especialidad extends Model {}
 
-  static get jsonSchema() {
-    return {
-      type: 'object',
-      required: ['nombre'],
+// Definición del modelo
+Especialidad.init({
+  id_especialidad: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
+  nombre: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+    validate: {
+      len: [1, 255], // Longitud mínima y máxima
+    },
+  },
+}, {
+  sequelize, // La instancia de Sequelize
+  modelName: 'Especialidad',
+  tableName: 'especialidades',
+  timestamps: false, 
+});
 
-      properties: {
-        id: { type: 'integer' },
-        nombre: { type: 'string', minLength: 1, maxLength: 255 }
-      }
-    };
-  }
 
-  static get relationMappings() {
-    const Turno = require('./Turno');
-    return {
-      turnos: {
-        relation: Model.HasManyRelation,
-        modelClass: Turno,
-        join: {
-          from: 'especialidades.id',
-          to: 'turnos.especialidadId'
-        }
-      }
-    };
-  }
-}
+module.exports = (sequelize, DataTypes) => {
+  const Especialidad = sequelize.define('Especialidad', {
+    id_especialidad: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    nombre: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        len: [1, 100], 
+      },
+    },
+  }, {
+    tableName: 'especialidades',
+    timestamps: false, 
+  });
 
-module.exports = Especialidad;
+// Relación con el modelo Turno
+Especialidad.associate = (models) => {
+  Especialidad.hasMany(models.Turno, {
+    foreignKey: 'especialidad_id',
+    sourceKey: 'id_especialidad',
+  });
+};
+
+return Especialidad;
+};
