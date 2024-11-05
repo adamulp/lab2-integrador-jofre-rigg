@@ -1,0 +1,23 @@
+.cal-mes-contenedor
+  .select-container
+    button#hoy-btn.btn.btn-primary(type='button') Hoy
+    .select-group-calMes
+        label(for='month-select') Mes:
+        select#month-select.form-select(name='month')
+            each mes, index in ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+                option(value=index) #{mes}
+    
+    .select-group-calMes
+        label(for='year-select') Año:
+        select#year-select.form-select(name='year')
+            each year in Array(5).fill().map((_, i) => new Date().getFullYear() - 2 + i)
+                option(value=year) #{year}
+    
+
+  // Weekday headers (starting from Monday)
+  .cal-mes-grid
+    each day in ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom']
+      div.cal-mes-day-header #{day}
+
+  // Dates for the current month
+  .cal-mes-grid#calendar-dates
