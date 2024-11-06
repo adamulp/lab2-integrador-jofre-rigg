@@ -108,7 +108,7 @@ app.get('/calendario', async (req, res) => {
       const especialidades = await Especialidad.findAll();
       const medicos = await Medico.findAll();
       const pacientes = await Paciente.findAll();
-      res.render('calendario', { citas: [], especialidades, medicos, pacientes });
+      res.render('calendarios/calendario', { citas: [], especialidades, medicos, pacientes });
     } catch (err) {
       res.status(500).send(err.message);
     }
@@ -121,7 +121,7 @@ app.get('/calendario', async (req, res) => {
       const especialidades = await Especialidad.findAll();
       const medicos = await Medico.findAll();
       const pacientes = await Paciente.findAll();
-      res.render('calendario', { citas, especialidades, medicos, pacientes });
+      res.render('calendarios/calendario', { citas, especialidades, medicos, pacientes });
     } catch (err) {
       res.status(500).send(err.message);
     }

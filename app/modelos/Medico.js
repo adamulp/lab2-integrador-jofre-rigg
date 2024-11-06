@@ -18,20 +18,20 @@ Medico.init({
       len: [1, 255], // Longitud mínima y máxima
     },
   },
-  mail: {
-    type: DataTypes.STRING(30),
-    allowNull: false,
-    unique: true,
-    validate: {
-      len: [1, 50], // Longitud mínima y máxima
-    },
+//   mail: {
+//     type: DataTypes.STRING(30),
+//     allowNull: false,
+//     unique: true,
+//     validate: {
+//       len: [1, 50], // Longitud mínima y máxima
+//     },
     estado: {
       type: DataTypes.TINYINT,
         allowNull: false,
         defaultValue: 1,
     },
   },
-}, {
+{
   sequelize, // La instancia de Sequelize
   modelName: 'Medico',
   tableName: 'medicos',
@@ -50,14 +50,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         len: [1, 255],
-      },
-    },
-    mail: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-      validate: {
-        len: [1, 50],
       },
       estado: {
         type: DataTypes.TINYINT,

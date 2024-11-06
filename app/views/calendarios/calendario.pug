@@ -23,13 +23,11 @@ html
               option(value='') -- Seleccione Especialidad --
               each especialidad in especialidades
                 option(value=especialidad.nombre) #{especialidad.nombre}
-
             label(for='medico') Médico:
             select.form-select(name='medico' id='medico')
               option(value='') -- Seleccione Médico --
               each medico in medicos
                 option(value=medico.nombre_completo) #{medico.nombre_completo}
-
             label(for='paciente') Paciente:
             select.form-select(name='paciente' id='paciente')
               option(value='') -- Seleccione Paciente --
