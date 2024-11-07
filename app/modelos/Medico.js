@@ -1,7 +1,7 @@
 // models/Medico.js
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/database'); // Asegúrate de que este archivo exporte la instancia de Sequelize
 
+module.exports = (sequelize) => {
 class Medico extends Model {}
 
 // Definición del modelo
@@ -15,7 +15,7 @@ Medico.init({
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
-      len: [1, 255], // Longitud mínima y máxima
+      len: [1, 255], 
     },
   },
   mail: {
@@ -23,7 +23,7 @@ Medico.init({
     allowNull: false,
     unique: true,
     validate: {
-      len: [1, 50], // Longitud mínima y máxima
+      len: [1, 50], 
     },
     estado: {
       type: DataTypes.TINYINT,
@@ -32,44 +32,11 @@ Medico.init({
     },
   },
 }, {
-  sequelize, // La instancia de Sequelize
+  sequelize, 
   modelName: 'Medico',
   tableName: 'medicos',
-  timestamps: false, // Si no quieres que Sequelize agregue campos de timestamps (createdAt, updatedAt)
+  timestamps: false, 
 });
-
-module.exports = (sequelize, DataTypes) => {
-  const Medico = sequelize.define('Medico', {
-    id_medico: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    nombre_completo: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [1, 255],
-      },
-    },
-    mail: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-      validate: {
-        len: [1, 50],
-      },
-      estado: {
-        type: DataTypes.TINYINT,
-          allowNull: false,
-          defaultValue: 1,
-          field: 'estado',
-    },
-  },
-}, {
-    tableName: 'medicos',
-    timestamps: false, // Si no quieres que Sequelize agregue campos de timestamps
-  });
 
 
 // Relación con los modelos Turno y Agenda
