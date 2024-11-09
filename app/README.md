@@ -12,6 +12,8 @@ El directorio `app` contiene el código principal de la aplicación y archivos r
 npm install --save-dev sequelize-cli
 ```
 
+https://sequelize.org/docs/v6/other-topics/migrations/
+
 `migrations/`: Archivos de migración para crear o recrear la base de datos según un esquema detallado en el javascript.
 `20241005022427_create_agenda_de_consultas_tables.js`: Archivo de migración para crear las tablas de agenda de consultas (el timestamp puede variar).
 
