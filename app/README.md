@@ -7,10 +7,12 @@ El directorio `app` contiene el código principal de la aplicación y archivos r
 `views/`: Plantillas Pug para renderizar HTML.
 
   #### Archivos de la base de datos
-`knexfile.js`: Archivo de configuración para Knex.js, utilizado con las migraciones y las semillas de la base de datos.
+```bash
+npm install --save-dev sequelize-cli
+```
 
 `migrations/`: Archivos de migración para crear o recrear la base de datos según un esquema detallado en el javascript.
-`20241005022427_create_agenda_de_consultas_tables.js`: Archivo de migración para crear las tablas de agenda de consultas.
+`20241005022427_create_agenda_de_consultas_tables.js`: Archivo de migración para crear las tablas de agenda de consultas (el timestamp puede variar).
 
 `modelos/`: Definiciones de los modelos.
 `seeds/`: Archivos de seed data para la base de datos.
