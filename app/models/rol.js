@@ -11,14 +11,28 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+            // Relación uno a muchos: un Rol puede estar asociado a muchos Usuarios
+            Rol.hasMany(models.Usuario, {
+              foreignKey: 'idRol', // La clave foránea en el modelo Usuario
+              as: 'usuarios',      // Nombre de la relación
+            });
     }
   }
   Rol.init({
-    idRole: DataTypes.INTEGER,
-    nombre: DataTypes.STRING
+    idRol: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    nombre: {
+      type: DataTypes.STRING,
+      allowNull: false,  
+    },
   }, {
     sequelize,
     modelName: 'Rol',
+    tableName: 'roles', 
+    timestamps: false
   });
   return Rol;
 };

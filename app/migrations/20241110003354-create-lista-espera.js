@@ -3,35 +3,29 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('ListaEsperas', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
       idListaEspera: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        autoIncrement: true,  // 'idListaEspera' auto-incremental
+        primaryKey: true,     // Definir como clave primaria
+        allowNull: false,
       },
       agregadoEn: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       idPaciente: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,     // No puede ser nulo
       },
       idMedico: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,     // No puede ser nulo
       },
       idEspecialidad: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,     // No puede ser nulo
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
     });
   },
   async down(queryInterface, Sequelize) {

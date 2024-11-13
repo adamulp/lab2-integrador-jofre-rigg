@@ -3,29 +3,18 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Sobreturnos', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
       idSobreturno: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false, // No puede ser nulo
       },
       maxSobreturnos: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false, // No puede ser nulo
       },
       idHorario: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false, // No puede ser nulo
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
     });
   },
   async down(queryInterface, Sequelize) {

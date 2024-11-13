@@ -11,14 +11,41 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+            // Relación muchos a uno con Usuario
+            Rbac.belongsTo(models.Usuario, {
+              foreignKey: 'idUsuario',  
+              as: 'usuario',            
+            });
+      
+            // Relación muchos a uno con Rol
+            Rbac.belongsTo(models.Rol, {
+              foreignKey: 'idRol',      
+              as: 'rol',                
+            });
     }
   }
   Rbac.init({
-    idUsuario: DataTypes.INTEGER,
-    idRol: DataTypes.INTEGER
+    idUsuario: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Usuarios',
+        key: 'idUsuario',
+      },
+    },
+    idRol: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Roles',
+        key: 'idRole',
+      },
+    },
   }, {
     sequelize,
     modelName: 'Rbac',
+    tableName: 'rbac',  
+    timestamps: false,
   });
   return Rbac;
 };

@@ -11,17 +11,66 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      ListaEspera.belongsTo(models.Paciente, {
+        foreignKey: 'idPaciente',
+        targetKey: 'idPaciente',
+        as: 'paciente', 
+      });
+
+      // Relación con Medico
+      ListaEspera.belongsTo(models.Medico, {
+        foreignKey: 'idMedico',
+        targetKey: 'idMedico',
+        as: 'medico', 
+      });
+
+      // Relación con Especialidad
+      ListaEspera.belongsTo(models.Especialidad, {
+        foreignKey: 'idEspecialidad',
+        targetKey: 'idEspecialidad',
+        as: 'especialidad', 
+      });
     }
   }
   ListaEspera.init({
-    idListaEspera: DataTypes.INTEGER,
-    agregadoEn: DataTypes.DATE,
-    idPaciente: DataTypes.INTEGER,
-    idMedico: DataTypes.INTEGER,
-    idEspecialidad: DataTypes.INTEGER
+    idListaEspera: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    agregadoEn: {
+      type: DataTypes.DATE,
+      allowNull: false, 
+    },
+    idPaciente: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Pacientes', 
+        key: 'idPaciente',  
+      },
+    },
+    idMedico: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Medicos', 
+        key: 'idMedico',  
+      },
+    },
+    idEspecialidad: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Especialidades', 
+        key: 'idEspecialidad',  
+      },
+    },
   }, {
     sequelize,
     modelName: 'ListaEspera',
+    tableName: 'listasEspera', 
+    timestamps: false,
   });
   return ListaEspera;
 };

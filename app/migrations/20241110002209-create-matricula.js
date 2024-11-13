@@ -3,35 +3,30 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Matriculas', {
-      id: {
+      idMatricula: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      idMatricula: {
-        type: Sequelize.INTEGER
-      },
       idMedico: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       idEspecialidad: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       matricula: {
-        type: Sequelize.STRING
-      },
-      createdAt: {
+        type: Sequelize.STRING,
         allowNull: false,
-        type: Sequelize.DATE
+        unique: true, // La matrícula debe ser única
       },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
     });
+
   },
   async down(queryInterface, Sequelize) {
+    // Eliminar la tabla 'Matriculas'
     await queryInterface.dropTable('Matriculas');
   }
 };

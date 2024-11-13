@@ -3,36 +3,32 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Usuarios', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
       idUsuario: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        autoIncrement: true,  // Establecer idUsuario como auto incremental
+        primaryKey: true,
       },
       username: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true, 
       },
       passwordHash: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       email: {
-        type: Sequelize.STRING
-      },
-      createdAt: {
-        type: Sequelize.DATE
-      },
-      createdAt: {
+        type: Sequelize.STRING,
         allowNull: false,
-        type: Sequelize.DATE
+        unique: true,
       },
-      updatedAt: {
+      idRol: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        type: Sequelize.DATE
-      }
+      },
     });
+
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Usuarios');

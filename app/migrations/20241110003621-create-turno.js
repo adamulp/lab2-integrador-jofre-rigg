@@ -3,47 +3,45 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Turnos', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
       idTurno: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true, // Hacer que sea auto-incremental
+        allowNull: false
       },
       fechaHora: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull: false, // No puede ser nula
       },
       estado: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: true, // Puede ser nula
       },
       motivoConsulta: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: true, // Puede ser nula
       },
       creadoEn: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW, // Establece la fecha y hora actual por defecto
+        allowNull: false, // No puede ser nulo
       },
       idPaciente: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false, // No puede ser nulo
       },
       idMedico: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false, // No puede ser nulo
       },
       idEspecialidad: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false, // No puede ser nulo
       },
       idHorario: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false, // No puede ser nulo
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
     });
   },
   async down(queryInterface, Sequelize) {

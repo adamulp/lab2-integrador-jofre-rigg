@@ -11,16 +11,52 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Matricula.belongsTo(models.Medico, {
+        foreignKey: 'idMedico',
+        targetKey: 'idMedico',
+        as: 'medico',
+      });
+
+      // Relación con el modelo Especialidad
+      Matricula.belongsTo(models.Especialidad, {
+        foreignKey: 'idEspecialidad',
+        targetKey: 'idEspecialidad',
+        as: 'especialidad',
+      });
     }
   }
   Matricula.init({
-    idMatricula: DataTypes.INTEGER,
-    idMedico: DataTypes.INTEGER,
-    idEspecialidad: DataTypes.INTEGER,
-    matricula: DataTypes.STRING
+    idMatricula: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    idMedico: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Medicos', 
+        key: 'idMedico',  
+      },
+    },
+    idEspecialidad: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Especialidades', 
+        key: 'idEspecialidad',  
+      },
+    },
+    matricula: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true, 
+    },
   }, {
     sequelize,
     modelName: 'Matricula',
+    tableName: 'matriculas',
+    timestamps: false,
   });
   return Matricula;
 };

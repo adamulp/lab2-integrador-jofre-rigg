@@ -2,30 +2,24 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Especialidads', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
+    await queryInterface.createTable('Especialidades', {
       idEspecialidad: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
       },
       nombre: {
-        type: Sequelize.STRING
-      },
-      createdAt: {
+        type: Sequelize.STRING(255),
         allowNull: false,
-        type: Sequelize.DATE
+        unique: true,
+        validate: {
+          len: [1, 255], // Aseguramos que el nombre tenga entre 1 y 255 caracteres
+        },
       },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Especialidads');
+    await queryInterface.dropTable('Especialidades');
   }
 };

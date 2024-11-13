@@ -3,35 +3,34 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Medicos', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
       idMedico: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        autoIncrement: true,  // Hacer que 'idMedico' sea auto-incremental
+        primaryKey: true,     // Definir como clave primaria
+        allowNull: false
       },
       idUsuario: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       nombreCompleto: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,  // El nombre no puede ser nulo
+        validate: {
+          len: [1, 255],  // Validación de longitud para el nombre
+        }
       },
       numeroMatricula: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,  // No puede ser nulo
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
     });
-  },
+
+      },
   async down(queryInterface, Sequelize) {
+
+
+    // Eliminar la tabla 'Medicos'
     await queryInterface.dropTable('Medicos');
   }
 };

@@ -11,18 +11,50 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Paciente.belongsTo(models.Usuario, {
+        foreignKey: 'idUsuario',  
+        as: 'usuario',            
+      });
     }
   }
   Paciente.init({
-    idPaciente: DataTypes.INTEGER,
-    idUsuario: DataTypes.INTEGER,
-    nombreCompleto: DataTypes.STRING,
-    dni: DataTypes.STRING,
-    informacionContacto: DataTypes.STRING,
-    obraSocial: DataTypes.STRING
+    idPaciente: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    idUsuario: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    nombreCompleto: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1, 255],
+      },
+    },
+    dni: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        len: [1, 20],
+      },
+    },
+    informacionContacto: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    obraSocial: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
   }, {
     sequelize,
     modelName: 'Paciente',
+    tableName: 'pacientes',
+    timestamps: false,
   });
   return Paciente;
 };

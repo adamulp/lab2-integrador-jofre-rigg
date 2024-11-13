@@ -11,14 +11,32 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Especialidad.hasMany(models.Turno, {
+        foreignKey: 'especialidadId', // Clave foránea en Turno
+        sourceKey: 'idEspecialidad',   // Clave primaria en Especialidad
+        as: 'turnos',                  // Alias para acceder a los turnos de una especialidad
+      });
     }
   }
   Especialidad.init({
-    idEspecialidad: DataTypes.INTEGER,
-    nombre: DataTypes.STRING
+    idEspecialidad: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    nombre: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true, 
+      validate: {
+        len: [1, 255], 
+      },
+    },
   }, {
     sequelize,
     modelName: 'Especialidad',
+    tableName: 'especialidades',
+    timestamps: false, 
   });
   return Especialidad;
 };

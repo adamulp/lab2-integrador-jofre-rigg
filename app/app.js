@@ -3,7 +3,7 @@ const express = require('express');
 const port = process.env.PORT || 3000;
 const app = express();
 const router = express.Router();
-const { sequelize, Agenda, Medico, Paciente, Especialidad, Turno } = require('./modelos');
+const { sequelize, Agenda, Medico, Paciente, Especialidad, Turno } = require('./models');
 
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -61,7 +61,7 @@ app.use("/pacientes", pacientesRouter);
 // Route for horarios page
 app.get('/horarios', async (req, res) => {
     try {
-      const medicos = await Medico.findAll({ attributes: ['nombre_completo'] }); // Fetch all medicos
+      const medicos = await Medico.findAll({ attributes: ['nombreCompleto'] }); // Fetch all medicos
       res.render('horarios', { medicos });
     } catch (err) {
       res.status(500).send(err.message);
@@ -172,7 +172,7 @@ function checkCitasDisponibles(especialidad) {
 // Route for sobreturnos page
 app.get('/sobreturnos', async (req, res) => {
     try {
-        const medicos = await Medico.findAll({ attributes: ['nombre_completo'] }); // Fetch all medicos
+        const medicos = await Medico.findAll({ attributes: ['nombreCompleto'] }); // Fetch all medicos
         res.render('sobreturnos', { medicos });
     } catch (err) {
         res.status(500).send(err.message);

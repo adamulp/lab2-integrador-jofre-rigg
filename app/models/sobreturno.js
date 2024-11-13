@@ -11,15 +11,36 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Sobreturno.belongsTo(models.Horario, {
+        foreignKey: 'idHorario',
+        targetKey: 'idHorario',
+        as: 'horario', // Alias para acceder al horario relacionado
+      });
     }
   }
   Sobreturno.init({
-    idSobreturno: DataTypes.INTEGER,
-    maxSobreturnos: DataTypes.INTEGER,
-    idHorario: DataTypes.INTEGER
+    idSobreturno: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    maxSobreturnos: {
+      type: DataTypes.INTEGER,
+      allowNull: false, 
+    },
+    idHorario: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Horarios', 
+        key: 'idHorario',  
+      },
+    },
   }, {
     sequelize,
     modelName: 'Sobreturno',
+    tableName: 'sobreturnos',  
+    timestamps: false,
   });
   return Sobreturno;
 };

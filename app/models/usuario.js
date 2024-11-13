@@ -11,17 +11,61 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-    }
+      Usuario.hasMany(models.Turno, {
+        foreignKey: 'idPaciente',  
+        as: 'turnos',
+      });
+
+      // Relación con el Médico (si el Usuario es un Médico)
+      Usuario.hasOne(models.Medico, {
+        foreignKey: 'idUsuario', 
+        as: 'medico',  
+        allowNull: true,  
+      });
+
+      // Relación con el Paciente (si el Usuario es un Paciente)
+      Usuario.hasOne(models.Paciente, {
+        foreignKey: 'idUsuario', 
+        as: 'paciente',  
+        allowNull: true,  
+      });
+    
+    Usuario.belongsTo(models.Rol, {
+      foreignKey: 'idRol',
+      targetKey: 'idRol',
+      as: 'rol',  // Alias para la relación
+    });
+  }
   }
   Usuario.init({
-    idUsuario: DataTypes.INTEGER,
-    username: DataTypes.STRING,
-    passwordHash: DataTypes.STRING,
-    email: DataTypes.STRING,
-    createdAt: DataTypes.DATE
+    idUsuario: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    passwordHash: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true, 
+    },
+    idRol: {
+      type: DataTypes.INTEGER,
+      allowNull: false, 
+    },
   }, {
     sequelize,
     modelName: 'Usuario',
+    tableName: 'usuarios',
+    timestamps: false,
   });
   return Usuario;
 };

@@ -3,28 +3,20 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Rols', {
-      id: {
+      idRol: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      idRole: {
-        type: Sequelize.INTEGER
+        autoIncrement: true,  // Establecer idRole como auto incremental
+        primaryKey: true, 
       },
       nombre: {
-        type: Sequelize.STRING
-      },
-      createdAt: {
+        type: Sequelize.STRING,
         allowNull: false,
-        type: Sequelize.DATE
       },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
     });
+
   },
+
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Rols');
   }
