@@ -1,18 +1,15 @@
 {
   "development": {
-    "username": "unyxqtk1psiywzsq",
     "database": "bie7wgzkppx7cwkj6c5s",
     "host": "bie7wgzkppx7cwkj6c5s-mysql.services.clever-cloud.com",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
     "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql"
