@@ -2,6 +2,8 @@
 
 TUDS-B-24 Laboratorio de Programación II: Proyecto Integrador
 
+https://lab2-integrador-jofre-rigg.vercel.app/
+
 ## Start app.js
 
 Run from the app folder.
