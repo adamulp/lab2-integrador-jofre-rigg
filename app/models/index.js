@@ -6,14 +6,26 @@ const Sequelize = require('sequelize');
 const process = require('process');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
+const config = require(__dirname + '/../config/config.js')[env];
 const db = {};
 
 let sequelize;
+console.log(config); 
+
 if (config.use_env_variable) {
+  // Usar variable de entorno si se especifica
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
+  // Si no, usar las credenciales directamente desde config
+  sequelize = new Sequelize(
+    config.database, 
+    config.username, 
+    config.password, 
+    {
+      host: config.host,
+      dialect: config.dialect
+    }
+  );
 }
 
 fs
