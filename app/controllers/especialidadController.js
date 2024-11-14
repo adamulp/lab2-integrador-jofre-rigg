@@ -1,5 +1,5 @@
 // controllers/EspecialidadController.js
-const Especialidad = require('../models/Especialidad'); // Asegúrate de que la ruta sea correcta
+const Especialidad = require('../models/especialidad'); // Asegúrate de que la ruta sea correcta
 
 class EspecialidadController {
   // Crear una nueva especialidad
