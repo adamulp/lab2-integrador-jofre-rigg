@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const { Especialidad, Medico, Turno } = require('../modelos'); // Asegúrate de incluir los modelos necesarios
+const { Especialidad, Medico, Turno } = require('../models'); // Asegúrate de incluir los modelos necesarios
 
 // Obtener todas las especialidades y médicos
 router.get('/', async (req, res) => {
     try {
         const especialidades = await Especialidad.findAll({ attributes: ['nombre'] }); // Fetch all especialidades
-        const medicos = await Medico.findAll({ attributes: ['nombre_completo'] }); // Fetch all medicos
+        const medicos = await Medico.findAll({ attributes: ['nombreCompleto'] }); // Fetch all medicos
         res.render('agendas', { especialidades, medicos });
     } catch (err) {
         res.status(500).send(err.message);

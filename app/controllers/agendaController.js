@@ -1,5 +1,5 @@
 // controllers/AgendaController.js
-const { Agenda, Medico, Especialidad } = require('../modelos');
+const { Agenda, Medico, Especialidad } = require('../models');
 
 class AgendaController {
   // Crear una nueva agenda

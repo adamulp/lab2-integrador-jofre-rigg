@@ -1,15 +1,15 @@
 const { Op } = require('sequelize');
-const { Paciente } = require('../modelos');
+const { Paciente } = require('../models');
 
 class PacienteController {
     // Crear un nuevo paciente
     static async crearPaciente(req, res) {
         try {
             const pacienteData = {
-                nombre_completo: req.body.nombre_completo,
+                nombreCompleto: req.body.nombreCompleto,
                 dni: req.body.dni,
-                informacion_contacto: req.body.contacto,  // Cambia 'contacto' por 'informacion_contacto'
-                obra_social: req.body.obraSocial
+                informacionContacto: req.body.contacto,  // Cambia 'contacto' por 'informacionContacto'
+                obraSocial: req.body.obraSocial
             };
 
             await Paciente.create(pacienteData);
@@ -21,13 +21,13 @@ class PacienteController {
     }
 //buscar un paciente por nombre y dni
 static async buscarPaciente(req, res) {
-    const { nombre_completo, dni } = req.body;
+    const { nombreCompleto, dni } = req.body;
 
     // Construimos la condición de búsqueda dinámica
     const condiciones = [];
     
-    if (nombre_completo) {
-        condiciones.push({ nombre_completo: { [Op.like]: `%${nombre_completo}%` } });
+    if (nombreCompleto) {
+        condiciones.push({ nombreCompleto: { [Op.like]: `%${nombreCompleto}%` } });
     }
     
     if (dni) {
@@ -59,7 +59,7 @@ static async buscarPaciente(req, res) {
     static async obtenerPacientes(req, res) {
         try {
             const pacientes = await Paciente.findAll({
-                attributes: ['id_paciente','nombre_completo', 'dni', 'informacion_contacto', 'obra_social'] // Cambia estos atributos a los de tu tabla `Paciente`
+                attributes: ['idPaciente','nombreCompleto', 'dni', 'informacionContacto', 'obraSocial'] // Cambia estos atributos a los de tu tabla `Paciente`
             }); 
             res.render('pacientes', { pacientes });
         } catch (error) {

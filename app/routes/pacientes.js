@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const { Op } = require('sequelize');
 
-const Especialidad = require('../modelos/Especialidad');
-const Medico = require('../modelos/Medico');
-const Paciente = require('../modelos/Paciente');
+const Especialidad = require('../models/Especialidad');
+const Medico = require('../models/Medico');
+const Paciente = require('../models/Paciente');
 const PacienteController = require('../controllers/pacienteController');
 
 // Obtener todos los pacientes
@@ -29,11 +29,11 @@ router.post('/delete/:id', async (req, res) => {
 // Manejar la búsqueda de resultados
 router.post('/resultados', async (req, res) => {
   try {
-      const { nombre_completo, dni } = req.body;
+      const { nombreCompleto, dni } = req.body;
       const pacientes = await Paciente.findAll({
           where: {
               [Op.or]: [
-                  { nombre_completo: { [Op.like]: `%${nombre_completo}%` } },
+                  { nombreCompleto: { [Op.like]: `%${nombreCompleto}%` } },
                   { dni: dni }
               ]
           }
@@ -59,20 +59,20 @@ router.get('/:id', async (req, res) => {
 
 /*router.post('/buscar', async (req, res) => {
   try {
-    const { nombre_completo, dni } = req.body;
+    const { nombreCompleto, dni } = req.body;
     let whereClause = {};
 
-    if (nombre_completo && dni) {
+    if (nombreCompleto && dni) {
       // Use AND logic when both fields are filled
       whereClause = {
-        nombre_completo: { [Op.like]: `%${nombre_completo}%` },
+        nombreCompleto: { [Op.like]: `%${nombreCompleto}%` },
         dni: { [Op.like]: `%${dni}%` }
       };
-    } else if (nombre_completo || dni) {
+    } else if (nombreCompleto || dni) {
       // Use OR logic when only one field is filled
       whereClause = {
         [Op.or]: [
-          nombre_completo ? { nombre_completo: { [Op.like]: `%${nombre_completo}%` } } : null,
+          nombreCompleto ? { nombreCompleto: { [Op.like]: `%${nombreCompleto}%` } } : null,
           dni ? { dni: { [Op.like]: `%${dni}%` } } : null
         ].filter(Boolean) // Remove null values
       };

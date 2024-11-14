@@ -42,7 +42,7 @@ class MedicoController {
         const { id } = req.params;
         try {
             const [updated] = await Medico.update(req.body, {
-                where: { id_medico: id }
+                where: { idMedico: id }
             });
             if (updated) {
                 const updatedMedico = await Medico.findByPk(id);
@@ -60,7 +60,7 @@ class MedicoController {
         const { id } = req.params;
         try {
             const deletedCount = await Medico.destroy({
-                where: { id_medico: id }
+                where: { idMedico: id }
             });
             if (deletedCount) {
                 res.status(204).send();
