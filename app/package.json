@@ -4,6 +4,7 @@
     "description": "Medical appointment scheduling system",
     "main": "app.js",
     "scripts": {
+        "reset-db": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all",
         "dev": "cross-env DB_CLIENT=mysql nodemon app.js",
         "start": "cross-env DB_CLIENT=mysql node app.js",
         "dev:sqlite": "cross-env DB_CLIENT=sqlite3 nodemon app.js",

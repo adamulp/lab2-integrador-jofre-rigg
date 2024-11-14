@@ -28,19 +28,43 @@ module.exports = {
       },
       idPaciente: {
         type: Sequelize.INTEGER,
-        allowNull: false, // No puede ser nulo
+        allowNull: false,
+        references: {
+          model: 'pacientes', // Ensure this matches the table name
+          key: 'idPaciente',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       idMedico: {
         type: Sequelize.INTEGER,
-        allowNull: false, // No puede ser nulo
+        allowNull: false,
+        references: {
+          model: 'medicos', // Ensure this matches the table name
+          key: 'idMedico',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       idEspecialidad: {
         type: Sequelize.INTEGER,
-        allowNull: false, // No puede ser nulo
+        allowNull: false,
+        references: {
+          model: 'especialidades', // Ensure this matches the table name
+          key: 'idEspecialidad',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       idHorario: {
         type: Sequelize.INTEGER,
-        allowNull: false, // No puede ser nulo
+        allowNull: false,
+        references: {
+          model: 'horarios', // Ensure this matches the table name
+          key: 'idHorario',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
     });
   },
