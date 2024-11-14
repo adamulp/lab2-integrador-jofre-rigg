@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const { Especialidad, Medico, Turno } = require('../models'); // Asegúrate de incluir los modelos necesarios
+const { especialidad, medico, turno } = require('../models'); // Asegúrate de incluir los modelos necesarios
 
 // Obtener todas las especialidades y médicos
 router.get('/', async (req, res) => {
     try {
-        const especialidades = await Especialidad.findAll({ attributes: ['nombre'] }); // Fetch all especialidades
-        const medicos = await Medico.findAll({ attributes: ['nombreCompleto'] }); // Fetch all medicos
+        const especialidades = await especialidad.findAll({ attributes: ['nombre'] }); // Fetch all especialidades
+        const medicos = await medico.findAll({ attributes: ['nombreCompleto'] }); // Fetch all medicos
         res.render('agendas', { especialidades, medicos });
     } catch (err) {
         res.status(500).send(err.message);
@@ -19,7 +19,7 @@ router.post('/filtrar', async (req, res) => {
 
     try {
         // Simulated logic for filtering appointments using Sequelize
-        const citas = await Turno.findAll({
+        const citas = await turno.findAll({
             where: {
                 especialidad: especialidad,
                 medico: medico
@@ -39,7 +39,7 @@ router.post('/transferir', async (req, res) => {
 
     try {
         // Lógica para transferir una cita (actualizar en la base de datos)
-        const citaTransferida = await Turno.update(
+        const citaTransferida = await turno.update(
             { medico: doctor_nuevo, fecha: fecha_cita_nueva, hora: hora_cita_nueva },
             { where: { nombrePaciente: nombre_paciente, medico: doctor_anterior, fecha: fecha_cita_anterior } }
         );

@@ -3,7 +3,7 @@ const express = require('express');
 const port = process.env.PORT || 3000;
 const app = express();
 const router = express.Router();
-const { sequelize, Agenda, Medico, Paciente, Especialidad, Turno } = require('./models');
+const { sequelize, agenda, medico, paciente, especialidad, turno } = require('./models');
 
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -11,7 +11,7 @@ const path = require('path');
 
 async function test() {
   try {
-      const pacientes = await Paciente.findAll(); // Intenta obtener todos los pacientes
+      const pacientes = await paciente.findAll(); // Intenta obtener todos los pacientes
       console.log('Pacientes:', pacientes); // Muestra los pacientes en la consola
   } catch (error) {
       console.error('Error al obtener los pacientes:', error); // Muestra cualquier error
@@ -61,7 +61,7 @@ app.use("/pacientes", pacientesRouter);
 // Route for horarios page
 app.get('/horarios', async (req, res) => {
     try {
-      const medicos = await Medico.findAll({ attributes: ['nombreCompleto'] }); // Fetch all medicos
+      const medicos = await medico.findAll({ attributes: ['nombreCompleto'] }); // Fetch all medicos
       res.render('horarios', { medicos });
     } catch (err) {
       res.status(500).send(err.message);
@@ -105,9 +105,9 @@ function filtrarCitas(especialidad, medico, paciente) {
 // Route for calendario page
 app.get('/calendario', async (req, res) => {
     try {
-      const especialidades = await Especialidad.findAll();
-      const medicos = await Medico.findAll();
-      const pacientes = await Paciente.findAll();
+      const especialidades = await especialidad.findAll();
+      const medicos = await medico.findAll();
+      const pacientes = await paciente.findAll();
       res.render('calendario', { citas: [], especialidades, medicos, pacientes });
     } catch (err) {
       res.status(500).send(err.message);
@@ -118,9 +118,9 @@ app.get('/calendario', async (req, res) => {
     const { especialidad, medico, paciente } = req.body;
     const citas = filtrarCitas(especialidad, medico, paciente);
     try {
-      const especialidades = await Especialidad.findAll();
-      const medicos = await Medico.findAll();
-      const pacientes = await Paciente.findAll();
+      const especialidades = await especialidad.findAll();
+      const medicos = await medico.findAll();
+      const pacientes = await paciente.findAll();
       res.render('calendario', { citas, especialidades, medicos, pacientes });
     } catch (err) {
       res.status(500).send(err.message);
@@ -138,7 +138,7 @@ app.get('/calSemana', (req, res) => {
 // Route for turnos page
 app.get('/turnos', async (req, res) => {
     try {
-      const especialidades = await Especialidad.findAll({ attributes: ['nombre'] }); // Fetch all especialidades
+      const especialidades = await especialidad.findAll({ attributes: ['nombre'] }); // Fetch all especialidades
       res.render('turnos', { especialidades });
     } catch (err) {
       res.status(500).send(err.message);
@@ -172,7 +172,7 @@ function checkCitasDisponibles(especialidad) {
 // Route for sobreturnos page
 app.get('/sobreturnos', async (req, res) => {
     try {
-        const medicos = await Medico.findAll({ attributes: ['nombreCompleto'] }); // Fetch all medicos
+        const medicos = await medico.findAll({ attributes: ['nombreCompleto'] }); // Fetch all medicos
         res.render('sobreturnos', { medicos });
     } catch (err) {
         res.status(500).send(err.message);

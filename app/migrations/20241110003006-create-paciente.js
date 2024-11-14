@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Pacientes', {
+    await queryInterface.createTable('pacientes', {
       idPaciente: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -43,6 +43,6 @@ module.exports = {
 
 
     // Eliminar la tabla 'Pacientes'
-    await queryInterface.dropTable('Pacientes');
+    await queryInterface.dropTable('pacientes');
   }
 };

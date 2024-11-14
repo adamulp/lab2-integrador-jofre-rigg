@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const { Op } = require('sequelize');
 
-const Especialidad = require('../models/especialidad');
-const Medico = require('../models/medico');
-const Paciente = require('../models/paciente');
+const especialidad = require('../models/especialidad');
+const medico = require('../models/medico');
+const paciente = require('../models/paciente');
 const PacienteController = require('../controllers/pacienteController');
 
 // Obtener todos los pacientes
@@ -18,7 +18,7 @@ router.post('/buscar', PacienteController.buscarPaciente);
 router.post('/delete/:id', async (req, res) => {
   try {
       const { id } = req.params;
-      await Paciente.destroy({ where: { id: id } }); // Eliminar paciente por ID
+      await paciente.destroy({ where: { id: id } }); // Eliminar paciente por ID
       res.redirect('/pacientes');
   } catch (err) {
       res.status(500).send(err.message);
@@ -30,7 +30,7 @@ router.post('/delete/:id', async (req, res) => {
 router.post('/resultados', async (req, res) => {
   try {
       const { nombreCompleto, dni } = req.body;
-      const pacientes = await Paciente.findAll({
+      const pacientes = await paciente.findAll({
           where: {
               [Op.or]: [
                   { nombreCompleto: { [Op.like]: `%${nombreCompleto}%` } },
@@ -47,7 +47,7 @@ router.post('/resultados', async (req, res) => {
 // Obtener un paciente por ID
 router.get('/:id', async (req, res) => {
   try {
-      const paciente = await Paciente.findByPk(req.params.id); // Fetch paciente by ID
+      const paciente = await paciente.findByPk(req.params.id); // Fetch paciente by ID
       if (!paciente) {
           return res.status(404).send('Paciente no encontrado');
       }

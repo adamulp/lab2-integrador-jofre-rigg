@@ -1,4 +1,4 @@
-// controllers/AgendaController.js
+// controllers/agendaController.js
 const { Agenda, Medico, Especialidad } = require('../models');
 
 class AgendaController {

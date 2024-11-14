@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('ListaEsperas', {
+    await queryInterface.createTable('listasEspera', {
       idListaEspera: {
         type: Sequelize.INTEGER,
         autoIncrement: true,  // 'idListaEspera' auto-incremental
@@ -29,6 +29,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('ListaEsperas');
+    await queryInterface.dropTable('listasEspera');
   }
 };

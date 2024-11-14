@@ -1,4 +1,4 @@
-const Turno = require('../models/Turno'); // Ajusta según tu estructura
+const Turno = require('../models/turno'); // Ajusta según tu estructura
 
 class TurnoController {
   // Crear un nuevo turno

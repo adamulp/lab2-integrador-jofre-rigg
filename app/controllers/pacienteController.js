@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const { Paciente } = require('../models');
+const { paciente } = require('../models');
 
 class PacienteController {
     // Crear un nuevo paciente
@@ -12,53 +12,54 @@ class PacienteController {
                 obraSocial: req.body.obraSocial
             };
 
-            await Paciente.create(pacienteData);
+            await paciente.create(pacienteData);
             res.redirect('/pacientes');
         } catch (error) {
             console.error("Error al crear el paciente:", error);
             res.status(400).json({ error: 'Error al crear el paciente.' });
         }
     }
-//buscar un paciente por nombre y dni
-static async buscarPaciente(req, res) {
-    const { nombreCompleto, dni } = req.body;
 
-    // Construimos la condición de búsqueda dinámica
-    const condiciones = [];
-    
-    if (nombreCompleto) {
-        condiciones.push({ nombreCompleto: { [Op.like]: `%${nombreCompleto}%` } });
-    }
-    
-    if (dni) {
-        condiciones.push({ dni: { [Op.like]: `%${dni}%` } });
-    }
+    // Buscar un paciente por nombre y dni
+    static async buscarPaciente(req, res) {
+        const { nombreCompleto, dni } = req.body;
 
-    try {
-        const pacientes = await Paciente.findAll({
-            where: {
-                [Op.or]: condiciones // Solo se incluirán las condiciones presentes
-            }
-        });
-
-        console.log("Pacientes encontrados:", pacientes); // Verifica los resultados antes de renderizar
-
-        // Renderizamos la vista con los resultados encontrados
-        if (pacientes.length === 0) {
-            return res.render('resultadosPacientes', { pacientes: [], mensaje: "No se encontraron pacientes." });
+        // Construimos la condición de búsqueda dinámica
+        const condiciones = [];
+        
+        if (nombreCompleto) {
+            condiciones.push({ nombreCompleto: { [Op.like]: `%${nombreCompleto}%` } });
+        }
+        
+        if (dni) {
+            condiciones.push({ dni: { [Op.like]: `%${dni}%` } });
         }
 
-        res.render('resultadosPacientes', { pacientes });
-    } catch (error) {
-        console.error("Error al buscar el paciente:", error);
-        res.status(400).json({ error: 'Error al buscar el paciente.' });
+        try {
+            const pacientes = await paciente.findAll({
+                where: {
+                    [Op.or]: condiciones // Solo se incluirán las condiciones presentes
+                }
+            });
+
+            console.log("Pacientes encontrados:", pacientes); // Verifica los resultados antes de renderizar
+
+            // Renderizamos la vista con los resultados encontrados
+            if (pacientes.length === 0) {
+                return res.render('resultadosPacientes', { pacientes: [], mensaje: "No se encontraron pacientes." });
+            }
+
+            res.render('resultadosPacientes', { pacientes });
+        } catch (error) {
+            console.error("Error al buscar el paciente:", error);
+            res.status(400).json({ error: 'Error al buscar el paciente.' });
+        }
     }
-}
 
     // Obtener todos los pacientes
     static async obtenerPacientes(req, res) {
         try {
-            const pacientes = await Paciente.findAll({
+            const pacientes = await paciente.findAll({
                 attributes: ['idPaciente','nombreCompleto', 'dni', 'informacionContacto', 'obraSocial'] // Cambia estos atributos a los de tu tabla `Paciente`
             }); 
             res.render('pacientes', { pacientes });
@@ -72,7 +73,7 @@ static async buscarPaciente(req, res) {
     static async obtenerPacientePorId(req, res) {
         const { id } = req.params;
         try {
-            const paciente = await Paciente.findByPk(id); // Cambié query().findById a findByPk
+            const paciente = await paciente.findByPk(id); // Cambié query().findById a findByPk
             if (!paciente) {
                 return res.status(404).json({ error: 'Paciente no encontrado.' });
             }
@@ -86,7 +87,7 @@ static async buscarPaciente(req, res) {
     static async actualizarPaciente(req, res) {
         const { id } = req.params;
         try {
-            const pacienteActualizado = await Paciente.update(req.body, {
+            const pacienteActualizado = await paciente.update(req.body, {
                 where: { id },
                 returning: true, // Solo necesario en algunas configuraciones de Sequelize
             });
@@ -103,7 +104,7 @@ static async buscarPaciente(req, res) {
     static async eliminarPaciente(req, res) {
         const { id } = req.params;
         try {
-            const eliminadoCount = await Paciente.destroy({ where: { id } }); // Cambié query().deleteById a destroy
+            const eliminadoCount = await paciente.destroy({ where: { id } }); // Cambié query().deleteById a destroy
             if (!eliminadoCount) {
                 return res.status(404).json({ error: 'Paciente no encontrado.' });
             }
