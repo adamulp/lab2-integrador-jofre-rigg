@@ -131,3 +131,4 @@ dist
 /app/views/html
 app/config/config.json
 .vercel
+*.zip
