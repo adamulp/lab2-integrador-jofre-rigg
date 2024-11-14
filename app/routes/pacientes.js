@@ -3,7 +3,7 @@ const router = express.Router();
 const { Op } = require('sequelize');
 
 const Especialidad = require('../models/especialidad');
-const Medico = require('../models/medico');
+const Medico = require('../models/Medico');
 const Paciente = require('../models/paciente');
 const PacienteController = require('../controllers/pacienteController');
 

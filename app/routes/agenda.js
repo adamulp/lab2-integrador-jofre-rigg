@@ -1,17 +1,21 @@
 const express = require("express");
 const router = express.Router();
 const { Especialidad, Medico, Turno } = require('../models'); // Asegúrate de incluir los modelos necesarios
+const especialidadController = require('../controllers/especialidadController');
+const medicoController = require('../controllers/MedicoController');
 
 // Obtener todas las especialidades y médicos
 router.get('/', async (req, res) => {
     try {
-        const especialidades = await Especialidad.findAll({ attributes: ['nombre'] }); // Fetch all especialidades
-        const medicos = await Medico.findAll({ attributes: ['nombreCompleto'] }); // Fetch all medicos
-        res.render('agendas', { especialidades, medicos });
+      const especialidades = await especialidadController.getAll();
+      const medicos = await medicoController.obtenerMedicos();
+  
+      // Renderiza ambas listas en la vista 'agendas'
+      res.render('agendas', { especialidades, medicos });
     } catch (err) {
-        res.status(500).send(err.message);
+      res.status(500).send(err.message);
     }
-});
+  });
 
 // Filtrar citas
 router.post('/filtrar', async (req, res) => {

@@ -14,13 +14,12 @@ class MedicoController {
     // Obtener todos los médicos
     static async obtenerMedicos(req, res) {
         try {
-            console.log('Obteniendo todos los médicos...');
-            const medicos = await Medico.findAll();
-            res.status(200).json(medicos);
+          return await Medico.findAll({ attributes: ['nombreCompleto'] });
         } catch (error) {
-            res.status(500).json({ error: error.message });
+          console.error("Error al obtener los médicos:", error);
+          throw new Error('Error al obtener los médicos');
         }
-    }
+      }
 
     // Obtener un médico por ID
     static async obtenerMedicoPorId(req, res) {
