@@ -58,7 +58,16 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Horario',
-    tableName: 'horarios',
+    tableName: (() => {
+      switch (process.env.NODE_ENV) {
+        case 'production':
+          return `${process.env.DB_NAME_PROD}.horarios`; // Para producción
+        case 'test':
+          return `${process.env.DB_NAME_TEST}.horarios`; // Para testing
+        case 'development':
+          return 'horarios'; // Para desarrollo (local)
+      }
+    })(), 
     timestamps: false,
   });
   return Horario;

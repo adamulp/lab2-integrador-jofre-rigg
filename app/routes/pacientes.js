@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const { Op } = require('sequelize');
 
-const Especialidad = require('../models/Especialidad');
-const Medico = require('../models/Medico');
-const Paciente = require('../models/Paciente');
+const Especialidad = require('../models/especialidad');
+const Medico = require('../models/medico');
+const Paciente = require('../models/paciente');
 const PacienteController = require('../controllers/pacienteController');
 
 // Obtener todos los pacientes

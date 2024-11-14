@@ -2,11 +2,11 @@ require('dotenv').config({ path: `.env_${process.env.NODE_ENV}` });   // Carga l
 
 module.exports = {
   development: {
-    username: process.env.DB_USER_DEV,
-    password: process.env.DB_PASS_DEV,
-    database: process.env.DB_NAME_DEV,
-    host: process.env.DB_HOST_DEV,
-    dialect: process.env.DB_DIALECT_DEV
+    username: process.env.DB_USER_DEV || 'root',
+    password: process.env.DB_PASS_DEV || '',
+    database: process.env.DB_NAME_DEV || 'agenda_consultas_dev',
+    host: process.env.DB_HOST_DEV || 'localhost',
+    dialect: process.env.DB_DIALECT_DEV || 'mysql'
   },
   testing: {
     username: process.env.DB_USER_TEST,
