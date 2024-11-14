@@ -1,4 +1,4 @@
-const Medico = require('../models/Medico'); // Asegúrate de que la ruta sea correcta
+const Medico = require('../models/medico'); // Asegúrate de que la ruta sea correcta
 
 class MedicoController {
     // Crear un nuevo médico
