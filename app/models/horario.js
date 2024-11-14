@@ -51,14 +51,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'medicos', 
+        model: 'Medicos', 
         key: 'idMedico',  
       },
     },
   }, {
     sequelize,
     modelName: 'Horario',
-    tableName: 'horarios',
+    tableName: 'horarios', 
     timestamps: false,
   });
   return Horario;

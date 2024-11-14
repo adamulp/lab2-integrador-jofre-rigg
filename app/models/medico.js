@@ -2,6 +2,8 @@
 const {
   Model
 } = require('sequelize');
+const sequelize = require('../config/database'); // Adjust the path as necessary
+
 module.exports = (sequelize, DataTypes) => {
   class Medico extends Model {
     /**
@@ -59,8 +61,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Medico',
-    tableName: 'medicos',
-    timestamps: false,
+    tableName: 'medicos', // Ensure the table name is correct
+    timestamps: false, // Adjust if you have timestamps
   });
   return Medico;
 };

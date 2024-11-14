@@ -1,37 +1,6 @@
-# lab2-integrador-jofre-rigg
+# Agenda de consultas médicas
 
-TUDS-B-24 Laboratorio de Programación II: Proyecto Integrador
+## lab2-integrador-jofre-rigg-ac
+ULP TUDS-B-24 Laboratorio de Programación II: Trabajo Integrador Web, Trabajo Práctico de la Agenda de Consultas médicas (AC)
 
-https://lab2-integrador-jofre-rigg.vercel.app/
-
-## Start app.js
-
-Run from the app folder.
-
-Install dependencies:
-```bash
-npm install
-```
-
-List dependencies:
-```bash
-jq -r '.dependencies | to_entries[] | "npm install \(.key)@\(.value)"' package.json
-```
-
-#### Dev mode on localhost (nodemon)
-
-```bash
-npm run dev
-```
-
-#### Autocompile SASS
-
-```bash
-npm run sass
-```
-
-#### Production mode on remote host
-
-```bash
-npm start
-```
+https://lab2-integrador-jofre-rigg-ac.vercel.app/

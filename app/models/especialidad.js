@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Especialidad',
-    tableName: 'especialidades', // Change to lowercase
+    tableName: 'especialidades', 
     timestamps: false, 
   });
   return Especialidad;

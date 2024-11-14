@@ -46,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'pacientes', 
+        model: 'Pacientes', 
         key: 'idPaciente',  
       },
     },
@@ -54,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'medicos', 
+        model: 'Medicos', 
         key: 'idMedico',  
       },
     },
@@ -62,14 +62,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'especialidades', 
+        model: 'Especialidades', 
         key: 'idEspecialidad',  
       },
     },
   }, {
     sequelize,
     modelName: 'ListaEspera',
-    tableName: 'listasEspera', 
+    tableName: 'lista_espera', 
     timestamps: false,
   });
   return ListaEspera;

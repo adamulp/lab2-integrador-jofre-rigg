@@ -1,12 +1,12 @@
 // controllers/EspecialidadController.js
-const especialidad = require('../models/especialidad'); // Asegúrate de que la ruta sea correcta
+const Especialidad = require('../models/especialidad'); // Asegúrate de que la ruta sea correcta
 
 class EspecialidadController {
   // Crear una nueva especialidad
   async create(req, res) {
     const { nombre } = req.body;
     try {
-      const newEspecialidad = await especialidad.create({ nombre });
+      const newEspecialidad = await Especialidad.create({ nombre });
       res.status(201).json(newEspecialidad);
     } catch (error) {
       res.status(500).json({ error: 'Error al crear la especialidad' });
@@ -16,7 +16,7 @@ class EspecialidadController {
   // Obtener todas las especialidades
   async getAll(req, res) {
     try {
-      const especialidades = await especialidad.findAll();
+      const especialidades = await Especialidad.findAll();
       res.status(200).json(especialidades);
     } catch (error) {
       res.status(500).json({ error: 'Error al obtener las especialidades' });
@@ -27,7 +27,7 @@ class EspecialidadController {
   async getById(req, res) {
     const { id } = req.params;
     try {
-      const especialidad = await especialidad.findByPk(id);
+      const especialidad = await Especialidad.findByPk(id);
       if (!especialidad) {
         return res.status(404).json({ error: 'Especialidad no encontrada' });
       }
@@ -42,11 +42,11 @@ class EspecialidadController {
     const { id } = req.params;
     const { nombre } = req.body;
     try {
-      const [updated] = await especialidad.update({ nombre }, {
+      const [updated] = await Especialidad.update({ nombre }, {
         where: { id_especialidad: id },
       });
       if (updated) {
-        const updatedEspecialidad = await especialidad.findByPk(id);
+        const updatedEspecialidad = await Especialidad.findByPk(id);
         res.status(200).json(updatedEspecialidad);
       } else {
         res.status(404).json({ error: 'Especialidad no encontrada' });
@@ -60,7 +60,7 @@ class EspecialidadController {
   async delete(req, res) {
     const { id } = req.params;
     try {
-      const deletedCount = await especialidad.destroy({
+      const deletedCount = await Especialidad.destroy({
         where: { id_especialidad: id },
       });
       if (deletedCount) {

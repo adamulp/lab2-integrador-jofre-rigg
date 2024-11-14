@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('horarios', {
+    await queryInterface.createTable('Horarios', {
       idHorario: {
         allowNull: false,
         autoIncrement: true,
@@ -36,6 +36,6 @@ module.exports = {
 
 
     // Eliminar la tabla 'Horarios' si existe
-    await queryInterface.dropTable('horarios');
+    await queryInterface.dropTable('Horarios');
   }
 };

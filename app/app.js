@@ -1,9 +1,9 @@
 require('dotenv').config();
 const express = require('express');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8888;
 const app = express();
 const router = express.Router();
-const { sequelize, agenda, medico, paciente, especialidad, turno } = require('./models');
+const { sequelize, Agenda, Medico, Paciente, Especialidad, Turno } = require('./models');
 
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -11,7 +11,7 @@ const path = require('path');
 
 async function test() {
   try {
-      const pacientes = await paciente.findAll(); // Intenta obtener todos los pacientes
+      const pacientes = await Paciente.findAll(); // Intenta obtener todos los pacientes
       console.log('Pacientes:', pacientes); // Muestra los pacientes en la consola
   } catch (error) {
       console.error('Error al obtener los pacientes:', error); // Muestra cualquier error
@@ -28,6 +28,13 @@ sequelize.authenticate()
   //test();
   })
     .catch(err => console.error('No se pudo conectar a la base de datos:', err));
+
+// Synchronize models with the database
+sequelize.sync({ force: false }) // Set to true if you want to drop and recreate tables
+  .then(() => {
+    console.log('Database & tables created!');
+  })
+  .catch(err => console.error('Error creating database & tables:', err));
 
 // Middleware para parsear el cuerpo de las solicitudes JSON
 app.use(express.json());
@@ -58,10 +65,18 @@ app.get('/', (req, res) => {
 const pacientesRouter = require("./routes/pacientes");
 app.use("/pacientes", pacientesRouter);
 
+// Route for agendas page
+const agendaRouter = require("./routes/agenda");
+app.use("/agendas", agendaRouter);
+
+// Define a route for the calendario
+const calendarioRouter = require("./routes/calendario");
+app.use("/", calendarioRouter);
+
 // Route for horarios page
 app.get('/horarios', async (req, res) => {
     try {
-      const medicos = await medico.findAll({ attributes: ['nombreCompleto'] }); // Fetch all medicos
+      const medicos = await Medico.findAll({ attributes: ['nombreCompleto'] }); // Fetch all medicos
       res.render('horarios', { medicos });
     } catch (err) {
       res.status(500).send(err.message);
@@ -86,7 +101,6 @@ app.post('/horarios/vacaciones', (req, res) => {
   res.redirect('/horarios');
 });
 
-
 // Route for horarios page
 app.get('/horarios', (req, res) => {
   res.render('horarios');
@@ -102,43 +116,10 @@ function filtrarCitas(especialidad, medico, paciente) {
     ];
   }
   
-// Route for calendario page
-app.get('/calendario', async (req, res) => {
-    try {
-      const especialidades = await especialidad.findAll();
-      const medicos = await medico.findAll();
-      const pacientes = await paciente.findAll();
-      res.render('calendario', { citas: [], especialidades, medicos, pacientes });
-    } catch (err) {
-      res.status(500).send(err.message);
-    }
-  });
-  
-  app.post('/calendario', async (req, res) => {
-    const { especialidad, medico, paciente } = req.body;
-    const citas = filtrarCitas(especialidad, medico, paciente);
-    try {
-      const especialidades = await especialidad.findAll();
-      const medicos = await medico.findAll();
-      const pacientes = await paciente.findAll();
-      res.render('calendario', { citas, especialidades, medicos, pacientes });
-    } catch (err) {
-      res.status(500).send(err.message);
-    }
-  });
-
-app.get('/calMes', (req, res) => {
-res.render('calMes');
-});
-
-app.get('/calSemana', (req, res) => {
-    res.render('calSemana');
-});
-
 // Route for turnos page
 app.get('/turnos', async (req, res) => {
     try {
-      const especialidades = await especialidad.findAll({ attributes: ['nombre'] }); // Fetch all especialidades
+      const especialidades = await Especialidad.findAll({ attributes: ['nombre'] }); // Fetch all especialidades
       res.render('turnos', { especialidades });
     } catch (err) {
       res.status(500).send(err.message);
@@ -172,7 +153,7 @@ function checkCitasDisponibles(especialidad) {
 // Route for sobreturnos page
 app.get('/sobreturnos', async (req, res) => {
     try {
-        const medicos = await medico.findAll({ attributes: ['nombreCompleto'] }); // Fetch all medicos
+        const medicos = await Medico.findAll({ attributes: ['nombreCompleto'] }); // Fetch all medicos
         res.render('sobreturnos', { medicos });
     } catch (err) {
         res.status(500).send(err.message);
@@ -235,10 +216,6 @@ function findCita(nombre_paciente, fecha_cita, hora_cita) {
   return { estado: 'Reservada' }; // Hardcoded value for simulation purposes
 }
 
-// Route for agendas page
-const agendaRouter = require("./routes/agenda");
-app.use("/agendas", agendaRouter);
-
 // Placeholder functions to simulate database interactions
 function filtrarCitas(especialidad, medico) {
   // In a real application, query the database for filtered appointments
@@ -253,3 +230,5 @@ function filtrarCitas(especialidad, medico) {
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+
+module.exports = app;

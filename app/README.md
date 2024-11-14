@@ -1,5 +1,3 @@
-https://lab2-integrador-jofre-rigg.vercel.app/
-
 ### Estructura del Directorio App
 
 El directorio `app` contiene el código principal de la aplicación y archivos relacionados. A continuación, se describe en detalle su contenido:
@@ -8,9 +6,7 @@ El directorio `app` contiene el código principal de la aplicación y archivos r
 `.env`: Archivo de configuración local del entorno (no se sube al repo)
 `views/`: Plantillas Pug para renderizar HTML.
 
-
 #### Archivos de la base de datos
-
 
 ```bash
 npm install --save-dev sequelize-cli

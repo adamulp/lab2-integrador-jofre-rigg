@@ -64,7 +64,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'pacientes', // Ensure this matches the table name
+        model: 'Pacientes',
         key: 'idPaciente',
       },
     },
@@ -72,7 +72,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'medicos', // Ensure this matches the table name
+        model: 'Medicos',
         key: 'idMedico',
       },
     },
@@ -80,7 +80,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'especialidades', // Ensure this matches the table name
+        model: 'Especialidades',
         key: 'idEspecialidad',
       },
     },
@@ -88,14 +88,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'horarios', // Ensure this matches the table name
+        model: 'Horarios',
         key: 'idHorario',
       },
     },
   }, {
     sequelize,
     modelName: 'Turno',
-    tableName: 'turnos',
+    tableName: 'turnos', 
     timestamps: false,
   });
   return Turno;
